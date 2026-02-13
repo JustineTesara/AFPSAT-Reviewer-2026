@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <title>AFP Exam Reviewer 2026</title>
     <style>
       * {
@@ -59,6 +59,631 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px;
+      }
+
+      /* ========================================
+         RESPONSIVE DESIGN - MEDIA QUERIES
+         ======================================== */
+
+      /* Tablet styles (768px and below) */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        body {
+          padding-bottom: 60px;
+        }
+
+        .header {
+          padding: 20px;
+          margin-bottom: 20px;
+          border-radius: 12px;
+        }
+
+        .header h1 {
+          font-size: 1.5rem;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+
+        .header-badge {
+          font-size: 0.8rem;
+          padding: 6px 15px;
+        }
+
+        .nav-tabs {
+          gap: 8px;
+          padding: 8px;
+          margin-bottom: 15px;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        .nav-tab {
+          padding: 10px 20px;
+          font-size: 0.95rem;
+          min-height: 44px;
+          flex-shrink: 0;
+        }
+
+        .nav-tab:hover {
+          transform: none;
+        }
+
+        .nav-tab:active {
+          transform: scale(0.98);
+        }
+
+        .content-section {
+          padding: 20px;
+          border-radius: 12px;
+        }
+
+        .section-header {
+          gap: 12px;
+          margin-bottom: 20px;
+          padding-bottom: 12px;
+          flex-wrap: wrap;
+        }
+
+        .section-header h2 {
+          font-size: 1.5rem;
+        }
+
+        .section-header .emoji {
+          font-size: 1.8rem;
+        }
+
+        .card-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 15px;
+          margin-top: 15px;
+        }
+
+        .card {
+          padding: 20px;
+        }
+
+        .card h3 {
+          font-size: 1.2rem;
+          margin-bottom: 10px;
+        }
+
+        .card .emoji {
+          font-size: 2.2rem;
+          margin-bottom: 12px;
+        }
+
+        .card:hover {
+          transform: none;
+        }
+
+        .card:active {
+          transform: scale(0.98);
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 15px;
+          margin: 20px 0;
+        }
+
+        .stat-card {
+          padding: 15px;
+        }
+
+        .stat-value {
+          font-size: 2rem;
+        }
+
+        .stat-card:hover {
+          transform: none;
+        }
+
+        .question-card {
+          padding: 20px;
+          margin: 15px 0;
+        }
+
+        .question-text {
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+        }
+
+        .option {
+          padding: 14px 18px;
+          min-height: 44px;
+        }
+
+        .option:hover {
+          transform: translateX(4px);
+        }
+
+        .btn {
+          padding: 12px 24px;
+          font-size: 0.95rem;
+          min-height: 44px;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover,
+        .btn-success:hover,
+        .btn-danger:hover {
+          transform: none;
+        }
+
+        .btn:active {
+          transform: scale(0.98);
+        }
+
+        .progress-container {
+          margin: 20px 0;
+          padding: 20px;
+        }
+
+        .achievement-grid {
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          gap: 12px;
+          margin: 20px 0;
+        }
+
+        .achievement-icon {
+          font-size: 2rem;
+          margin-bottom: 6px;
+        }
+
+        .score-circle {
+          width: 150px;
+          height: 150px;
+          margin: 20px auto;
+        }
+
+        .score {
+          font-size: 3rem;
+        }
+
+        .notification {
+          top: 10px;
+          right: 10px;
+          left: 10px;
+          max-width: calc(100% - 20px);
+          padding: 15px 20px;
+        }
+
+        .timer {
+          top: 10px;
+          padding: 10px 20px;
+          font-size: 0.95rem;
+        }
+
+        .info-box,
+        .warning-box,
+        .success-box {
+          padding: 15px;
+          margin: 15px 0;
+        }
+
+        .switch {
+          width: 52px;
+          height: 30px;
+        }
+
+        .slider:before {
+          height: 22px;
+          width: 22px;
+        }
+
+        input:checked + .slider:before {
+          transform: translateX(22px);
+        }
+
+        h1 {
+          font-size: 1.75rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        h3 {
+          font-size: 1.3rem;
+        }
+
+        ::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+      }
+
+      /* Mobile styles (600px and below) */
+      @media (max-width: 600px) {
+        .card-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      /* Small mobile styles (480px and below) */
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+        }
+
+        body {
+          padding-bottom: 50px;
+        }
+
+        .header {
+          padding: 15px;
+          margin-bottom: 15px;
+        }
+
+        .header h1 {
+          font-size: 1.25rem;
+          gap: 8px;
+        }
+
+        .header-badge {
+          padding: 6px 12px;
+          font-size: 0.75rem;
+        }
+
+        .nav-tabs {
+          gap: 6px;
+          padding: 6px;
+          border-radius: 8px;
+        }
+
+        .nav-tab {
+          padding: 10px 16px;
+          font-size: 0.9rem;
+          min-height: 44px;
+        }
+
+        .content-section {
+          padding: 15px;
+        }
+
+        .section-header {
+          gap: 10px;
+          margin-bottom: 15px;
+        }
+
+        .section-header h2 {
+          font-size: 1.3rem;
+        }
+
+        .section-header .emoji {
+          font-size: 1.5rem;
+        }
+
+        .card {
+          padding: 15px;
+        }
+
+        .card h3 {
+          font-size: 1.1rem;
+        }
+
+        .card p {
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+
+        .card .emoji {
+          font-size: 2rem;
+          margin-bottom: 10px;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .stat-card {
+          padding: 12px;
+        }
+
+        .stat-value {
+          font-size: 1.8rem;
+        }
+
+        .stat-label {
+          font-size: 0.85rem;
+        }
+
+        .question-card {
+          padding: 15px;
+          margin: 12px 0;
+        }
+
+        .question-text {
+          font-size: 1rem;
+          margin-bottom: 15px;
+          line-height: 1.5;
+        }
+
+        .options {
+          gap: 10px;
+        }
+
+        .option {
+          padding: 12px 15px;
+          font-size: 0.95rem;
+          gap: 10px;
+        }
+
+        .btn {
+          padding: 12px 20px;
+          font-size: 0.9rem;
+          width: 100%;
+          max-width: 100%;
+        }
+
+        .button-group {
+          gap: 8px;
+          margin: 15px 0;
+        }
+
+        .button-group .btn {
+          flex: 1 1 100%;
+          min-width: 0;
+        }
+
+        .progress-container {
+          margin: 15px 0;
+          padding: 15px;
+        }
+
+        .progress-bar {
+          height: 10px;
+        }
+
+        .achievement-grid {
+          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+          gap: 10px;
+        }
+
+        .achievement {
+          padding: 10px;
+          border-radius: 10px;
+        }
+
+        .achievement-icon {
+          font-size: 1.5rem;
+          margin-bottom: 4px;
+        }
+
+        .achievement-name {
+          font-size: 0.7rem;
+        }
+
+        .score-circle {
+          width: 130px;
+          height: 130px;
+        }
+
+        .score {
+          font-size: 2.5rem;
+        }
+
+        .total {
+          font-size: 1rem;
+        }
+
+        .badge {
+          padding: 5px 12px;
+          font-size: 0.8rem;
+          margin: 3px;
+        }
+
+        .notification {
+          padding: 12px 16px;
+          font-size: 0.9rem;
+        }
+
+        .timer {
+          padding: 8px 16px;
+          font-size: 0.85rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+          padding: 12px 14px;
+          font-size: 16px; /* Prevents zoom on iOS */
+          min-height: 44px;
+        }
+
+        .form-group {
+          margin-bottom: 15px;
+        }
+
+        .form-label {
+          font-size: 0.95rem;
+          margin-bottom: 6px;
+        }
+
+        .info-box,
+        .warning-box,
+        .success-box {
+          padding: 12px;
+          margin: 12px 0;
+          font-size: 0.95rem;
+        }
+
+        .modal {
+          padding: 10px;
+        }
+
+        .modal-content {
+          padding: 15px;
+          max-height: 80vh;
+          border-radius: 12px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        h3 {
+          font-size: 1.1rem;
+        }
+
+        p {
+          line-height: 1.5;
+          font-size: 0.95rem;
+        }
+
+        .mt-1 { margin-top: 0.375rem; }
+        .mt-2 { margin-top: 0.75rem; }
+        .mt-3 { margin-top: 1.125rem; }
+        .mb-1 { margin-bottom: 0.375rem; }
+        .mb-2 { margin-bottom: 0.75rem; }
+        .mb-3 { margin-bottom: 1.125rem; }
+      }
+
+      /* Landscape mode adjustments for mobile */
+      @media (max-width: 768px) and (orientation: landscape) {
+        .header {
+          padding: 15px;
+        }
+
+        .header h1 {
+          font-size: 1.3rem;
+        }
+
+        .content-section {
+          padding: 15px;
+        }
+
+        .score-circle {
+          width: 120px;
+          height: 120px;
+        }
+
+        .score {
+          font-size: 2rem;
+        }
+      }
+
+      /* Smooth scrolling for navigation tabs */
+      .nav-tabs {
+        scrollbar-color: var(--primary-light) transparent;
+      }
+
+      .nav-tabs::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 3px;
+      }
+
+      /* Touch-friendly tap targets */
+      @media (hover: none) and (pointer: coarse) {
+        .card,
+        .option,
+        .nav-tab,
+        .btn {
+          min-height: 44px;
+        }
+      }
+
+      /* Prevent text selection on interactive elements */
+      .btn,
+      .nav-tab,
+      .option {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        user-select: none;
+      }
+
+      /* Safe area insets for notched devices */
+      @supports (padding: max(0px)) {
+        body {
+          padding-left: max(0px, env(safe-area-inset-left));
+          padding-right: max(0px, env(safe-area-inset-right));
+        }
+
+        .container {
+          padding-left: max(20px, env(safe-area-inset-left));
+          padding-right: max(20px, env(safe-area-inset-right));
+        }
+      }
+
+      /* Utility classes */
+      .hide-mobile {
+        display: block;
+      }
+
+      .show-mobile {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .hide-mobile {
+          display: none;
+        }
+        .show-mobile {
+          display: block;
+        }
+
+        .header:hover {
+          transform: none;
+        }
+
+        .nav-tab.active {
+          transform: none;
+        }
+
+        .card:hover::after {
+          width: 0;
+          height: 0;
+        }
+
+        .card:active::after {
+          width: 300px;
+          height: 300px;
+        }
+      }
+
+      /* Image responsiveness */
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Table responsiveness */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow-x: auto;
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        table {
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        table {
+          font-size: 0.85rem;
+        }
       }
 
       .header {
