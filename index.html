@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+    />
     <title>AFP Exam Reviewer 2026</title>
     <style>
       * {
@@ -432,11 +435,14 @@
         .button-group {
           gap: 8px;
           margin: 15px 0;
+          display: flex;
+          flex-direction: column; /* ADDED: Stack buttons vertically */
         }
 
         .button-group .btn {
-          flex: 1 1 100%;
+          width: 100%; /* ADDED: Full width buttons */
           min-width: 0;
+          margin: 5px 0; /* ADDED: Spacing between stacked buttons */
         }
 
         .progress-container {
@@ -489,6 +495,10 @@
         .notification {
           padding: 12px 16px;
           font-size: 0.9rem;
+          bottom: 10px;
+          right: 10px;
+          left: 10px;
+          max-width: calc(100% - 20px);
         }
 
         .timer {
@@ -504,7 +514,15 @@
           font-size: 16px; /* Prevents zoom on iOS */
           min-height: 44px;
         }
-
+        /* Math game input fixes */
+        input[type="number"]#mathAnswer {
+          width: 100% !important; /* Full width on mobile */
+          max-width: 280px;
+          font-size: 1.8rem !important; /* Larger text */
+          padding: 18px !important; /* More touch area */
+          margin: 15px auto;
+          display: block;
+        }
         .form-group {
           margin-bottom: 15px;
         }
@@ -527,11 +545,15 @@
         }
 
         .modal-content {
-          padding: 15px;
-          max-height: 80vh;
+          padding: 25px 15px;
           border-radius: 12px;
+          max-height: 95vh; /* ADDED: More screen space */
+          overflow-y: auto;
+          overflow-x: hidden; /* ADDED: Prevent horizontal scroll */
         }
-
+        .modal-content * {
+          max-width: 100%; /* ADDED: Force all children to respect container */
+        }
         h1 {
           font-size: 1.5rem;
         }
@@ -549,12 +571,24 @@
           font-size: 0.95rem;
         }
 
-        .mt-1 { margin-top: 0.375rem; }
-        .mt-2 { margin-top: 0.75rem; }
-        .mt-3 { margin-top: 1.125rem; }
-        .mb-1 { margin-bottom: 0.375rem; }
-        .mb-2 { margin-bottom: 0.75rem; }
-        .mb-3 { margin-bottom: 1.125rem; }
+        .mt-1 {
+          margin-top: 0.375rem;
+        }
+        .mt-2 {
+          margin-top: 0.75rem;
+        }
+        .mt-3 {
+          margin-top: 1.125rem;
+        }
+        .mb-1 {
+          margin-bottom: 0.375rem;
+        }
+        .mb-2 {
+          margin-bottom: 0.75rem;
+        }
+        .mb-3 {
+          margin-bottom: 1.125rem;
+        }
       }
 
       /* Landscape mode adjustments for mobile */
@@ -715,6 +749,8 @@
         justify-content: center;
         gap: 15px;
         text-shadow: 0 2px 4px rgba(26, 77, 46, 0.1);
+        flex-wrap: wrap; /* ADDED: Prevents text overflow */
+        text-align: center; /* ADDED: Centers wrapped text */
       }
 
       .header-badge {
@@ -842,6 +878,29 @@
         margin-top: 20px;
       }
 
+      @media (max-width: 768px) and (min-width: 481px) {
+        /* Tablet: 2 columns */
+        .card-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        /* Mobile: 1 column */
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 380px) {
+        .score-circle {
+          width: 110px;
+          height: 110px;
+        }
+
+        .score {
+          font-size: 2rem;
+        }
+      }
       .card {
         background: linear-gradient(
           135deg,
@@ -925,6 +984,9 @@
         line-height: 1.6;
         position: relative;
         z-index: 1;
+        word-wrap: break-word; /* ADDED: Breaks long words */
+        overflow-wrap: break-word; /* ADDED: Modern browsers */
+        hyphens: auto; /* ADDED: Hyphenates long text */
       }
 
       .btn {
@@ -1420,7 +1482,37 @@
           transform: translateX(0);
         }
       }
+      @media (max-width: 768px) {
+        .modal {
+          padding: 10px;
+        }
 
+        .modal-content {
+          padding: 30px 20px;
+          max-height: 90vh;
+          width: 95%;
+        }
+
+        #practiceModal .modal-content {
+          max-width: 100%;
+        }
+
+        .modal-content button[onclick*="close"] {
+          top: 10px;
+          right: 10px;
+          width: 35px;
+          height: 35px;
+          font-size: 1.3rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .modal-content {
+          padding: 25px 15px;
+          border-radius: 12px;
+        }
+      }
+      /* ===== ENHANCED MODAL SYSTEM ===== */
       .modal {
         display: none;
         position: fixed;
@@ -1428,12 +1520,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(26, 77, 46, 0.85);
-        backdrop-filter: blur(4px);
+        background: rgba(26, 77, 46, 0.9);
+        backdrop-filter: blur(8px);
         z-index: 2000;
         align-items: center;
         justify-content: center;
         animation: fadeIn 0.3s ease;
+        overflow-y: auto;
+        padding: 20px;
       }
 
       .modal.active {
@@ -1447,19 +1541,121 @@
           var(--bg-cream) 100%
         );
         padding: 40px;
-        border-radius: 16px;
-        max-width: 600px;
-        width: 90%;
+        border-radius: 20px;
+        max-width: 900px;
+        width: 95%;
         max-height: 90vh;
         overflow-y: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
         border: 2px solid var(--border);
         animation: modalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+        margin: auto;
+      }
+
+      /* Modal close button */
+      .modal-close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--danger), #9a0e1a);
+        color: white;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(193, 18, 31, 0.3);
+        line-height: 1;
+        font-weight: 300;
+      }
+
+      .modal-close-btn:hover {
+        background: linear-gradient(135deg, #9a0e1a, #7a0b15);
+        transform: rotate(90deg) scale(1.1);
+        box-shadow: 0 6px 20px rgba(193, 18, 31, 0.5);
+      }
+
+      .modal-close-btn:active {
+        transform: rotate(90deg) scale(0.95);
+      }
+
+      /* Modal header styles */
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid var(--border);
+      }
+
+      .modal-title {
+        color: var(--primary);
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .modal-body {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Smooth scrollbar for modal */
+      .modal-content::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .modal-content::-webkit-scrollbar-track {
+        background: var(--bg-light);
+        border-radius: 5px;
+      }
+
+      .modal-content::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 5px;
+      }
+
+      .modal-content::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary)
+        );
+      }
+
+      /* Animation keyframes */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
       }
 
       @keyframes modalSlideIn {
         0% {
-          transform: scale(0.7) translateY(-50px);
+          transform: scale(0.8) translateY(-60px);
           opacity: 0;
         }
         100% {
@@ -1468,6 +1664,82 @@
         }
       }
 
+      @keyframes modalSlideOut {
+        0% {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0.8) translateY(-60px);
+          opacity: 0;
+        }
+      }
+
+      /* Responsive Modal Styles */
+      @media (max-width: 768px) {
+        .modal {
+          padding: 10px;
+        }
+
+        .modal-content {
+          padding: 30px 20px;
+          max-height: 92vh;
+          width: 98%;
+          border-radius: 16px;
+        }
+
+        .modal-close-btn {
+          top: 12px;
+          right: 12px;
+          width: 38px;
+          height: 38px;
+          font-size: 1.5rem;
+        }
+
+        .modal-title {
+          font-size: 1.4rem;
+          padding-right: 50px;
+        }
+
+        .modal-header {
+          margin-bottom: 20px;
+          padding-bottom: 15px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .modal-content {
+          padding: 25px 15px;
+          border-radius: 12px;
+        }
+
+        .modal-close-btn {
+          width: 36px;
+          height: 36px;
+          font-size: 1.3rem;
+        }
+
+        .modal-title {
+          font-size: 1.2rem;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
       .topic-list {
         list-style: none;
       }
@@ -1645,7 +1917,34 @@
         margin: 10px 0;
         border-left: 4px solid var(--success);
       }
+      .strict-mode-container {
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border: 2px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
 
+      @media (max-width: 600px) {
+        .strict-mode-container {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 20px;
+        }
+
+        .strict-mode-container > div {
+          width: 100%;
+        }
+
+        .strict-mode-container label {
+          align-self: flex-end;
+        }
+      }
       /* Footer Styles */
       .footer {
         background: linear-gradient(
@@ -1779,20 +2078,7 @@
         </h2>
 
         <!-- Strict Exam Mode Toggle -->
-        <div
-          style="
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 2px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-          "
-        >
+        <div class="strict-mode-container">
           <div style="flex: 1; min-width: 250px">
             <h3
               style="
@@ -1953,7 +2239,11 @@
           </div>
         </div>
 
-        <div id="practiceQuestions" style="margin-top: 30px"></div>
+        <div
+          id="practiceQuestions"
+          style="margin-top: 30px"
+          display="none"
+        ></div>
       </div>
 
       <!-- Mock Exam Section -->
@@ -1979,7 +2269,7 @@
           </div>
         </div>
 
-        <div id="mockExamContent"></div>
+        <div id="mockExamContent" style="display: none"></div>
       </div>
 
       <!-- Stats Section -->
@@ -2198,7 +2488,7 @@
           </div>
         </div>
 
-        <div id="gameContent" style="margin-top: 30px"></div>
+        <div id="gameContent" style="margin-top: 30px; display: none"></div>
       </div>
 
       <!-- Study Resources Section -->
@@ -2304,6 +2594,54 @@
         >
           Close
         </button>
+      </div>
+    </div>
+
+    <!-- Practice Questions Modal -->
+    <div id="practiceModal" class="modal">
+      <div class="modal-content" style="max-width: 900px">
+        <button
+          onclick="closePracticeModal()"
+          style="
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s;
+          "
+        >
+          ×
+        </button>
+        <div id="practiceModalContent"></div>
+      </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="modal">
+      <div class="modal-content" style="max-width: 1000px">
+        <button onclick="closeGameModal()" class="modal-close-btn">×</button>
+        <div id="gameModalContent"></div>
+      </div>
+    </div>
+
+    <!-- Mock Exam Modal -->
+    <div id="mockExamModal" class="modal">
+      <div class="modal-content" style="max-width: 1100px">
+        <button onclick="closeMockExamModal()" class="modal-close-btn">
+          ×
+        </button>
+        <div id="mockExamModalContent"></div>
       </div>
     </div>
 
@@ -3841,33 +4179,162 @@
       // Start practice with difficulty selection
       function startPractice(type) {
         const html = `
-                <div style="text-align: center; padding: 30px;">
-                    <h2 style="color: var(--primary); margin-bottom: 20px;">Select Difficulty Level</h2>
-                    <p style="margin-bottom: 30px;">Choose your practice difficulty. Start with Easy and progress to Hard.</p>
-                    
-                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                        <button class="btn btn-success" onclick="startPracticeSession('${type}', 'easy')" style="padding: 20px 40px;">
-                            <div style="font-size: 1.2rem; margin-bottom: 5px;">🟢 EASY</div>
-                            <div style="font-size: 0.9rem;">Build confidence</div>
-                        </button>
-                        <button class="btn btn-primary" onclick="startPracticeSession('${type}', 'medium')" style="padding: 20px 40px;">
-                            <div style="font-size: 1.2rem; margin-bottom: 5px;">🟡 MEDIUM</div>
-                            <div style="font-size: 0.9rem;">Realistic difficulty</div>
-                        </button>
-                        <button class="btn btn-danger" onclick="startPracticeSession('${type}', 'hard')" style="padding: 20px 40px;">
-                            <div style="font-size: 1.2rem; margin-bottom: 5px;">🔴 HARD</div>
-                            <div style="font-size: 0.9rem;">Challenge yourself</div>
-                        </button>
-                    </div>
-                    
-                    <div class="tip-box" style="max-width: 600px; margin: 30px auto;">
-                        <strong>💡 Tip:</strong> Master Easy level (80%+ accuracy) before attempting Medium. 
-                        Achieve 75%+ on Hard to be exam-ready.
-                    </div>
-                </div>
-            `;
-        document.getElementById("practiceQuestions").innerHTML = html;
+    <div style="text-align: center; padding: 30px;">
+      <h2 style="color: var(--primary); margin-bottom: 20px;">Select Difficulty Level</h2>
+      <p style="margin-bottom: 30px;">Choose your practice difficulty. Start with Easy and progress to Hard.</p>
+      
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-success" onclick="startPracticeSession('${type}', 'easy')" style="padding: 20px 40px;">
+          <div style="font-size: 1.2rem; margin-bottom: 5px;">🟢 EASY</div>
+          <div style="font-size: 0.9rem;">Build confidence</div>
+        </button>
+        <button class="btn btn-primary" onclick="startPracticeSession('${type}', 'medium')" style="padding: 20px 40px;">
+          <div style="font-size: 1.2rem; margin-bottom: 5px;">🟡 MEDIUM</div>
+          <div style="font-size: 0.9rem;">Realistic difficulty</div>
+        </button>
+        <button class="btn btn-danger" onclick="startPracticeSession('${type}', 'hard')" style="padding: 20px 40px;">
+          <div style="font-size: 1.2rem; margin-bottom: 5px;">🔴 HARD</div>
+          <div style="font-size: 0.9rem;">Challenge yourself</div>
+        </button>
+      </div>
+      
+      <div class="tip-box" style="max-width: 600px; margin: 30px auto;">
+        <strong>💡 Tip:</strong> Master Easy level (80%+ accuracy) before attempting Medium. 
+        Achieve 75%+ on Hard to be exam-ready.
+      </div>
+    </div>
+  `;
+
+        // Open in modal instead of inline
+        document.getElementById("practiceModalContent").innerHTML = html;
+        document.getElementById("practiceModal").classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevent background scroll
       }
+      // Close practice modal
+      function closePracticeModal() {
+        const modal = document.getElementById("practiceModal");
+        modal.style.animation = "fadeOut 0.3s ease";
+
+        setTimeout(() => {
+          modal.classList.remove("active");
+          modal.style.animation = "";
+          document.body.style.overflow = ""; // Restore scroll
+
+          // Stop any active timers
+          stopTimer();
+        }, 300);
+      }
+      // ===== UNIVERSAL MODAL SYSTEM =====
+
+      // Generic modal opener
+      function openModal(modalId, title, content, showCloseButton = true) {
+        const modal = document.getElementById(modalId);
+        const modalContent = document.getElementById(modalId + "Content");
+
+        if (!modal || !modalContent) {
+          console.error(`Modal ${modalId} not found`);
+          return;
+        }
+
+        // Build modal structure with optional header
+        let html = "";
+
+        if (title) {
+          html += `
+      <div class="modal-header">
+        <h2 class="modal-title">${title}</h2>
+      </div>
+    `;
+        }
+
+        html += `<div class="modal-body">${content}</div>`;
+
+        modalContent.innerHTML = html;
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      // Generic modal closer with animation
+      function closeModalAnimated(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+
+        // Add fade out animation
+        modal.style.animation = "fadeOut 0.3s ease";
+        const modalContent = modal.querySelector(".modal-content");
+        if (modalContent) {
+          modalContent.style.animation = "modalSlideOut 0.3s ease";
+        }
+
+        setTimeout(() => {
+          modal.classList.remove("active");
+          modal.style.animation = "";
+          if (modalContent) {
+            modalContent.style.animation = "";
+          }
+          document.body.style.overflow = "";
+
+          // Stop any active timers
+          stopTimer();
+        }, 300);
+      }
+
+      // Enhanced close practice modal (update existing function)
+      function closePracticeModal() {
+        closeModalAnimated("practiceModal");
+      }
+
+      // Close game modal
+      function closeGameModal() {
+        closeModalAnimated("gameModal");
+      }
+
+      // Close mock exam modal
+      function closeMockExamModal() {
+        closeModalAnimated("mockExamModal");
+      }
+
+      // Click outside to close - update existing listener
+      document.addEventListener("click", function (event) {
+        const modals = ["practiceModal", "gameModal", "mockExamModal", "modal"];
+
+        modals.forEach((modalId) => {
+          const modal = document.getElementById(modalId);
+          if (event.target === modal) {
+            if (modalId === "practiceModal") closePracticeModal();
+            else if (modalId === "gameModal") closeGameModal();
+            else if (modalId === "mockExamModal") closeMockExamModal();
+            else closeModal();
+          }
+        });
+      });
+
+      // ESC key to close modals
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          if (
+            document
+              .getElementById("practiceModal")
+              .classList.contains("active")
+          ) {
+            closePracticeModal();
+          } else if (
+            document.getElementById("gameModal").classList.contains("active")
+          ) {
+            closeGameModal();
+          } else if (
+            document
+              .getElementById("mockExamModal")
+              .classList.contains("active")
+          ) {
+            closeMockExamModal();
+          } else if (
+            document.getElementById("modal").classList.contains("active")
+          ) {
+            closeModal();
+          }
+        }
+      });
 
       // Start practice session with selected difficulty
       window.startPracticeSession = function (type, difficulty) {
@@ -3950,7 +4417,7 @@
                     <button class="btn btn-primary" onclick="submitAnswer()" style="margin-top: 20px;">Submit Answer</button>
                 `;
 
-          document.getElementById("practiceQuestions").innerHTML = html;
+          document.getElementById("practiceModalContent").innerHTML = html;
 
           // Start question timer if applicable
           if (timeLimit > 0) {
@@ -4033,7 +4500,12 @@
                     </button>
                 `;
 
-          document.getElementById("practiceQuestions").innerHTML += explanation;
+          // Append explanation to the modal content instead
+          const currentContent = document.getElementById(
+            "practiceModalContent",
+          ).innerHTML;
+          document.getElementById("practiceModalContent").innerHTML =
+            currentContent + explanation;
 
           saveUserData();
           window.selectedAnswer = undefined;
@@ -4208,64 +4680,139 @@
                     </div>
                 </div>
             `;
-        document.getElementById("practiceQuestions").innerHTML = html;
+        document.getElementById("practiceModalContent").innerHTML = html;
         updateDashboard();
       }
 
-      // Start mock exam
+      // Start mock exam - now opens in modal
       function startMockExam(examType) {
+        let title = "";
+        let html = "";
+
         if (examType === "afpsat") {
-          const html = `
-                    <div style="text-align: center; padding: 40px;">
-                        <h2 style="color: var(--primary); margin-bottom: 20px;">AFPSAT Full Mock Exam</h2>
-                        <p style="margin: 20px 0;">This mock exam simulates the actual AFPSAT test conditions:</p>
-                        <ul style="text-align: left; max-width: 500px; margin: 20px auto;">
-                            <li>50 Abstract Reasoning questions (12 minutes)</li>
-                            <li>65 Verbal Reasoning questions (30 minutes)</li>
-                            <li>35 Numerical Reasoning questions (35 minutes)</li>
-                            <li><strong>Total: 150 questions in 77 minutes</strong></li>
-                        </ul>
-                        <div class="tip-box" style="max-width: 600px; margin: 30px auto;">
-                            <strong>Important:</strong> Once you start, you must complete all sections. The timer cannot be paused. Ensure you have uninterrupted time before beginning.
-                        </div>
-                        <button class="btn btn-success" onclick="launchMockExam('afpsat')" style="padding: 15px 40px; font-size: 1.2rem;">
-                            Start Mock Exam
-                        </button>
-                    </div>
-                `;
-          document.getElementById("mockExamContent").innerHTML = html;
+          title = "⏱️ AFPSAT Full Mock Exam";
+          html = `
+      <div style="text-align: center; padding: 20px;">
+        <div style="background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-cream) 100%); padding: 30px; border-radius: 16px; margin-bottom: 30px;">
+          <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;">
+            Simulate Real AFPSAT Test Conditions
+          </h3>
+          <p style="margin: 15px 0; color: var(--text-dark); font-size: 1.1rem;">
+            This mock exam replicates the actual AFPSAT structure:
+          </p>
+        </div>
+        
+        <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px auto; max-width: 600px; text-align: left; box-shadow: 0 4px 12px var(--shadow-soft);">
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--primary);">
+              <strong>📐 Abstract Reasoning:</strong> 50 questions (12 minutes)
+            </li>
+            <li style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+              <strong>📖 Verbal Ability:</strong> 65 questions (30 minutes)
+            </li>
+            <li style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--secondary-light);">
+              <strong>🔢 Numerical Ability:</strong> 35 questions (35 minutes)
+            </li>
+            <li style="padding: 12px; margin: 8px 0; background: var(--accent); color: white; border-radius: 8px; font-weight: 600;">
+              <strong>⏱️ Total:</strong> 150 questions in 77 minutes
+            </li>
+          </ul>
+        </div>
+        
+        <div class="tip-box" style="max-width: 700px; margin: 30px auto; text-align: left;">
+          <strong>⚠️ Important Rules:</strong>
+          <ul style="margin: 15px 0 0 20px;">
+            <li>Timer cannot be paused once started</li>
+            <li>You must complete all sections in one sitting</li>
+            <li>Ensure 90+ minutes of uninterrupted time</li>
+            <li>Use headphones to minimize distractions</li>
+          </ul>
+        </div>
+        
+        <button class="btn btn-success" onclick="launchMockExam('afpsat')" 
+                style="padding: 18px 50px; font-size: 1.3rem; margin-top: 20px;">
+          🚀 Start AFPSAT Mock Exam
+        </button>
+      </div>
+    `;
         } else {
-          const html = `
-                    <div style="text-align: center; padding: 40px;">
-                        <h2 style="color: var(--primary); margin-bottom: 20px;">Neuro-Psychological Mock Exam</h2>
-                        <p style="margin: 20px 0;">This simulation includes:</p>
-                        <ul style="text-align: left; max-width: 500px; margin: 20px auto;">
-                            <li>Personality assessment questions</li>
-                            <li>Situational judgment scenarios</li>
-                            <li>Logical thinking problems</li>
-                            <li>Stress tolerance evaluation</li>
-                            <li><strong>Estimated time: 60 minutes</strong></li>
-                        </ul>
-                        <div class="tip-box" style="max-width: 600px; margin: 30px auto;">
-                            <strong>Remember:</strong> Answer honestly and consistently. There are no "right" or "wrong" answers in personality assessments. The test checks for truthfulness and consistency.
-                        </div>
-                        <button class="btn btn-success" onclick="launchMockExam('neuroPsych')" style="padding: 15px 40px; font-size: 1.2rem;">
-                            Start Mock Exam
-                        </button>
-                    </div>
-                `;
-          document.getElementById("mockExamContent").innerHTML = html;
+          title = "🧠 Neuro-Psychological Mock Exam";
+          html = `
+      <div style="text-align: center; padding: 20px;">
+        <div style="background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-cream) 100%); padding: 30px; border-radius: 16px; margin-bottom: 30px;">
+          <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;">
+            Comprehensive Psychological Assessment
+          </h3>
+          <p style="margin: 15px 0; color: var(--text-dark); font-size: 1.1rem;">
+            This simulation evaluates your psychological readiness for military service:
+          </p>
+        </div>
+        
+        <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px auto; max-width: 600px; text-align: left; box-shadow: 0 4px 12px var(--shadow-soft);">
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--primary);">
+              <strong>👤 Personality Assessment:</strong> Behavioral patterns & attitudes
+            </li>
+            <li style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+              <strong>🎯 Situational Judgment:</strong> Decision-making scenarios
+            </li>
+            <li style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--secondary-light);">
+              <strong>🧩 Logical Thinking:</strong> Critical reasoning problems
+            </li>
+            <li style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--accent);">
+              <strong>💪 Stress Tolerance:</strong> Emotional control evaluation
+            </li>
+            <li style="padding: 12px; margin: 8px 0; background: var(--accent); color: white; border-radius: 8px; font-weight: 600;">
+              <strong>⏱️ Estimated Time:</strong> 60 minutes
+            </li>
+          </ul>
+        </div>
+        
+        <div class="tip-box" style="max-width: 700px; margin: 30px auto; text-align: left; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);">
+          <strong>💡 Remember:</strong>
+          <ul style="margin: 15px 0 0 20px;">
+            <li>Answer honestly and consistently</li>
+            <li>No "right" or "wrong" answers exist</li>
+            <li>Test detects inconsistencies automatically</li>
+            <li>First instinct is usually most accurate</li>
+          </ul>
+        </div>
+        
+        <button class="btn btn-success" onclick="launchMockExam('neuroPsych')" 
+                style="padding: 18px 50px; font-size: 1.3rem; margin-top: 20px;">
+          🧠 Start Neuro-Psych Mock Exam
+        </button>
+      </div>
+    `;
         }
+
+        // Open in modal
+        const modalContent = document.getElementById("mockExamModalContent");
+        modalContent.innerHTML = `
+    <div class="modal-header">
+      <h2 class="modal-title">${title}</h2>
+    </div>
+    <div class="modal-body">${html}</div>
+  `;
+
+        document.getElementById("mockExamModal").classList.add("active");
+        document.body.style.overflow = "hidden";
       }
 
       function launchMockExam(type) {
+        // Close the modal first
+        closeMockExamModal();
+
+        // Show notification
         showNotification(
-          "Mock exam feature will track your time and provide comprehensive results!",
+          `🚀 ${type === "afpsat" ? "AFPSAT" : "Neuro-Psych"} Mock Exam will be available soon! Full implementation with timer and comprehensive results coming.`,
         );
-        // Full implementation would include timer and complete question sets
+
+        // Future: This is where the full mock exam implementation will go
+        // It will open in a new full-screen modal with timer, questions, and auto-submit
       }
 
-      // Start game
+      // Start game - now opens in modal
       function startGame(gameType) {
         // Ensure games progress exists
         if (!userData.gamesProgress) {
@@ -4281,160 +4828,21 @@
           };
         }
 
-        if (gameType === "patternSpeed") {
-          startPatternSpeedGame();
-        } else if (gameType === "mathBlitz") {
-          startMathBlitzGame();
-        } else if (gameType === "memoryMatch") {
-          startMemoryMatchGame();
-        }
-      }
+        // Open modal FIRST
+        const modal = document.getElementById("gameModal");
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
 
-      // === GAME 1: PATTERN SPEED CHALLENGE ===
-      function startPatternSpeedGame() {
-        let score = 0;
-        let round = 1;
-        const maxRounds = 10;
-        let startTime = Date.now();
-
-        const patterns = [
-          { sequence: ["🔴", "🔵", "🔴", "🔵", "🔴"], next: "🔵" },
-          {
-            sequence: ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐"],
-            next: "⭐⭐⭐⭐⭐",
-          },
-          { sequence: ["▲", "▼", "▲", "▼"], next: "▲" },
-          { sequence: ["1", "2", "4", "8"], next: "16" },
-          { sequence: ["A", "C", "E", "G"], next: "I" },
-          { sequence: ["🟢", "🟡", "🔴", "🟢", "🟡"], next: "🔴" },
-          { sequence: ["■", "●", "▲", "■", "●"], next: "▲" },
-        ];
-
-        function showRound() {
-          if (round > maxRounds) {
-            endGame();
-            return;
+        // Wait for modal to be visible, THEN launch game
+        setTimeout(() => {
+          if (gameType === "patternSpeed") {
+            startPatternSpeedGame();
+          } else if (gameType === "mathBlitz") {
+            startMathBlitzGame();
+          } else if (gameType === "memoryMatch") {
+            startMemoryMatchGame();
           }
-
-          const pattern = patterns[Math.floor(Math.random() * patterns.length)];
-          const roundStart = Date.now();
-
-          const options = [pattern.next];
-          const wrongOptions = [
-            "🟠",
-            "🟣",
-            "⬛",
-            "◆",
-            "◇",
-            "▶",
-            "◀",
-            "B",
-            "J",
-            "32",
-          ];
-          while (options.length < 4) {
-            const wrong =
-              wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
-            if (!options.includes(wrong) && wrong !== pattern.next) {
-              options.push(wrong);
-            }
-          }
-          shuffleArray(options);
-
-          const html = `
-            <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
-              <h3 style="color: var(--primary); margin-bottom: 20px;">
-                Round ${round} of ${maxRounds}
-              </h3>
-              <div style="background: var(--bg-light); padding: 30px; border-radius: 12px; margin: 20px 0;">
-                <div style="font-size: 3rem; margin-bottom: 20px;">
-                  ${pattern.sequence.join(" → ")} → ?
-                </div>
-              </div>
-              <p style="margin: 20px 0; color: var(--text-light);">What comes next?</p>
-              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 400px; margin: 0 auto;">
-                ${options
-                  .map(
-                    (opt) => `
-                  <button class="btn btn-primary" onclick="checkPatternAnswer('${opt}', '${pattern.next}', ${roundStart})" 
-                          style="font-size: 2rem; padding: 30px;">
-                    ${opt}
-                  </button>
-                `,
-                  )
-                  .join("")}
-              </div>
-              <div style="margin-top: 30px; padding: 20px; background: var(--bg-light); border-radius: 8px;">
-                <strong>Score:</strong> ${score} points | <strong>Time:</strong> ${Math.floor((Date.now() - startTime) / 1000)}s
-              </div>
-            </div>
-          `;
-
-          document.getElementById("gameContent").innerHTML = html;
-        }
-
-        window.checkPatternAnswer = function (selected, correct, roundStart) {
-          const responseTime = Date.now() - roundStart;
-          const timeBonus = Math.max(0, 1000 - responseTime);
-
-          if (selected === correct) {
-            score += Math.floor(100 + timeBonus / 10);
-            showNotification(
-              "✅ Correct! +" + Math.floor(100 + timeBonus / 10) + " points",
-            );
-          } else {
-            showNotification("❌ Incorrect. Correct answer was: " + correct);
-          }
-
-          round++;
-          setTimeout(showRound, 800);
-        };
-
-        function endGame() {
-          const totalTime = Math.floor((Date.now() - startTime) / 1000);
-
-          if (!userData.gamesProgress.patternSpeed) {
-            userData.gamesProgress.patternSpeed = { highScore: 0, attempts: 0 };
-          }
-
-          userData.gamesProgress.patternSpeed.attempts++;
-          const isNewHigh =
-            score > userData.gamesProgress.patternSpeed.highScore;
-          if (isNewHigh) {
-            userData.gamesProgress.patternSpeed.highScore = score;
-            userData.gamesProgress.patternSpeed.lastPlayed =
-              new Date().toISOString();
-          }
-          saveUserData();
-
-          const html = `
-            <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
-              <h2 style="color: var(--success); margin-bottom: 20px;">🎉 Game Complete!</h2>
-              <div class="score-circle" style="margin: 30px auto;">
-                <div class="score">${score}</div>
-                <div class="total">points</div>
-              </div>
-              <p style="font-size: 1.2rem; margin: 20px 0;">Completed in ${totalTime} seconds</p>
-              <p style="color: var(--text-light);">
-                ${isNewHigh ? "🏆 New High Score!" : "High Score: " + userData.gamesProgress.patternSpeed.highScore}
-              </p>
-              <div style="margin-top: 30px;">
-                <button class="btn btn-primary" onclick="startGame('patternSpeed')" style="margin: 0 10px;">
-                  Play Again
-                </button>
-                <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                        onclick="document.getElementById('gameContent').innerHTML = ''">
-                  Back to Games
-                </button>
-              </div>
-            </div>
-          `;
-
-          document.getElementById("gameContent").innerHTML = html;
-          updateGameScores();
-        }
-
-        showRound();
+        }, 100); // Small delay ensures modal DOM is ready
       }
 
       // === GAME 2: MATH BLITZ ===
@@ -4511,7 +4919,7 @@
             </div>
           `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
           document.getElementById("mathAnswer").focus();
         }
 
@@ -4566,14 +4974,14 @@
                   Play Again
                 </button>
                 <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                        onclick="document.getElementById('gameContent').innerHTML = ''">
+                        onclick="document.getElementById('gameModalContent').innerHTML = ''">
                   Back to Games
                 </button>
               </div>
             </div>
           `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
           updateGameScores();
         }
 
@@ -4604,7 +5012,7 @@
             </div>
           `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
 
           let index = 0;
           const displayInterval = setInterval(() => {
@@ -4648,7 +5056,7 @@
             </div>
           `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
         }
 
         window.selectSymbol = function (symbol) {
@@ -4725,14 +5133,14 @@
                   Play Again
                 </button>
                 <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                        onclick="document.getElementById('gameContent').innerHTML = ''">
+                        onclick="document.getElementById('gameModalContent').innerHTML = ''">
                   Back to Games
                 </button>
               </div>
             </div>
           `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
           updateGameScores();
         }
 
@@ -5043,7 +5451,7 @@
       </div>
     `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
         }
 
         window.checkPatternAnswer = function (selected, correct, roundStart) {
@@ -5095,14 +5503,14 @@
             Play Again
           </button>
           <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                  onclick="document.getElementById('gameContent').innerHTML = ''">
+                  onclick="closeGameModal()">
             Back to Games
           </button>
         </div>
       </div>
     `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
           updateGameScores();
         }
 
@@ -5183,7 +5591,7 @@
       </div>
     `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
           document.getElementById("mathAnswer").focus();
         }
 
@@ -5237,14 +5645,14 @@
             Play Again
           </button>
           <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                  onclick="document.getElementById('gameContent').innerHTML = ''">
+                  onclick="closeGameModal()">
             Back to Games
           </button>
         </div>
       </div>
     `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
           updateGameScores();
         }
 
@@ -5275,7 +5683,7 @@
       </div>
     `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
 
           // Show sequence one by one
           let index = 0;
@@ -5320,7 +5728,7 @@
       </div>
     `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
         }
 
         window.selectSymbol = function (symbol) {
@@ -5395,14 +5803,14 @@
             Play Again
           </button>
           <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                  onclick="document.getElementById('gameContent').innerHTML = ''">
+                  onclick="closeGameModal()">
             Back to Games
           </button>
         </div>
       </div>
     `;
 
-          document.getElementById("gameContent").innerHTML = html;
+          document.getElementById("gameModalContent").innerHTML = html;
           updateGameScores();
         }
 
