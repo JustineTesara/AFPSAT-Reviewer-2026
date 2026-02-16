@@ -550,7 +550,15 @@
           max-height: 95vh; /* ADDED: More screen space */
           overflow-y: auto;
           overflow-x: hidden; /* ADDED: Prevent horizontal scroll */
+          -webkit-overflow-scrolling: touch; /* ✅ ADD this for iOS smooth scroll */
         }
+        /* ADD this new rule: */
+        @media (max-width: 480px) {
+          .modal-content {
+            max-height: 85vh; /* Shorter on mobile to account for keyboard */
+          }
+        }
+
         .modal-content * {
           max-width: 100%; /* ADDED: Force all children to respect container */
         }
@@ -773,7 +781,14 @@
           transform: scale(1.05);
         }
       }
-
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
       .nav-tabs {
         display: flex;
         gap: 10px;
@@ -1042,7 +1057,39 @@
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(26, 77, 46, 0.4);
       }
+      /* Force hover effects inside modals even on touch devices */
+      .modal-content .btn:hover,
+      .modal-content .btn:focus {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 20px rgba(26, 77, 46, 0.4) !important;
+      }
 
+      .modal-content .btn-primary:hover,
+      .modal-content .btn-primary:focus {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary)
+        ) !important;
+      }
+
+      .modal-content .btn-success:hover,
+      .modal-content .btn-success:focus {
+        background: linear-gradient(
+          135deg,
+          var(--secondary),
+          var(--success)
+        ) !important;
+      }
+
+      .modal-content .btn-secondary:hover,
+      .modal-content .btn-secondary:focus {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-light),
+          var(--secondary)
+        ) !important;
+      }
       .btn-primary:active {
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(26, 77, 46, 0.3);
@@ -1075,7 +1122,25 @@
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(193, 18, 31, 0.4);
       }
+      .btn-secondary {
+        background: linear-gradient(
+          135deg,
+          var(--secondary),
+          var(--secondary-light)
+        );
+        color: white;
+        box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+      }
 
+      .btn-secondary:hover {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-light),
+          var(--secondary)
+        );
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(74, 124, 89, 0.4);
+      }
       .question-card {
         background: linear-gradient(
           135deg,
@@ -1366,7 +1431,67 @@
         border-radius: 12px;
         text-align: center;
       }
+      /* Game Modal Responsive Fixes */
+      @media (max-width: 768px) {
+        #gameModal .modal-content {
+          padding: 25px 15px;
+          max-width: 95%;
+        }
 
+        /* Game completion screen */
+        .score-circle {
+          width: 140px !important;
+          height: 140px !important;
+        }
+
+        .score-circle .score {
+          font-size: 2.8rem !important;
+        }
+
+        /* Game buttons - stack vertically on mobile */
+        #gameModalContent > div > div:last-child {
+          flex-direction: column !important;
+          gap: 10px !important;
+        }
+
+        #gameModalContent .btn {
+          width: 100% !important;
+          max-width: 280px !important;
+          margin: 5px auto !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #gameModal .modal-content {
+          padding: 20px 12px;
+        }
+
+        .score-circle {
+          width: 120px !important;
+          height: 120px !important;
+        }
+
+        .score-circle .score {
+          font-size: 2.2rem !important;
+        }
+
+        .score-circle .total {
+          font-size: 0.9rem !important;
+        }
+
+        /* Smaller fonts for mobile */
+        #gameModalContent h2 {
+          font-size: 1.3rem !important;
+        }
+
+        #gameModalContent h3 {
+          font-size: 1.1rem !important;
+        }
+
+        #gameModalContent p {
+          font-size: 0.95rem !important;
+        }
+      }
       .pattern-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1375,6 +1500,79 @@
         max-width: 400px;
       }
 
+      /* Add these responsive rules */
+      @media (max-width: 480px) {
+        .pattern-grid {
+          max-width: 100%;
+          gap: 10px;
+          margin: 15px auto;
+        }
+      }
+      /* Flash Memory Game Responsive Fixes */
+      @media (max-width: 768px) {
+        /* Symbol grid - 3 columns on tablet */
+        #gameModalContent div[style*="grid-template-columns: repeat(4"] {
+          grid-template-columns: repeat(3, 1fr) !important;
+          gap: 10px !important;
+          max-width: 100% !important;
+        }
+
+        /* Smaller emoji size on tablet */
+        #gameModalContent button[onclick*="selectSymbol"] {
+          font-size: 2.2rem !important;
+          padding: 15px !important;
+          min-height: 70px !important;
+        }
+
+        /* Sequence display */
+        #sequenceDisplay {
+          font-size: 3rem !important;
+          padding: 30px !important;
+          min-height: 120px !important;
+        }
+
+        /* User sequence display */
+        #userSequenceDisplay {
+          font-size: 1.6rem !important;
+          padding: 15px !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        /* Symbol grid - 2 columns on mobile */
+        #gameModalContent div[style*="grid-template-columns: repeat(4"] {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 8px !important;
+          padding: 0 5px !important;
+        }
+
+        /* Even smaller emoji on mobile */
+        #gameModalContent button[onclick*="selectSymbol"] {
+          font-size: 2rem !important;
+          padding: 12px !important;
+          min-height: 60px !important;
+        }
+
+        /* Sequence display mobile */
+        #sequenceDisplay {
+          font-size: 2.5rem !important;
+          padding: 25px !important;
+          min-height: 100px !important;
+        }
+
+        /* User sequence mobile */
+        #userSequenceDisplay {
+          font-size: 1.4rem !important;
+          padding: 12px !important;
+          min-height: 60px !important;
+        }
+
+        /* Stack Clear/Submit buttons on mobile */
+        #gameModalContent div[style*="flex"] > .btn {
+          width: 100% !important;
+          max-width: 240px !important;
+        }
+      }
       .pattern-box {
         aspect-ratio: 1;
         background: var(--white);
@@ -1723,23 +1921,6 @@
           font-size: 1.2rem;
         }
       }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      @keyframes fadeOut {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0;
-        }
-      }
       .topic-list {
         list-style: none;
       }
@@ -1751,8 +1932,8 @@
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
-        border-left: 4px solid var(--primary);
-        border: 2px solid var(--border);
+        border: 2px solid var(--border); /* ✅ General border first */
+        border-left: 4px solid var(--primary); /* ✅ Then specific override */
       }
 
       .topic-item:hover {
@@ -2049,24 +2230,31 @@
       </div>
 
       <div class="nav-tabs">
-        <button class="nav-tab active" onclick="showSection('dashboard')">
+        <button
+          class="nav-tab active"
+          onclick="showSection('dashboard', event)"
+        >
           📊 Dashboard
         </button>
-        <button class="nav-tab" onclick="showSection('tutorials')">
+        <button class="nav-tab" onclick="showSection('tutorials', event)">
           📚 Tutorials
         </button>
-        <button class="nav-tab" onclick="showSection('practice')">
+        <button class="nav-tab" onclick="showSection('practice', event)">
           ✍️ Practice
         </button>
-        <button class="nav-tab" onclick="showSection('mockExam')">
+        <button class="nav-tab" onclick="showSection('mockExam', event)">
           ⏱️ Mock Exams
         </button>
-        <button class="nav-tab" onclick="showSection('stats')">
+        <button class="nav-tab" onclick="showSection('stats', event)">
           📈 Performance
         </button>
-        <button class="nav-tab" onclick="showSection('tips')">💡 Tips</button>
-        <button class="nav-tab" onclick="showSection('games')">🎮 Games</button>
-        <button class="nav-tab" onclick="showSection('resources')">
+        <button class="nav-tab" onclick="showSection('tips', event)">
+          💡 Tips
+        </button>
+        <button class="nav-tab" onclick="showSection('games', event)">
+          🎮 Games
+        </button>
+        <button class="nav-tab" onclick="showSection('resources', event)">
           📚 Resources
         </button>
       </div>
@@ -2814,11 +3002,22 @@
       }
 
       function autoSubmitSection() {
-        showNotification(
-          "⏰ TIME EXPIRED - Section auto-submitted (as in real exam)",
+        showNotification("⏰ TIME EXPIRED - Section auto-submitted");
+
+        // Auto-click submit button if it exists
+        const submitBtn = document.querySelector(
+          'button[onclick*="submitAnswer"]',
         );
-        // Mark remaining questions as incorrect
-        // Implementation depends on current question flow
+        if (submitBtn) {
+          submitBtn.click();
+        } else {
+          // If in practice, force show results
+          if (typeof showPracticeResults === "function") {
+            // Call with current state
+            closePracticeModal();
+            showNotification("⏰ Time's up! Practice ended.");
+          }
+        }
       }
 
       // Load saved data
@@ -2836,7 +3035,10 @@
           }
 
           updateDashboard();
-
+          // ✅ ADD this line:
+          setTimeout(() => {
+            updateGameScores();
+          }, 100);
           // Initialize strict mode toggle after DOM is ready
           setTimeout(() => {
             initializeStrictMode();
@@ -3766,9 +3968,9 @@
                 "5% less",
                 "Equal to 1",
               ],
-              correct: 1,
+              correct: 0, // ✅ Change from 1 to 0
               explanation:
-                "Let x = 100. After +25%: 125. After -20% of 125: 125 - 25 = 100. Wait, 20% of 125 = 25, so 125-25=100. Actually equal. Let me recalculate: Start 100. +25% = 125. -20% of 125 = -25, so 100. Equal! Answer should be 0, but options say 5% more. Check: 100→125→(125×0.8)=100. Equal to original.",
+                "Start with 100. After +25%: 125. After -20%: 125 × 0.8 = 100. Equal to original!",
               topic: "percentages",
             },
           ],
@@ -4139,7 +4341,8 @@
       };
 
       // Show section
-      function showSection(sectionId) {
+      function showSection(sectionId, event) {
+        // ✅ ADD event parameter
         document.querySelectorAll(".content-section").forEach((section) => {
           section.classList.remove("active");
         });
@@ -4148,7 +4351,10 @@
         });
 
         document.getElementById(sectionId).classList.add("active");
-        event.target.classList.add("active");
+        if (event && event.target) {
+          // ✅ SAFE check
+          event.target.classList.add("active");
+        }
 
         if (sectionId === "stats") {
           updateStats();
@@ -4338,6 +4544,14 @@
 
       // Start practice session with selected difficulty
       window.startPracticeSession = function (type, difficulty) {
+        // ✅ ADD loading state
+        document.getElementById("practiceModalContent").innerHTML = `
+          <div style="text-align: center; padding: 60px;">
+            <div style="font-size: 3rem; animation: spin 1s linear infinite;">⚙️</div>
+            <p style="margin-top: 20px; color: var(--text-light);">Preparing questions...</p>
+          </div>
+        `;
+
         const questionSet =
           type === "neuroPsych"
             ? [
@@ -4471,12 +4685,17 @@
             userData.weakAreas[q.topic].correct++;
           }
 
-          // Show feedback
+          // ADD this check before showing explanation:
+          if (userData.preferences.strictExamMode) {
+            // In strict mode, just move to next question without showing answer
+            currentQuestion++;
+            showQuestion();
+            return;
+          }
+
+          // Show feedback (only in non-strict mode)
           const options = document.querySelectorAll(".option");
           options[q.correct].classList.add("correct");
-          if (!correct) {
-            options[window.selectedAnswer].classList.add("incorrect");
-          }
 
           // Time feedback
           const timeFeedback =
@@ -4799,19 +5018,227 @@
         document.body.style.overflow = "hidden";
       }
 
+      // REPLACE with actual implementation:
       function launchMockExam(type) {
-        // Close the modal first
         closeMockExamModal();
 
-        // Show notification
-        showNotification(
-          `🚀 ${type === "afpsat" ? "AFPSAT" : "Neuro-Psych"} Mock Exam will be available soon! Full implementation with timer and comprehensive results coming.`,
-        );
-
-        // Future: This is where the full mock exam implementation will go
-        // It will open in a new full-screen modal with timer, questions, and auto-submit
+        if (type === "afpsat") {
+          startFullAFPSATMock();
+        } else {
+          startFullNeuroPsychMock();
+        }
       }
 
+      // ADD these new functions after launchMockExam:
+      function startFullAFPSATMock() {
+        // Combine all sections
+        const allQuestions = [
+          ...practiceQuestions.afpsatAbstract.easy,
+          ...practiceQuestions.afpsatAbstract.medium,
+          ...practiceQuestions.afpsatVerbal.easy,
+          ...practiceQuestions.afpsatNumerical.easy,
+        ];
+
+        const shuffled = shuffleQuestions(allQuestions);
+        startTimedExam(shuffled, 4620, "AFPSAT Full Mock"); // 77 minutes
+      }
+      function startFullNeuroPsychMock() {
+        const allQuestions = [
+          ...practiceQuestions.neuroPsych.easy,
+          ...practiceQuestions.neuroPsych.medium,
+          ...practiceQuestions.neuroPsych.hard,
+        ];
+
+        const shuffled = shuffleQuestions(allQuestions);
+        startTimedExam(shuffled, 3600, "Neuro-Psych Mock"); // 60 minutes
+      }
+
+      function startTimedExam(questions, timeLimit, examName) {
+        // Open practice modal for exam
+        document.getElementById("practiceModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+
+        // Show loading
+        document.getElementById("practiceModalContent").innerHTML = `
+    <div style="text-align: center; padding: 60px;">
+      <div style="font-size: 3rem; animation: spin 1s linear infinite;">⚙️</div>
+      <p style="margin-top: 20px; color: var(--text-light);">Loading ${examName}...</p>
+    </div>
+  `;
+
+        setTimeout(() => {
+          let currentQuestion = 0;
+          let score = 0;
+          let answers = []; // Store all answers for strict mode
+          const totalQuestions = questions.length;
+
+          // Start exam timer
+          startTimer(timeLimit, examName, "exam");
+
+          function showExamQuestion() {
+            if (currentQuestion >= totalQuestions) {
+              // Exam complete - show all results
+              showExamResults();
+              return;
+            }
+
+            const q = questions[currentQuestion];
+            const progress = Math.round(
+              ((currentQuestion + 1) / totalQuestions) * 100,
+            );
+
+            const html = `
+        <div class="question-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="color: var(--primary); margin: 0;">
+              ${examName} - Question ${currentQuestion + 1} of ${totalQuestions}
+            </h3>
+            <div id="sectionTimer" class="timer" style="display: inline-block; padding: 10px 20px; margin: 0;">
+              ${Math.floor(timeLimit / 60)}:00
+            </div>
+          </div>
+          
+          <div class="progress-bar" style="height: 15px; margin-bottom: 20px;">
+            <div class="progress-fill" style="width: ${progress}%;">${progress}%</div>
+          </div>
+          
+          <p style="margin: 20px 0; font-size: 1.1rem; line-height: 1.6;">${q.question}</p>
+          
+          <div class="options">
+            ${q.options
+              .map(
+                (opt, i) => `
+              <div class="option" onclick="selectExamAnswer(${i})">${opt}</div>
+            `,
+              )
+              .join("")}
+          </div>
+        </div>
+        
+        <div style="display: flex; gap: 15px; justify-content: space-between; margin-top: 20px; flex-wrap: wrap;">
+          <button class="btn btn-secondary" onclick="previousExamQuestion()" 
+                  ${currentQuestion === 0 ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ""}>
+            ← Previous
+          </button>
+          <button class="btn btn-primary" onclick="submitExamAnswer()">
+            ${currentQuestion === totalQuestions - 1 ? "Finish Exam" : "Next Question →"}
+          </button>
+        </div>
+        
+        <div class="tip-box" style="margin-top: 20px;">
+          <strong>⚠️ Exam Mode:</strong> You can review and change answers. 
+          Timer continues - answers will be revealed only at the end.
+        </div>
+      `;
+
+            document.getElementById("practiceModalContent").innerHTML = html;
+
+            // Restore previously selected answer if user goes back
+            if (answers[currentQuestion] !== undefined) {
+              window.selectedAnswer = answers[currentQuestion];
+              document
+                .querySelectorAll(".option")
+                [answers[currentQuestion]].classList.add("selected");
+            } else {
+              window.selectedAnswer = undefined;
+            }
+          }
+
+          window.selectExamAnswer = function (optionIndex) {
+            document
+              .querySelectorAll(".option")
+              .forEach((opt) => opt.classList.remove("selected"));
+            document
+              .querySelectorAll(".option")
+              [optionIndex].classList.add("selected");
+            window.selectedAnswer = optionIndex;
+          };
+
+          window.submitExamAnswer = function () {
+            if (window.selectedAnswer === undefined) {
+              showNotification("Please select an answer!");
+              return;
+            }
+
+            // Save answer
+            answers[currentQuestion] = window.selectedAnswer;
+            currentQuestion++;
+            window.selectedAnswer = undefined;
+
+            showExamQuestion();
+          };
+
+          window.previousExamQuestion = function () {
+            if (currentQuestion > 0) {
+              currentQuestion--;
+              showExamQuestion();
+            }
+          };
+
+          function showExamResults() {
+            stopTimer();
+
+            // Calculate score
+            let correct = 0;
+            questions.forEach((q, i) => {
+              if (answers[i] === q.correct) correct++;
+            });
+
+            const percentage = Math.round((correct / totalQuestions) * 100);
+
+            // Save to mock exams
+            userData.mockExams.push({
+              type: examName,
+              score: percentage,
+              date: new Date().toISOString(),
+              questionsTotal: totalQuestions,
+              questionsCorrect: correct,
+            });
+            saveUserData();
+
+            const html = `
+        <div class="score-summary">
+          <h2 style="color: var(--primary);">${examName} Complete!</h2>
+          
+          <div class="score-circle">
+            <div class="score">${correct}</div>
+            <div class="total">out of ${totalQuestions}</div>
+          </div>
+          
+          <h3 style="color: ${percentage >= 71 ? "var(--success)" : "var(--danger)"}; margin: 20px 0;">
+            Final Score: ${percentage}% ${percentage >= 71 ? "✅ PASSING" : "❌ BELOW PASSING"}
+          </h3>
+          
+          <div class="tip-box" style="margin: 20px 0; background: ${percentage >= 71 ? "#dcfce7" : "#fee2e2"};">
+            <strong>${percentage >= 71 ? "🎉 Congratulations!" : "📖 Keep Studying"}</strong>
+            ${
+              percentage >= 71
+                ? "You achieved a passing score! You're ready for the real exam."
+                : "AFPSAT requires 71+ to pass. Review weak areas and try again."
+            }
+          </div>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+            <button class="btn btn-primary" onclick="closePracticeModal(); showSection('mockExam')">
+              Back to Mock Exams
+            </button>
+            <button class="btn btn-success" onclick="closePracticeModal(); showSection('stats')">
+              View Stats
+            </button>
+          </div>
+        </div>
+      `;
+
+            document.getElementById("practiceModalContent").innerHTML = html;
+            updateDashboard();
+          }
+
+          showExamQuestion();
+          showNotification(
+            `⏱️ ${examName} started! ${Math.floor(timeLimit / 60)} minutes`,
+          );
+        }, 300);
+      }
       // Start game - now opens in modal
       function startGame(gameType) {
         // Ensure games progress exists
@@ -4921,6 +5348,10 @@
 
           document.getElementById("gameModalContent").innerHTML = html;
           document.getElementById("mathAnswer").focus();
+
+          setTimeout(() => {
+            document.getElementById("mathAnswer").focus();
+          }, 100); // Small delay ensures DOM is ready
         }
 
         window.checkMathAnswer = function (correct, roundStart) {
@@ -4967,14 +5398,15 @@
               </div>
               <p style="font-size: 1.2rem; margin: 20px 0;">Completed in ${totalTime} seconds</p>
               <p style="color: var(--text-light);">
-                ${isNewHigh ? "🏆 New High Score!" : "High Score: " + userData.gamesProgress.mathBlitz.highScore}
+                ${score > userData.gamesProgress.mathBlitz.highScore ? "🏆 New High Score!" : "High Score: " + userData.gamesProgress.mathBlitz.highScore}
               </p>
-              <div style="margin-top: 30px;">
-                <button class="btn btn-primary" onclick="startGame('mathBlitz')" style="margin: 0 10px;">
+              <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="startGame('mathBlitz')" 
+                        style="min-width: 140px; padding: 14px 30px;">
                   Play Again
                 </button>
-                <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                        onclick="document.getElementById('gameModalContent').innerHTML = ''">
+                <button class="btn btn-secondary" onclick="closeGameModal()" 
+                        style="min-width: 140px; padding: 14px 30px;">
                   Back to Games
                 </button>
               </div>
@@ -5048,11 +5480,13 @@
                   )
                   .join("")}
               </div>
-              <div id="userSequenceDisplay" style="font-size: 2rem; margin: 30px 0; min-height: 60px; padding: 20px; background: var(--bg-light); border-radius: 8px;">
-                <em style="color: var(--text-light);">Your sequence will appear here...</em>
+              <div id="userSequenceDisplay" style="font-size: 1.8rem; margin: 25px 0; min-height: 70px; padding: 18px; background: var(--bg-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px;">
+                <em style="color: var(--text-light); font-size: 0.9rem;">Your sequence will appear here...</em>
               </div>
-              <button class="btn btn-danger" onclick="clearMemorySequence()" style="margin: 0 10px;">Clear</button>
-              <button class="btn btn-success" onclick="checkMemorySequence()" style="margin: 0 10px;">Submit</button>
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                <button class="btn btn-danger" onclick="clearMemorySequence()" style="min-width: 120px; padding: 12px 24px;">Clear</button>
+                <button class="btn btn-success" onclick="checkMemorySequence()" style="min-width: 120px; padding: 12px 24px;">Submit</button>
+              </div>
             </div>
           `;
 
@@ -5128,12 +5562,13 @@
               <p style="color: var(--text-light);">
                 Best: Level ${userData.gamesProgress.memoryMatch.highScore} in ${userData.gamesProgress.memoryMatch.bestTime}s
               </p>
-              <div style="margin-top: 30px;">
-                <button class="btn btn-primary" onclick="startGame('memoryMatch')" style="margin: 0 10px;">
+              <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="startGame('memoryMatch')" 
+                        style="min-width: 140px; padding: 14px 30px;">
                   Play Again
                 </button>
-                <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                        onclick="document.getElementById('gameModalContent').innerHTML = ''">
+                <button class="btn btn-secondary" onclick="closeGameModal()" 
+                        style="min-width: 140px; padding: 14px 30px;">
                   Back to Games
                 </button>
               </div>
@@ -5420,7 +5855,7 @@
               options.push(wrong);
             }
           }
-          shuffleArray(options);
+          const shuffledOptions = shuffleArray([...options]); // Create shuffled copy
 
           const html = `
       <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
@@ -5433,15 +5868,15 @@
           </div>
         </div>
         <p style="margin: 20px 0; color: var(--text-light);">What comes next?</p>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 400px; margin: 0 auto;">
-          ${options
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 400px; margin: 0 auto; padding: 0 10px;">
+          ${shuffledOptions
             .map(
               (opt) => `
-            <button class="btn btn-primary" onclick="checkPatternAnswer('${opt}', '${pattern.next}', ${roundStart})" 
-                    style="font-size: 2rem; padding: 30px;">
-              ${opt}
-            </button>
-          `,
+                  <button class="btn btn-primary" onclick="checkPatternAnswer('${opt}', '${pattern.next}', ${roundStart})" 
+                          style="font-size: 1.8rem; padding: 25px; min-height: 90px; display: flex; align-items: center; justify-content: center;">
+                    ${opt}
+                  </button>
+            `,
             )
             .join("")}
         </div>
@@ -5456,7 +5891,7 @@
 
         window.checkPatternAnswer = function (selected, correct, roundStart) {
           const responseTime = Date.now() - roundStart;
-          const timeBonus = Math.max(0, 1000 - responseTime); // Bonus for speed
+          const timeBonus = Math.max(0, 1000 - responseTime);
 
           if (selected === correct) {
             score += Math.floor(100 + timeBonus / 10);
@@ -5464,7 +5899,9 @@
               "✅ Correct! +" + Math.floor(100 + timeBonus / 10) + " points",
             );
           } else {
-            showNotification("❌ Incorrect. Correct answer was: " + correct);
+            showNotification(
+              `❌ Incorrect. You selected: ${selected} | Correct: ${correct}`,
+            );
           }
 
           round++;
@@ -5479,12 +5916,17 @@
             userData.gamesProgress.patternSpeed = { highScore: 0, attempts: 0 };
           }
 
+          // SAVE THE OLD HIGH SCORE FIRST
+          const oldHighScore = userData.gamesProgress.patternSpeed.highScore;
+          const isNewHighScore = score > oldHighScore;
+
           userData.gamesProgress.patternSpeed.attempts++;
-          if (score > userData.gamesProgress.patternSpeed.highScore) {
+          if (isNewHighScore) {
             userData.gamesProgress.patternSpeed.highScore = score;
             userData.gamesProgress.patternSpeed.lastPlayed =
               new Date().toISOString();
           }
+
           saveUserData();
 
           const html = `
@@ -5496,14 +5938,14 @@
         </div>
         <p style="font-size: 1.2rem; margin: 20px 0;">Completed in ${totalTime} seconds</p>
         <p style="color: var(--text-light);">
-          ${score > userData.gamesProgress.patternSpeed.highScore - score ? "🏆 New High Score!" : "High Score: " + userData.gamesProgress.patternSpeed.highScore}
-        </p>
-        <div style="margin-top: 30px;">
-          <button class="btn btn-primary" onclick="startGame('patternSpeed')" style="margin: 0 10px;">
+            ${isNewHighScore ? "🏆 New High Score!" : "High Score: " + oldHighScore}        </p>
+        <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="startGame('patternSpeed')" 
+                  style="min-width: 140px; padding: 14px 30px;">
             Play Again
           </button>
-          <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                  onclick="closeGameModal()">
+          <button class="btn btn-secondary" onclick="closeGameModal()" 
+                  style="min-width: 140px; padding: 14px 30px;">
             Back to Games
           </button>
         </div>
@@ -5515,306 +5957,6 @@
         }
 
         showRound();
-      }
-
-      // === GAME 2: MATH BLITZ ===
-      function startMathBlitzGame() {
-        let score = 0;
-        let round = 1;
-        const maxRounds = 10;
-        let startTime = Date.now();
-
-        function generateProblem() {
-          const type = Math.floor(Math.random() * 4);
-          let question, answer;
-
-          switch (type) {
-            case 0: // Addition
-              const a1 = Math.floor(Math.random() * 50) + 10;
-              const b1 = Math.floor(Math.random() * 50) + 10;
-              question = `${a1} + ${b1}`;
-              answer = a1 + b1;
-              break;
-            case 1: // Subtraction
-              const a2 = Math.floor(Math.random() * 80) + 20;
-              const b2 = Math.floor(Math.random() * 40) + 10;
-              question = `${a2} - ${b2}`;
-              answer = a2 - b2;
-              break;
-            case 2: // Multiplication
-              const a3 = Math.floor(Math.random() * 12) + 3;
-              const b3 = Math.floor(Math.random() * 12) + 3;
-              question = `${a3} × ${b3}`;
-              answer = a3 * b3;
-              break;
-            case 3: // Division
-              const b4 = Math.floor(Math.random() * 9) + 2;
-              const a4 = b4 * (Math.floor(Math.random() * 12) + 2);
-              question = `${a4} ÷ ${b4}`;
-              answer = a4 / b4;
-              break;
-          }
-
-          return { question, answer };
-        }
-
-        function showRound() {
-          if (round > maxRounds) {
-            endGame();
-            return;
-          }
-
-          const problem = generateProblem();
-          const roundStart = Date.now();
-
-          const html = `
-      <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
-        <h3 style="color: var(--primary); margin-bottom: 20px;">
-          Problem ${round} of ${maxRounds}
-        </h3>
-        <div style="background: var(--bg-light); padding: 50px; border-radius: 12px; margin: 20px 0;">
-          <div style="font-size: 3rem; font-weight: 700; color: var(--primary);">
-            ${problem.question} = ?
-          </div>
-        </div>
-        <input type="number" id="mathAnswer" placeholder="Your answer" 
-               style="width: 200px; padding: 15px; font-size: 1.5rem; text-align: center; border: 2px solid var(--border); border-radius: 8px;"
-               onkeypress="if(event.key==='Enter') checkMathAnswer(${problem.answer}, ${roundStart})">
-        <br>
-        <button class="btn btn-success" onclick="checkMathAnswer(${problem.answer}, ${roundStart})" 
-                style="margin-top: 20px; padding: 15px 40px; font-size: 1.2rem;">
-          Submit
-        </button>
-        <div style="margin-top: 30px; padding: 20px; background: var(--bg-light); border-radius: 8px;">
-          <strong>Score:</strong> ${score} points | <strong>Time:</strong> ${Math.floor((Date.now() - startTime) / 1000)}s
-        </div>
-      </div>
-    `;
-
-          document.getElementById("gameModalContent").innerHTML = html;
-          document.getElementById("mathAnswer").focus();
-        }
-
-        window.checkMathAnswer = function (correct, roundStart) {
-          const userAnswer = parseInt(
-            document.getElementById("mathAnswer").value,
-          );
-          const responseTime = Date.now() - roundStart;
-          const timeBonus = Math.max(0, 5000 - responseTime); // 5 second target
-
-          if (userAnswer === correct) {
-            const points = Math.floor(100 + timeBonus / 50);
-            score += points;
-            showNotification("✅ Correct! +" + points + " points");
-          } else {
-            showNotification("❌ Incorrect. Answer was: " + correct);
-          }
-
-          round++;
-          setTimeout(showRound, 800);
-        };
-
-        function endGame() {
-          const totalTime = Math.floor((Date.now() - startTime) / 1000);
-
-          if (!userData.gamesProgress.mathBlitz) {
-            userData.gamesProgress.mathBlitz = { highScore: 0, attempts: 0 };
-          }
-
-          userData.gamesProgress.mathBlitz.attempts++;
-          if (score > userData.gamesProgress.mathBlitz.highScore) {
-            userData.gamesProgress.mathBlitz.highScore = score;
-            userData.gamesProgress.mathBlitz.lastPlayed =
-              new Date().toISOString();
-          }
-          saveUserData();
-
-          const html = `
-      <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
-        <h2 style="color: var(--success); margin-bottom: 20px;">🎉 Math Blitz Complete!</h2>
-        <div class="score-circle" style="margin: 30px auto;">
-          <div class="score">${score}</div>
-          <div class="total">points</div>
-        </div>
-        <p style="font-size: 1.2rem; margin: 20px 0;">Completed in ${totalTime} seconds</p>
-        <p style="color: var(--text-light);">
-          ${score > userData.gamesProgress.mathBlitz.highScore - score ? "🏆 New High Score!" : "High Score: " + userData.gamesProgress.mathBlitz.highScore}
-        </p>
-        <div style="margin-top: 30px;">
-          <button class="btn btn-primary" onclick="startGame('mathBlitz')" style="margin: 0 10px;">
-            Play Again
-          </button>
-          <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                  onclick="closeGameModal()">
-            Back to Games
-          </button>
-        </div>
-      </div>
-    `;
-
-          document.getElementById("gameModalContent").innerHTML = html;
-          updateGameScores();
-        }
-
-        showRound();
-      }
-
-      // === GAME 3: FLASH MEMORY ===
-      function startMemoryMatchGame() {
-        const symbols = ["🎖️", "⭐", "🎯", "🏆", "🔥", "💎", "🎪", "🎭"];
-        let sequence = [];
-        let userSequence = [];
-        let level = 1;
-        let startTime = Date.now();
-
-        function showSequence() {
-          sequence = [];
-          for (let i = 0; i < level + 2; i++) {
-            sequence.push(symbols[Math.floor(Math.random() * symbols.length)]);
-          }
-
-          let html = `
-      <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
-        <h3 style="color: var(--primary); margin-bottom: 20px;">Level ${level}</h3>
-        <p style="margin: 20px 0;">Memorize this sequence:</p>
-        <div id="sequenceDisplay" style="font-size: 4rem; padding: 40px; background: var(--bg-light); border-radius: 12px; margin: 20px 0;">
-        </div>
-        <p style="color: var(--text-light);">Watch carefully...</p>
-      </div>
-    `;
-
-          document.getElementById("gameModalContent").innerHTML = html;
-
-          // Show sequence one by one
-          let index = 0;
-          const displayInterval = setInterval(() => {
-            if (index < sequence.length) {
-              document.getElementById("sequenceDisplay").textContent =
-                sequence[index];
-              index++;
-            } else {
-              clearInterval(displayInterval);
-              setTimeout(askForRecall, 1000);
-            }
-          }, 800);
-        }
-
-        function askForRecall() {
-          userSequence = [];
-
-          const html = `
-      <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
-        <h3 style="color: var(--primary); margin-bottom: 20px;">Recall the Sequence</h3>
-        <p style="margin: 20px 0;">Click the symbols in the correct order:</p>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 500px; margin: 30px auto;">
-          ${symbols
-            .map(
-              (symbol) => `
-            <button onclick="selectSymbol('${symbol}')" 
-                    style="font-size: 3rem; padding: 20px; background: white; border: 3px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.3s;"
-                    onmouseover="this.style.borderColor='var(--primary)'" 
-                    onmouseout="this.style.borderColor='var(--border)'">
-              ${symbol}
-            </button>
-          `,
-            )
-            .join("")}
-        </div>
-        <div id="userSequenceDisplay" style="font-size: 2rem; margin: 30px 0; min-height: 60px; padding: 20px; background: var(--bg-light); border-radius: 8px;">
-          <em style="color: var(--text-light);">Your sequence will appear here...</em>
-        </div>
-        <button class="btn btn-danger" onclick="clearMemorySequence()" style="margin: 0 10px;">Clear</button>
-        <button class="btn btn-success" onclick="checkMemorySequence()" style="margin: 0 10px;">Submit</button>
-      </div>
-    `;
-
-          document.getElementById("gameModalContent").innerHTML = html;
-        }
-
-        window.selectSymbol = function (symbol) {
-          userSequence.push(symbol);
-          document.getElementById("userSequenceDisplay").textContent =
-            userSequence.join(" ");
-        };
-
-        window.clearMemorySequence = function () {
-          userSequence = [];
-          document.getElementById("userSequenceDisplay").innerHTML =
-            '<em style="color: var(--text-light);">Your sequence will appear here...</em>';
-        };
-
-        window.checkMemorySequence = function () {
-          if (userSequence.length !== sequence.length) {
-            showNotification("⚠️ Sequence length doesn't match!");
-            return;
-          }
-
-          const correct = userSequence.every(
-            (symbol, index) => symbol === sequence[index],
-          );
-
-          if (correct) {
-            level++;
-            showNotification("✅ Correct! Moving to level " + level);
-            setTimeout(showSequence, 1000);
-          } else {
-            endMemoryGame();
-          }
-        };
-
-        function endMemoryGame() {
-          const totalTime = Math.floor((Date.now() - startTime) / 1000);
-          const finalLevel = level - 1;
-
-          if (!userData.gamesProgress.memoryMatch) {
-            userData.gamesProgress.memoryMatch = {
-              highScore: 0,
-              bestTime: 999999,
-              attempts: 0,
-            };
-          }
-
-          userData.gamesProgress.memoryMatch.attempts++;
-          if (finalLevel > userData.gamesProgress.memoryMatch.highScore) {
-            userData.gamesProgress.memoryMatch.highScore = finalLevel;
-            userData.gamesProgress.memoryMatch.lastPlayed =
-              new Date().toISOString();
-          }
-          if (totalTime < userData.gamesProgress.memoryMatch.bestTime) {
-            userData.gamesProgress.memoryMatch.bestTime = totalTime;
-          }
-          saveUserData();
-
-          const html = `
-      <div style="background: white; padding: 40px; border-radius: 16px; text-align: center;">
-        <h2 style="color: ${finalLevel >= 5 ? "var(--success)" : "var(--primary)"}; margin-bottom: 20px;">
-          ${finalLevel >= 5 ? "🎉 Excellent Memory!" : "🧠 Good Try!"}
-        </h2>
-        <div class="score-circle" style="margin: 30px auto;">
-          <div class="score">${finalLevel}</div>
-          <div class="total">levels</div>
-        </div>
-        <p style="font-size: 1.2rem; margin: 20px 0;">Time: ${totalTime} seconds</p>
-        <p style="color: var(--text-light);">
-          Best: Level ${userData.gamesProgress.memoryMatch.highScore} in ${userData.gamesProgress.memoryMatch.bestTime}s
-        </p>
-        <div style="margin-top: 30px;">
-          <button class="btn btn-primary" onclick="startGame('memoryMatch')" style="margin: 0 10px;">
-            Play Again
-          </button>
-          <button class="btn" style="background: var(--text-light); color: white; margin: 0 10px;" 
-                  onclick="closeGameModal()">
-            Back to Games
-          </button>
-        </div>
-      </div>
-    `;
-
-          document.getElementById("gameModalContent").innerHTML = html;
-          updateGameScores();
-        }
-
-        showSequence();
       }
 
       // Update game scores display
@@ -5944,8 +6086,15 @@
                   (s) => `
                 <li style="margin: 8px 0;">
                   <strong>${s.topic}:</strong> Check out 
-                  <a href="#${s.category}Resources" onclick="document.getElementById('${s.category}Resources').scrollIntoView({behavior: 'smooth'}); return false;" 
-                     style="color: var(--primary); font-weight: 600; text-decoration: underline;">
+                  <a href="#${s.category}Resources" 
+                    onclick="
+                      event.preventDefault(); 
+                      const target = document.getElementById('${s.category}Resources');
+                      const offset = 100; // Account for header
+                      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                      window.scrollTo({top: targetPosition, behavior: 'smooth'});
+                    " 
+                    style="color: var(--primary); font-weight: 600; text-decoration: underline;">
                     ${s.category} resources
                   </a>
                 </li>
@@ -5971,7 +6120,7 @@
             "data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZSkge2NvbnNvbGUubG9nKCdTZXJ2aWNlIFdvcmtlciBJbnN0YWxsZWQnKX0p",
           )
           .then(() => console.log("Offline mode enabled"))
-          .catch(() => console.log("Offline mode not available"));
+          .catch((err) => console.log("Offline mode not available", err));
       }
 
       // Daily reminder
