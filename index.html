@@ -2334,7 +2334,33 @@
             <div class="stat-label">days</div>
           </div>
         </div>
-
+        <!-- RESET PROGRESS CARD -->
+        <div
+          style="
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-radius: 12px;
+            border: 2px solid #f87171;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+          "
+        >
+          <div>
+            <h3 style="color: var(--danger); margin-bottom: 6px">
+              🗑️ Reset All Progress
+            </h3>
+            <p style="color: #7f1d1d; font-size: 0.95rem; margin: 0">
+              Clear all scores, streaks, and statistics. This cannot be undone.
+            </p>
+          </div>
+          <button class="btn btn-danger" onclick="confirmResetProgress()">
+            Reset Progress
+          </button>
+        </div>
         <div class="card-grid">
           <div class="card" onclick="showSection('tutorials')">
             <h3>📚 Start Learning</h3>
@@ -2488,6 +2514,239 @@
           <div id="progressChart"></div>
         </div>
 
+        <!-- ADD THIS NEW SECTION -->
+        <div id="verbalAnalysis" style="margin: 30px 0">
+          <h3 style="color: var(--primary); margin: 30px 0 15px">
+            📖 Verbal Ability Deep Dive
+          </h3>
+
+          <div
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--bg-light) 0%,
+                var(--bg-cream) 100%
+              );
+              padding: 25px;
+              border-radius: 16px;
+              border: 2px solid var(--border);
+            "
+          >
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div
+                style="
+                  background: white;
+                  padding: 20px;
+                  border-radius: 12px;
+                  border-left: 4px solid var(--primary);
+                "
+              >
+                <h4
+                  style="
+                    color: var(--primary);
+                    margin-bottom: 10px;
+                    font-size: 0.95rem;
+                  "
+                >
+                  Word Analogies
+                </h4>
+                <div
+                  id="analogiesPerf"
+                  style="
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: var(--primary);
+                    margin: 10px 0;
+                  "
+                >
+                  0%
+                </div>
+                <div class="progress-bar" style="height: 8px; margin-top: 10px">
+                  <div
+                    id="analogiesBar"
+                    class="progress-fill"
+                    style="width: 0%"
+                  ></div>
+                </div>
+                <p
+                  id="analogiesText"
+                  style="
+                    margin-top: 8px;
+                    font-size: 0.85rem;
+                    color: var(--text-light);
+                  "
+                >
+                  No attempts yet
+                </p>
+              </div>
+
+              <div
+                style="
+                  background: white;
+                  padding: 20px;
+                  border-radius: 12px;
+                  border-left: 4px solid var(--secondary);
+                "
+              >
+                <h4
+                  style="
+                    color: var(--secondary);
+                    margin-bottom: 10px;
+                    font-size: 0.95rem;
+                  "
+                >
+                  Vocabulary
+                </h4>
+                <div
+                  id="vocabPerf"
+                  style="
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: var(--secondary);
+                    margin: 10px 0;
+                  "
+                >
+                  0%
+                </div>
+                <div class="progress-bar" style="height: 8px; margin-top: 10px">
+                  <div
+                    id="vocabBar"
+                    class="progress-fill"
+                    style="width: 0%; background: var(--secondary)"
+                  ></div>
+                </div>
+                <p
+                  id="vocabText"
+                  style="
+                    margin-top: 8px;
+                    font-size: 0.85rem;
+                    color: var(--text-light);
+                  "
+                >
+                  No attempts yet
+                </p>
+              </div>
+
+              <div
+                style="
+                  background: white;
+                  padding: 20px;
+                  border-radius: 12px;
+                  border-left: 4px solid var(--secondary-light);
+                "
+              >
+                <h4
+                  style="
+                    color: var(--secondary-light);
+                    margin-bottom: 10px;
+                    font-size: 0.95rem;
+                  "
+                >
+                  Reading Comprehension
+                </h4>
+                <div
+                  id="comprehensionPerf"
+                  style="
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: var(--secondary-light);
+                    margin: 10px 0;
+                  "
+                >
+                  0%
+                </div>
+                <div class="progress-bar" style="height: 8px; margin-top: 10px">
+                  <div
+                    id="comprehensionBar"
+                    class="progress-fill"
+                    style="width: 0%; background: var(--secondary-light)"
+                  ></div>
+                </div>
+                <p
+                  id="comprehensionText"
+                  style="
+                    margin-top: 8px;
+                    font-size: 0.85rem;
+                    color: var(--text-light);
+                  "
+                >
+                  No attempts yet
+                </p>
+              </div>
+
+              <div
+                style="
+                  background: white;
+                  padding: 20px;
+                  border-radius: 12px;
+                  border-left: 4px solid var(--accent);
+                "
+              >
+                <h4
+                  style="
+                    color: var(--accent);
+                    margin-bottom: 10px;
+                    font-size: 0.95rem;
+                  "
+                >
+                  Grammar
+                </h4>
+                <div
+                  id="grammarPerf"
+                  style="
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: var(--accent);
+                    margin: 10px 0;
+                  "
+                >
+                  0%
+                </div>
+                <div class="progress-bar" style="height: 8px; margin-top: 10px">
+                  <div
+                    id="grammarBar"
+                    class="progress-fill"
+                    style="width: 0%; background: var(--accent)"
+                  ></div>
+                </div>
+                <p
+                  id="grammarText"
+                  style="
+                    margin-top: 8px;
+                    font-size: 0.85rem;
+                    color: var(--text-light);
+                  "
+                >
+                  No attempts yet
+                </p>
+              </div>
+            </div>
+
+            <div
+              id="verbalRecommendation"
+              style="
+                margin-top: 20px;
+                padding: 15px;
+                background: #fef3c7;
+                border-radius: 8px;
+                border-left: 4px solid var(--accent);
+              "
+            >
+              <strong>💡 Recommendation:</strong>
+              <span id="verbalRecText"
+                >Complete verbal practice to get personalized
+                recommendations</span
+              >
+            </div>
+          </div>
+        </div>
+
         <h3 style="color: var(--primary); margin: 30px 0 15px">
           Areas for Improvement
         </h3>
@@ -2548,7 +2807,173 @@
           <strong>10. Sleep Well Before Exam:</strong> Mental sharpness is
           crucial. Get 7-8 hours of sleep the night before.
         </div>
+        <h3 style="color: var(--secondary); margin: 40px 0 15px">
+          📖 AFPSAT Verbal Ability - Pro Strategies (Based on Cathy Castillo
+          Vlog Tips)
+        </h3>
 
+        <div
+          class="tip-box"
+          style="
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-left-color: var(--primary);
+          "
+        >
+          <strong>🎯 Cathy Castillo's Golden Rule:</strong> "For Verbal, SPEED +
+          ACCURACY = Success. You have 27.7 seconds per question - practice
+          until it becomes automatic!"
+        </div>
+
+        <div class="tip-box">
+          <strong>1. Word Analogies - Identify the Relationship FIRST:</strong>
+          <ul style="margin: 10px 0 0 20px; line-height: 1.8">
+            <li>
+              <strong>Types to memorize:</strong> Synonyms, Antonyms,
+              Part-to-Whole, Cause-Effect, Function, Location
+            </li>
+            <li>
+              <strong>Example:</strong> DOCTOR : HOSPITAL → "person to
+              workplace" → TEACHER : SCHOOL
+            </li>
+            <li>
+              <strong>Common trap:</strong> Don't just pick words that "sound
+              related" - the RELATIONSHIP must match exactly
+            </li>
+            <li>
+              <strong>Speed tip:</strong> Eliminate 2 obviously wrong answers
+              first, then choose from remaining 2
+            </li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <strong>2. Vocabulary - Build Your Word Bank Daily:</strong>
+          <ul style="margin: 10px 0 0 20px; line-height: 1.8">
+            <li>
+              <strong>Learn 10 new words every day</strong> (both English and
+              Filipino)
+            </li>
+            <li>
+              <strong>Focus on military/government terms:</strong> discipline,
+              hierarchy, protocol, allegiance, resilience
+            </li>
+            <li>
+              <strong>Use context clues:</strong> Read the sentence carefully -
+              surrounding words often hint at meaning
+            </li>
+            <li>
+              <strong>Synonyms practice:</strong> For every new word, learn 2-3
+              synonyms and 1-2 antonyms
+            </li>
+            <li>
+              <strong>Cathy's tip:</strong> "If you don't know a word, use
+              process of elimination. Wrong answers are usually too extreme or
+              unrelated."
+            </li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <strong>3. Reading Comprehension - The "3-Step Attack":</strong>
+          <ul style="margin: 10px 0 0 20px; line-height: 1.8">
+            <li>
+              <strong>Step 1 - Read the QUESTION first</strong> (before the
+              passage) to know what to look for
+            </li>
+            <li>
+              <strong>Step 2 - Skim the passage</strong> for keywords related to
+              the question (don't read every word)
+            </li>
+            <li>
+              <strong>Step 3 - Eliminate obviously wrong answers</strong> before
+              choosing
+            </li>
+            <li>
+              <strong>Main idea questions:</strong> Answer is usually in the
+              FIRST or LAST sentence
+            </li>
+            <li>
+              <strong>Inference questions:</strong> Choose the answer that's
+              implied but NOT directly stated
+            </li>
+            <li>
+              <strong>Detail questions:</strong> Go back and find the EXACT
+              sentence that answers it
+            </li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <strong>4. Grammar & Sentence Construction:</strong>
+          <ul style="margin: 10px 0 0 20px; line-height: 1.8">
+            <li>
+              <strong>Subject-Verb Agreement:</strong> Singular subjects =
+              singular verbs (The soldier IS, The soldiers ARE)
+            </li>
+            <li>
+              <strong>Common errors to watch:</strong> Wrong tense, incorrect
+              prepositions, misplaced modifiers
+            </li>
+            <li>
+              <strong>Read it aloud mentally:</strong> Does it "sound right"?
+              Trust your ear for obvious errors
+            </li>
+            <li>
+              <strong>Cathy's trick:</strong> "Cover the answer choices first,
+              try to spot the error yourself, THEN look at options"
+            </li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <strong>5. Time Management for Verbal Section:</strong>
+          <ul style="margin: 10px 0 0 20px; line-height: 1.8">
+            <li>
+              <strong>65 questions in 30 minutes</strong> = ~27 seconds per
+              question
+            </li>
+            <li>
+              <strong>Strategy:</strong> Spend 15 seconds reading, 10 seconds
+              answering, 2 seconds marking
+            </li>
+            <li>
+              <strong>If stuck beyond 30 seconds:</strong> Make your best guess,
+              mark it, and move on
+            </li>
+            <li>
+              <strong>Save 3-5 minutes</strong> at the end to review marked
+              questions
+            </li>
+            <li>
+              <strong>Cathy's advice:</strong> "Easy questions are worth the
+              same points as hard ones - grab the easy points first!"
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="tip-box"
+          style="
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left-color: var(--accent);
+          "
+        >
+          <strong>⚡ Final Verbal Speed Hacks:</strong>
+          <ul style="margin: 10px 0 0 20px; line-height: 1.8">
+            <li>
+              Practice reading Filipino newspapers/articles daily to improve
+              comprehension speed
+            </li>
+            <li>
+              Make flashcards for word analogies you get wrong - review daily
+            </li>
+            <li>Never leave blanks - always guess if time is running out</li>
+            <li>
+              <strong>Cathy's secret:</strong> "For comprehension, if 2 answers
+              seem correct, pick the MORE SPECIFIC one"
+            </li>
+          </ul>
+        </div>
         <h3 style="color: var(--secondary); margin: 40px 0 15px">
           Neuro-Psychological Exam Tips (10 Key Guidelines)
         </h3>
@@ -2904,6 +3329,13 @@
         lastStudyDate: null,
         weakAreas: {},
         strongAreas: {},
+        // ADD THIS NEW FIELD:
+        verbalSubTopicPerformance: {
+          analogies: { correct: 0, total: 0 },
+          vocabulary: { correct: 0, total: 0 },
+          comprehension: { correct: 0, total: 0 },
+          grammar: { correct: 0, total: 0 },
+        },
         // New tracking fields
         questionsAnsweredOnTime: 0,
         questionsTotalTimed: 0,
@@ -3034,12 +3466,39 @@
             };
           }
 
+          // ✅ FIX: Ensure verbalSubTopicPerformance exists (backward compatibility)
+          if (!userData.verbalSubTopicPerformance) {
+            userData.verbalSubTopicPerformance = {
+              analogies: { correct: 0, total: 0 },
+              vocabulary: { correct: 0, total: 0 },
+              comprehension: { correct: 0, total: 0 },
+              grammar: { correct: 0, total: 0 },
+            };
+          }
+
+          // ✅ FIX: Ensure all 4 topics exist even if partially saved
+          const requiredTopics = [
+            "analogies",
+            "vocabulary",
+            "comprehension",
+            "grammar",
+          ];
+          requiredTopics.forEach((topic) => {
+            if (!userData.verbalSubTopicPerformance[topic]) {
+              userData.verbalSubTopicPerformance[topic] = {
+                correct: 0,
+                total: 0,
+              };
+            }
+          });
+
           updateDashboard();
-          // ✅ ADD this line:
+          updateStats();
+
           setTimeout(() => {
             updateGameScores();
           }, 100);
-          // Initialize strict mode toggle after DOM is ready
+
           setTimeout(() => {
             initializeStrictMode();
           }, 100);
@@ -3064,7 +3523,9 @@
               : 0;
 
           let mockScore = 0;
-          if (mockAvg >= 80) mockScore = 100;
+          if (mockScores.length === 0) {
+            mockScore = 0; // ✅ No exams taken = show 0, not 15
+          } else if (mockAvg >= 80) mockScore = 100;
           else if (mockAvg >= 75) mockScore = 90;
           else if (mockAvg >= 71) mockScore = 75;
           else if (mockAvg >= 65) mockScore = 55;
@@ -3217,6 +3678,18 @@
 
       // Save data
       function saveUserData() {
+        // Update study streak
+        const today = new Date().toDateString();
+        if (userData.lastStudyDate !== today) {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          if (userData.lastStudyDate === yesterday.toDateString()) {
+            userData.studyStreak = (userData.studyStreak || 0) + 1;
+          } else if (userData.lastStudyDate !== today) {
+            userData.studyStreak = 1; // Reset streak if gap > 1 day
+          }
+          userData.lastStudyDate = today;
+        }
         localStorage.setItem("afpExamData", JSON.stringify(userData));
       }
 
@@ -3295,36 +3768,116 @@
       // Tutorial Data
       const tutorials = {
         afpsatVerbal: {
-          title: "AFPSAT: Verbal Ability",
+          title: "AFPSAT: Verbal Ability - Complete Guide",
           content: `
-                    <h3>Overview</h3>
-                    <p>The Verbal Reasoning section measures your ability to understand and reason using concepts framed in words. It tests your comprehension, grammar, and vocabulary recognition.</p>
-                    
-                    <p><strong>Format:</strong> 65 items in 30 minutes (approximately 28 seconds per question)</p>
-                    
-                    <h3>Key Topics Covered:</h3>
-                    <ul>
-                        <li><strong>Reading Comprehension:</strong> Understanding passages and answering questions about main ideas, details, and inferences</li>
-                        <li><strong>Grammar:</strong> Subject-verb agreement, tenses, sentence structure, parts of speech</li>
-                        <li><strong>Vocabulary:</strong> Synonyms, antonyms, word meanings in context</li>
-                        <li><strong>Analogies:</strong> Identifying relationships between word pairs</li>
-                        <li><strong>Sentence Completion:</strong> Choosing the right words to complete sentences logically</li>
-                    </ul>
-                    
-                    <h3>Study Tips:</h3>
-                    <ul>
-                        <li>Read Filipino and English materials daily (newspapers, articles, books)</li>
-                        <li>Learn 10 new vocabulary words daily</li>
-                        <li>Practice identifying main ideas in passages quickly</li>
-                        <li>Review basic grammar rules thoroughly</li>
-                        <li>Time yourself when practicing - speed is crucial</li>
-                    </ul>
-                    
-                    <h3>Common Question Types:</h3>
-                    <p><strong>1. Synonyms:</strong> Which word has the same meaning as "brave"? (Answer: courageous)</p>
-                    <p><strong>2. Analogies:</strong> Doctor is to hospital as teacher is to ___? (Answer: school)</p>
-                    <p><strong>3. Grammar:</strong> Identify the error in: "The soldiers was marching." (Answer: was should be were)</p>
-                `,
+            <h3>Overview (Based on AFPSAT 2025-2026 Format)</h3>
+            <p>The Verbal Reasoning section measures your ability to understand and reason using concepts framed in words. This is your chance to demonstrate language mastery.</p>
+            
+            <p><strong>Format:</strong> 65 items in 30 minutes (approximately 27.7 seconds per question)</p>
+            <p><strong>Passing Score Contribution:</strong> ~43% of total AFPSAT score</p>
+            
+            <div style="background: var(--bg-light); padding: 20px; border-radius: 12px; margin: 20px 0;">
+              <h4 style="color: var(--primary); margin-bottom: 10px;">Question Type Breakdown:</h4>
+              <ul style="margin-left: 20px;">
+                <li><strong>Word Analogies:</strong> ~25 questions (38%)</li>
+                <li><strong>Vocabulary:</strong> ~20 questions (31%)</li>
+                <li><strong>Reading Comprehension:</strong> ~15 questions (23%)</li>
+                <li><strong>Grammar/Sentence Construction:</strong> ~5 questions (8%)</li>
+              </ul>
+            </div>
+            
+            <h3>1. Word Analogies - Master the Relationships</h3>
+            <p>Analogies test your ability to see relationships between word pairs. The key is identifying the TYPE of relationship first.</p>
+            
+            <div style="background: #e0f2fe; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <strong>Common Relationship Types:</strong>
+              <ul style="margin: 10px 0 0 20px;">
+                <li><strong>Synonyms:</strong> HAPPY : JOYFUL</li>
+                <li><strong>Antonyms:</strong> HOT : COLD</li>
+                <li><strong>Part to Whole:</strong> WHEEL : CAR</li>
+                <li><strong>Function:</strong> PEN : WRITE</li>
+                <li><strong>Location:</strong> DOCTOR : HOSPITAL</li>
+                <li><strong>Degree:</strong> WARM : HOT (intensity)</li>
+                <li><strong>Cause & Effect:</strong> TRAINING : SKILL</li>
+              </ul>
+            </div>
+            
+            <p><strong>Strategy:</strong></p>
+            <ol style="margin-left: 20px;">
+              <li>Read the first pair and create a sentence: "A DOCTOR works in a HOSPITAL"</li>
+              <li>Apply that same sentence structure to answer choices</li>
+              <li>Eliminate answers that don't fit the exact relationship</li>
+            </ol>
+            
+            <h3>2. Vocabulary - Synonyms, Antonyms, Context Clues</h3>
+            <p>Vocabulary questions test your word knowledge. Even if you don't know a word, you can often figure it out.</p>
+            
+            <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <strong>High-Frequency AFPSAT Words to Memorize:</strong>
+              <ul style="margin: 10px 0 0 20px; columns: 2; -webkit-columns: 2; -moz-columns: 2;">
+                <li>Resilient, Adaptable</li>
+                <li>Discipline, Authority</li>
+                <li>Integrity, Honor</li>
+                <li>Strategy, Tactics</li>
+                <li>Allegiance, Loyalty</li>
+                <li>Hierarchy, Rank</li>
+                <li>Protocol, Procedure</li>
+                <li>Deploy, Mobilize</li>
+                <li>Fortify, Reinforce</li>
+                <li>Reconnaissance, Surveillance</li>
+              </ul>
+            </div>
+            
+            <p><strong>Context Clues Technique:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Look for signal words: "but" (antonym), "like" (synonym)</li>
+              <li>Check if the sentence gives examples or definitions</li>
+              <li>Consider the overall tone (positive/negative)</li>
+            </ul>
+            
+            <h3>3. Reading Comprehension - Speed Reading Skills</h3>
+            <p>You don't have time to read every word carefully. Learn to skim effectively.</p>
+            
+            <div style="background: #dcfce7; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <strong>The AFPSAT Reading Formula:</strong>
+              <ol style="margin: 10px 0 0 20px;">
+                <li><strong>Question First:</strong> Read what's being asked BEFORE reading passage</li>
+                <li><strong>Skim for Keywords:</strong> Look for names, dates, numbers, topic sentences</li>
+                <li><strong>First & Last Sentences:</strong> These usually contain main ideas</li>
+                <li><strong>Eliminate 2 Wrong Answers:</strong> Then choose from remaining options</li>
+              </ol>
+            </div>
+            
+            <p><strong>Question Types You'll See:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li><strong>Main Idea:</strong> "What is this passage mainly about?"</li>
+              <li><strong>Detail:</strong> "According to the passage, when did...?"</li>
+              <li><strong>Inference:</strong> "The author implies that..."</li>
+              <li><strong>Vocabulary in Context:</strong> "The word 'X' most nearly means..."</li>
+            </ul>
+            
+            <h3>4. Grammar & Sentence Structure</h3>
+            <p>Review these common grammar rules tested on AFPSAT:</p>
+            
+            <ul style="margin-left: 20px;">
+              <li><strong>Subject-Verb Agreement:</strong> The soldier runs (singular) / The soldiers run (plural)</li>
+              <li><strong>Verb Tenses:</strong> Maintain consistency (past, present, future)</li>
+              <li><strong>Pronouns:</strong> Ensure pronouns match their antecedents</li>
+              <li><strong>Sentence Fragments:</strong> Identify incomplete sentences</li>
+            </ul>
+            
+            <h3>Study Plan (4-Week Preparation)</h3>
+            <div style="background: var(--bg-light); padding: 20px; border-radius: 12px; margin: 15px 0;">
+              <p><strong>Week 1:</strong> Learn 50 vocabulary words + 20 analogy types</p>
+              <p><strong>Week 2:</strong> Practice 100 verbal questions (mixed difficulty)</p>
+              <p><strong>Week 3:</strong> Focus on weak areas + speed drills (timed practice)</p>
+              <p><strong>Week 4:</strong> Take 3 full mock exams under real conditions</p>
+            </div>
+            
+            <div class="tip-box" style="margin-top: 20px;">
+              <strong>🎯 Pro Tip from Cathy Castillo:</strong> "Practice with a timer ALWAYS. Your brain needs to get used to making decisions in 27 seconds. Slow practice = slow exam performance!"
+            </div>
+          `,
         },
         afpsatNumerical: {
           title: "AFPSAT: Numerical Ability",
@@ -3684,35 +4237,50 @@
       const practiceQuestions = {
         afpsatVerbal: {
           easy: [
+            // WORD ANALOGIES - Easy
+            {
+              question:
+                "Choose the word pair that has the same relationship: DOCTOR : HOSPITAL",
+              options: [
+                "Teacher : School",
+                "Farmer : Market",
+                "Student : Library",
+                "Chef : Restaurant",
+              ],
+              correct: 0,
+              explanation:
+                "A doctor works in a hospital just as a teacher works in a school. This is a 'person to workplace' relationship.",
+              topic: "analogies",
+              subTopic: "workplace",
+            },
+            {
+              question: "Complete the analogy: PEN : WRITE :: KNIFE : ___",
+              options: ["Cut", "Sharp", "Kitchen", "Metal"],
+              correct: 0,
+              explanation:
+                "A pen is used to write; a knife is used to cut. This is a 'tool to function' relationship.",
+              topic: "analogies",
+              subTopic: "function",
+            },
+            {
+              question: "WHEEL : BICYCLE :: PROPELLER : ___",
+              options: ["Airplane", "Engine", "Speed", "Metal"],
+              correct: 0,
+              explanation:
+                "A wheel is part of a bicycle; a propeller is part of an airplane. This is a 'part to whole' relationship.",
+              topic: "analogies",
+              subTopic: "partToWhole",
+            },
+
+            // VOCABULARY - Easy
             {
               question: "Choose the word most similar in meaning to 'BRAVE':",
               options: ["Cowardly", "Courageous", "Timid", "Fearful"],
               correct: 1,
               explanation:
-                "Courageous is a synonym of brave, both meaning showing courage and fearlessness.",
+                "Courageous means showing courage, which is a synonym of brave.",
               topic: "vocabulary",
-            },
-            {
-              question:
-                "Complete the analogy: Doctor is to Hospital as Teacher is to ___",
-              options: ["Classroom", "School", "Student", "Lesson"],
-              correct: 1,
-              explanation:
-                "A doctor works in a hospital, just as a teacher works in a school. This is a place of work relationship.",
-              topic: "analogies",
-            },
-            {
-              question: "Identify the grammatically correct sentence:",
-              options: [
-                "The soldiers was marching in formation.",
-                "The soldiers were marching in formation.",
-                "The soldiers is marching in formation.",
-                "The soldiers be marching in formation.",
-              ],
-              correct: 1,
-              explanation:
-                "'Soldiers' is plural, so it requires the plural verb 'were', not 'was'.",
-              topic: "grammar",
+              subTopic: "synonyms",
             },
             {
               question: "What is the opposite of 'VICTORY'?",
@@ -3721,18 +4289,83 @@
               explanation:
                 "Defeat is the antonym of victory. Victory means winning, while defeat means losing.",
               topic: "vocabulary",
+              subTopic: "antonyms",
             },
             {
               question:
-                "Choose the word that best completes: The officer gave a ____ speech that motivated all soldiers.",
+                "The officer gave a ____ speech that motivated all soldiers.",
               options: ["boring", "inspiring", "confusing", "lengthy"],
               correct: 1,
               explanation:
-                "An inspiring speech would motivate soldiers. The context clue is 'motivated'.",
+                "Context clue: 'motivated' suggests the speech was inspiring.",
               topic: "vocabulary",
+              subTopic: "contextClues",
+            },
+
+            // READING COMPREHENSION - Easy
+            {
+              question:
+                "Read: 'The Philippine Army values discipline, honor, and service to the nation.' What is the MAIN idea?",
+              options: [
+                "The army needs more soldiers",
+                "Core values of the Philippine Army",
+                "Discipline is most important",
+                "The army serves the government",
+              ],
+              correct: 1,
+              explanation:
+                "The sentence lists core values, making option B the main idea.",
+              topic: "comprehension",
+              subTopic: "mainIdea",
+            },
+            {
+              question:
+                "Read: 'Military training builds physical strength and mental toughness.' This sentence suggests training affects:",
+              options: [
+                "Only the body",
+                "Only the mind",
+                "Both body and mind",
+                "Neither body nor mind",
+              ],
+              correct: 2,
+              explanation:
+                "The sentence mentions both 'physical strength' and 'mental toughness'.",
+              topic: "comprehension",
+              subTopic: "inference",
             },
           ],
+
           medium: [
+            // WORD ANALOGIES - Medium
+            {
+              question: "GENERAL : ARMY :: CAPTAIN : ___",
+              options: ["Navy", "Ship", "Soldier", "Officer"],
+              correct: 1,
+              explanation:
+                "A general leads an army; a captain commands a ship. This is a 'leader to domain' relationship.",
+              topic: "analogies",
+              subTopic: "leadership",
+            },
+            {
+              question: "RIFLE : INFANTRY :: ARTILLERY : ___",
+              options: ["Army", "Cannon", "Battle", "Defense"],
+              correct: 1,
+              explanation:
+                "A rifle is the primary weapon of infantry; a cannon is the primary weapon of artillery units.",
+              topic: "analogies",
+              subTopic: "military",
+            },
+            {
+              question: "STRATEGY : GENERAL :: DIAGNOSIS : ___",
+              options: ["Disease", "Doctor", "Hospital", "Patient"],
+              correct: 1,
+              explanation:
+                "A general creates strategy; a doctor makes diagnoses. Professional function relationship.",
+              topic: "analogies",
+              subTopic: "profession",
+            },
+
+            // VOCABULARY - Medium
             {
               question: "Select the word closest in meaning to 'RESILIENT':",
               options: ["Fragile", "Flexible", "Rigid", "Delicate"],
@@ -3740,27 +4373,7 @@
               explanation:
                 "Resilient means able to recover quickly, similar to flexible or adaptable.",
               topic: "vocabulary",
-            },
-            {
-              question: "Rifle is to Infantry as Artillery is to ___",
-              options: ["Army", "Cannon", "Battle", "Defense"],
-              correct: 1,
-              explanation:
-                "A rifle is the primary weapon of infantry, just as a cannon is the primary weapon of artillery units.",
-              topic: "analogies",
-            },
-            {
-              question: "Which sentence is grammatically correct?",
-              options: [
-                "Each of the recruits have their own uniform.",
-                "Each of the recruits has their own uniform.",
-                "Each of the recruits have his own uniform.",
-                "Each of the recruits has his own uniform.",
-              ],
-              correct: 3,
-              explanation:
-                "'Each' is singular and requires 'has'. 'His' agrees with the singular antecedent (though 'their' is becoming acceptable).",
-              topic: "grammar",
+              subTopic: "synonyms",
             },
             {
               question:
@@ -3775,45 +4388,89 @@
               explanation:
                 "Stoic means showing no emotion, remaining calm under pressure.",
               topic: "vocabulary",
+              subTopic: "contextClues",
             },
             {
-              question: "Strategy is to General as Diagnosis is to ___",
-              options: ["Disease", "Doctor", "Hospital", "Patient"],
+              question: "Which word is the ANTONYM of 'ASCEND'?",
+              options: ["Rise", "Climb", "Descend", "Elevate"],
+              correct: 2,
+              explanation: "Ascend means to go up; descend means to go down.",
+              topic: "vocabulary",
+              subTopic: "antonyms",
+            },
+
+            // READING COMPREHENSION - Medium
+            {
+              question:
+                "Read: 'The battalion prepared for deployment by conducting intensive training exercises, ensuring all equipment was functional, and reviewing mission protocols.' The MAIN purpose of these activities was to:",
+              options: [
+                "Impress superior officers",
+                "Ensure readiness for deployment",
+                "Test new equipment",
+                "Train new recruits",
+              ],
               correct: 1,
               explanation:
-                "A general creates strategy; a doctor makes diagnoses. This is a professional function relationship.",
-              topic: "analogies",
+                "All activities mentioned are preparation steps, indicating the purpose is ensuring readiness.",
+              topic: "comprehension",
+              subTopic: "purpose",
+            },
+            {
+              question:
+                "Read: 'Despite facing numerous obstacles, the platoon successfully completed their mission through teamwork and determination.' What can be INFERRED?",
+              options: [
+                "The mission was easy",
+                "Teamwork was not important",
+                "They encountered difficulties but persevered",
+                "They received external help",
+              ],
+              correct: 2,
+              explanation:
+                "'Despite obstacles' implies difficulties, 'successfully completed' implies perseverance.",
+              topic: "comprehension",
+              subTopic: "inference",
             },
           ],
+
           hard: [
+            // WORD ANALOGIES - Hard
             {
-              question: "Choose the word most nearly opposite to 'AMBIGUOUS':",
-              options: ["Clear", "Uncertain", "Vague", "Obscure"],
-              correct: 0,
-              explanation:
-                "Ambiguous means unclear or open to multiple interpretations. Clear is the direct opposite.",
-              topic: "vocabulary",
-            },
-            {
-              question: "Regimented is to Discipline as Chaotic is to ___",
+              question: "REGIMENTED : DISCIPLINE :: CHAOTIC : ___",
               options: ["Order", "Disorder", "Control", "Structure"],
               correct: 1,
               explanation:
-                "Regimented leads to discipline; chaotic leads to disorder. This is a cause-effect relationship.",
+                "Regimented leads to discipline; chaotic leads to disorder. Cause-effect relationship.",
               topic: "analogies",
+              subTopic: "causeEffect",
             },
             {
-              question: "Identify the sentence with NO grammatical errors:",
-              options: [
-                "Between you and I, the mission was compromised.",
-                "The platoon, along with its commander, were prepared.",
-                "Neither the captain nor the lieutenants were ready.",
-                "The equipment that was issued yesterday needs maintenance.",
-              ],
-              correct: 3,
+              question: "CAMOUFLAGE : CONCEALMENT :: FORTIFICATION : ___",
+              options: ["Building", "Protection", "Attack", "Visibility"],
+              correct: 1,
               explanation:
-                "Option D is correct. A: 'between you and me'. B: 'platoon...was'. C: 'lieutenants...were' is actually correct by proximity rule, but option D has no errors.",
-              topic: "grammar",
+                "Camouflage provides concealment; fortification provides protection. Purpose relationship.",
+              topic: "analogies",
+              subTopic: "purpose",
+            },
+            {
+              question: "HIERARCHY : ORGANIZATION :: PROTOCOL : ___",
+              options: ["Chaos", "Procedure", "Confusion", "Disorder"],
+              correct: 1,
+              explanation:
+                "Hierarchy provides structure to organization; protocol provides structure to procedure.",
+              topic: "analogies",
+              subTopic: "structure",
+            },
+
+            // VOCABULARY - Hard
+            {
+              question: "Choose the word most nearly OPPOSITE to 'AMBIGUOUS':",
+              options: ["Clear", "Uncertain", "Vague", "Obscure"],
+              correct: 0,
+              explanation:
+                "Ambiguous means unclear; clear is the direct opposite.",
+              topic: "vocabulary",
+              subTopic: "antonyms",
             },
             {
               question:
@@ -3823,15 +4480,47 @@
               explanation:
                 "Intrepid means fearless and adventurous, showing courage in dangerous situations.",
               topic: "vocabulary",
+              subTopic: "contextClues",
+            },
+            {
+              question: "Select the word that means 'to make less severe':",
+              options: ["Aggravate", "Mitigate", "Intensify", "Amplify"],
+              correct: 1,
+              explanation: "Mitigate means to make less severe or serious.",
+              topic: "vocabulary",
+              subTopic: "definitions",
+            },
+
+            // READING COMPREHENSION - Hard
+            {
+              question:
+                "Read: 'The implementation of new combat strategies required not only technical proficiency but also adaptability, as soldiers needed to adjust tactics based on real-time battlefield conditions while maintaining coordination with allied forces.' The passage emphasizes that successful strategy implementation depends PRIMARILY on:",
+              options: [
+                "Technical skill alone",
+                "Flexibility and coordination",
+                "Superior weaponry",
+                "Individual heroism",
+              ],
+              correct: 1,
+              explanation:
+                "The passage highlights both 'adaptability' and 'maintaining coordination', making flexibility and coordination the primary factors.",
+              topic: "comprehension",
+              subTopic: "analysis",
             },
             {
               question:
-                "Camouflage is to Concealment as Fortification is to ___",
-              options: ["Building", "Protection", "Attack", "Visibility"],
+                "Read: 'While courage in combat is universally admired, true military excellence encompasses strategic thinking, ethical decision-making, and the ability to lead others effectively under pressure.' The author would MOST LIKELY agree that:",
+              options: [
+                "Courage is the only important military quality",
+                "Military excellence requires multiple competencies",
+                "Strategic thinking is more important than courage",
+                "Ethical decisions are rarely necessary in combat",
+              ],
               correct: 1,
               explanation:
-                "Camouflage provides concealment; fortification provides protection. This is a purpose relationship.",
-              topic: "analogies",
+                "The passage states excellence 'encompasses' multiple qualities, indicating agreement with option B.",
+              topic: "comprehension",
+              subTopic: "authorIntent",
             },
           ],
         },
@@ -4352,8 +5041,17 @@
 
         document.getElementById(sectionId).classList.add("active");
         if (event && event.target) {
-          // ✅ SAFE check
           event.target.classList.add("active");
+        } else {
+          // Called from a card — highlight the matching nav tab
+          document.querySelectorAll(".nav-tab").forEach((tab) => {
+            if (
+              tab.getAttribute("onclick") &&
+              tab.getAttribute("onclick").includes(sectionId)
+            ) {
+              tab.classList.add("active");
+            }
+          });
         }
 
         if (sectionId === "stats") {
@@ -4655,6 +5353,16 @@
             return;
           }
 
+          // ✅ FIX 1: Prevent multiple submissions
+          const submitBtn = document.querySelector(
+            'button[onclick="submitAnswer()"]',
+          );
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.5";
+            submitBtn.style.cursor = "not-allowed";
+          }
+
           stopTimer();
           const questionTime = Date.now() - timeStarted;
           const onTime = timeLimit === 0 || questionTime / 1000 <= timeLimit;
@@ -4670,10 +5378,40 @@
           }
           userData.totalQuestions++;
 
-          // Track by topic
+          // Track by topic (your existing code)
           if (!userData.weakAreas[q.topic]) {
             userData.weakAreas[q.topic] = { correct: 0, total: 0 };
             userData.strongAreas[q.topic] = { correct: 0, total: 0 };
+          }
+
+          // Track verbal sub-topics (your existing code)
+          const verbalTopics = [
+            "analogies",
+            "vocabulary",
+            "comprehension",
+            "grammar",
+          ];
+          if (verbalTopics.includes(q.topic)) {
+            if (!userData.verbalSubTopicPerformance) {
+              userData.verbalSubTopicPerformance = {
+                analogies: { correct: 0, total: 0 },
+                vocabulary: { correct: 0, total: 0 },
+                comprehension: { correct: 0, total: 0 },
+                grammar: { correct: 0, total: 0 },
+              };
+            }
+
+            if (!userData.verbalSubTopicPerformance[q.topic]) {
+              userData.verbalSubTopicPerformance[q.topic] = {
+                correct: 0,
+                total: 0,
+              };
+            }
+
+            userData.verbalSubTopicPerformance[q.topic].total++;
+            if (correct) {
+              userData.verbalSubTopicPerformance[q.topic].correct++;
+            }
           }
 
           userData.weakAreas[q.topic].total++;
@@ -4681,55 +5419,84 @@
 
           if (correct) {
             userData.strongAreas[q.topic].correct++;
-            userData.weakAreas[q.topic].correct++; // ✅ Correct answers go to both
+            userData.weakAreas[q.topic].correct++;
           }
 
-          // ADD this check before showing explanation:
+          // Check strict mode
           if (userData.preferences.strictExamMode) {
-            // In strict mode, just move to next question without showing answer
             currentQuestion++;
             showQuestion();
             return;
           }
 
-          // Show feedback (only in non-strict mode)
+          // ✅ FIX 2: Mark correct answer visually
           const options = document.querySelectorAll(".option");
           options[q.correct].classList.add("correct");
+
+          // ✅ FIX 3: If user was wrong, mark their selection
+          if (!correct && window.selectedAnswer !== undefined) {
+            options[window.selectedAnswer].classList.add("incorrect");
+          }
 
           // Time feedback
           const timeFeedback =
             timeLimit > 0
               ? `
-                    <p style="margin-top: 10px;">
-                        <strong>Time taken:</strong> ${Math.round(questionTime / 1000)}s 
-                        ${onTime ? "✅ On time" : "⚠️ Over time - practice speed!"}
-                    </p>
-                `
+        <p style="margin-top: 10px;">
+            <strong>Time taken:</strong> ${Math.round(questionTime / 1000)}s 
+            ${onTime ? "✅ On time" : "⚠️ Over time - practice speed!"}
+        </p>
+    `
               : "";
 
+          // ✅ FIX 4: Create explanation HTML with null-safe access
           const explanation = `
-                    <div class="explanation">
-                        <strong>${correct ? "✅ Correct!" : "❌ Incorrect"}</strong>
-                        <p style="margin-top: 10px;">${q.explanation}</p>
-                        ${timeFeedback}
-                    </div>
-                    <button class="btn btn-primary" onclick="nextQuestion()" style="margin-top: 20px;">
-                        ${currentQuestion < shuffledQuestions.length - 1 ? "Next Question" : "See Results"}
-                    </button>
-                `;
+    <div class="explanation">
+        <strong>${correct ? "✅ Correct!" : "❌ Incorrect"}</strong>
+        <p style="margin-top: 10px;">${q.explanation || "No explanation available."}</p>
+        ${timeFeedback}
+    </div>
+    <button class="btn btn-primary" onclick="nextQuestion()" style="margin-top: 20px;">
+        ${currentQuestion < shuffledQuestions.length - 1 ? "Next Question" : "See Results"}
+    </button>
+  `;
 
-          // Append explanation to the modal content instead
-          const currentContent = document.getElementById(
-            "practiceModalContent",
-          ).innerHTML;
-          document.getElementById("practiceModalContent").innerHTML =
-            currentContent + explanation;
+          // ✅ FIX 5: Remove existing explanation and next button FIRST
+          const existingExplanation = document.querySelector(".explanation");
+          const existingNextBtn = document.querySelector(
+            'button[onclick="nextQuestion()"]',
+          );
+
+          if (existingExplanation) {
+            existingExplanation.remove();
+          }
+          if (existingNextBtn) {
+            existingNextBtn.remove();
+          }
+
+          // ✅ FIX 6: Now insert the NEW explanation (not duplicate)
+          const questionCard = document.querySelector(".question-card");
+          if (questionCard) {
+            // Insert after the question card
+            questionCard.insertAdjacentHTML("afterend", explanation);
+          } else {
+            // Fallback: append to modal content
+            document
+              .getElementById("practiceModalContent")
+              .insertAdjacentHTML("beforeend", explanation);
+          }
 
           saveUserData();
           window.selectedAnswer = undefined;
         };
-
         window.nextQuestion = function () {
+          // ✅ Prevent double-clicking
+          const nextBtn = document.querySelector(
+            'button[onclick="nextQuestion()"]',
+          );
+          if (nextBtn) {
+            nextBtn.disabled = true;
+          }
           currentQuestion++;
           showQuestion();
         };
@@ -4858,6 +5625,11 @@
                         `
                             : ""
                         }
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                          <button class="btn btn-primary" onclick="closePracticeModal(); showSection('practice')">Practice Again</button>
+                          <button class="btn btn-success" onclick="closePracticeModal(); showSection('stats')">View Full Stats</button>
+                          <button class="btn" style="background: var(--accent); color: white;" onclick="closePracticeModal(); showSection('dashboard')">Dashboard</button>
+                        </div>
                     </div>
                     
                     <div class="tip-box" style="margin: 20px 0;">
@@ -5037,16 +5809,57 @@
 
       // ADD these new functions after launchMockExam:
       function startFullAFPSATMock() {
-        // Combine all sections
-        const allQuestions = [
+        // Helper to repeat a question pool until we hit the target count
+        function fillToCount(pool, targetCount) {
+          const result = [];
+          while (result.length < targetCount) {
+            const shuffled = shuffleQuestions([...pool]);
+            result.push(...shuffled);
+          }
+          return result.slice(0, targetCount);
+        }
+
+        // Abstract: 50 questions (12 min)
+        const abstractPool = [
           ...practiceQuestions.afpsatAbstract.easy,
           ...practiceQuestions.afpsatAbstract.medium,
+          ...practiceQuestions.afpsatAbstract.hard,
+        ];
+        const abstractQuestions = fillToCount(abstractPool, 50).map((q) => ({
+          ...q,
+          _section: "Abstract Reasoning",
+        }));
+
+        // Verbal: 65 questions (30 min)
+        const verbalPool = [
           ...practiceQuestions.afpsatVerbal.easy,
+          ...practiceQuestions.afpsatVerbal.medium,
+          ...practiceQuestions.afpsatVerbal.hard,
+        ];
+        const verbalQuestions = fillToCount(verbalPool, 65).map((q) => ({
+          ...q,
+          _section: "Verbal Ability",
+        }));
+
+        // Numerical: 35 questions (35 min)
+        const numericalPool = [
           ...practiceQuestions.afpsatNumerical.easy,
+          ...practiceQuestions.afpsatNumerical.medium,
+          ...practiceQuestions.afpsatNumerical.hard,
+        ];
+        const numericalQuestions = fillToCount(numericalPool, 35).map((q) => ({
+          ...q,
+          _section: "Numerical Ability",
+        }));
+
+        // Combine: 50 + 65 + 35 = 150 total, in section order
+        const allQuestions = [
+          ...abstractQuestions,
+          ...verbalQuestions,
+          ...numericalQuestions,
         ];
 
-        const shuffled = shuffleQuestions(allQuestions);
-        startTimedExam(shuffled, 4620, "AFPSAT Full Mock"); // 77 minutes
+        startTimedExam(allQuestions, 4620, "AFPSAT Full Mock"); // 77 minutes
       }
       function startFullNeuroPsychMock() {
         const allQuestions = [
@@ -5099,6 +5912,7 @@
             <h3 style="color: var(--primary); margin: 0;">
               ${examName} - Question ${currentQuestion + 1} of ${totalQuestions}
             </h3>
+            ${q._section ? `<span style="background: var(--accent); color: white; padding: 4px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">${q._section}</span>` : ""}
             <div id="sectionTimer" class="timer" style="display: inline-block; padding: 10px 20px; margin: 0;">
               ${Math.floor(timeLimit / 60)}:00
             </div>
@@ -5192,7 +6006,6 @@
 
             const percentage = Math.round((correct / totalQuestions) * 100);
 
-            // Save to mock exams
             userData.mockExams.push({
               type: examName,
               score: percentage,
@@ -5200,6 +6013,14 @@
               questionsTotal: totalQuestions,
               questionsCorrect: correct,
             });
+
+            // Route score to the correct tracker
+            if (examName.toLowerCase().includes("neuro")) {
+              userData.neuroPsychScores.push(percentage);
+            } else {
+              userData.afpsatScores.push(percentage);
+            }
+
             saveUserData();
 
             const html = `
@@ -5361,9 +6182,12 @@
         }
 
         window.checkMathAnswer = function (correct, roundStart) {
-          const userAnswer = parseInt(
-            document.getElementById("mathAnswer").value,
-          );
+          const inputElem = document.getElementById("mathAnswer");
+          if (!inputElem || inputElem.value.trim() === "") {
+            showNotification("⚠️ Please enter an answer!");
+            return;
+          }
+          const userAnswer = parseInt(inputElem.value);
           const responseTime = Date.now() - roundStart;
           const timeBonus = Math.max(0, 5000 - responseTime);
 
@@ -5623,6 +6447,8 @@
             (userData.correctAnswers / userData.totalQuestions) * 100,
           );
           document.getElementById("avgScore").textContent = avgScore + "%";
+        } else {
+          document.getElementById("avgScore").textContent = "0%"; // ✅ Always reset to 0%
         }
 
         document.getElementById("studyStreak").textContent =
@@ -5722,9 +6548,6 @@
 
         document.getElementById("passingProbability").innerHTML =
           probabilityHTML;
-
-        // Update game scores if on games page
-        updateGameScores();
       }
 
       // Update stats
@@ -5857,7 +6680,7 @@
                 )
                 .join("")
             : "<p>Complete more practices to identify your strong areas!</p>";
-
+        updateVerbalAnalysis();
         document.getElementById("strongAreas").innerHTML = strongAreasHtml;
       }
 
@@ -6216,6 +7039,183 @@
       }
 
       setInterval(checkDailyReminder, 60000); // Check every minute
+
+      // Update Verbal Analysis Dashboard
+      function updateVerbalAnalysis() {
+        // ✅ ADD: Reset all display elements first before recalculating
+        const topics = ["analogies", "vocabulary", "comprehension", "grammar"];
+        topics.forEach((topic) => {
+          const perfElem = document.getElementById(`${topic}Perf`);
+          const barElem = document.getElementById(`${topic}Bar`);
+          const textElem = document.getElementById(`${topic}Text`);
+          if (perfElem) perfElem.textContent = "0%";
+          if (barElem) barElem.style.width = "0%";
+          if (textElem) textElem.textContent = "No attempts yet";
+        });
+
+        // ✅ Safety check: Ensure the object exists
+        if (!userData.verbalSubTopicPerformance) {
+          console.warn(
+            "⚠️ verbalSubTopicPerformance not initialized, creating now...",
+          );
+          userData.verbalSubTopicPerformance = {
+            analogies: { correct: 0, total: 0 },
+            vocabulary: { correct: 0, total: 0 },
+            comprehension: { correct: 0, total: 0 },
+            grammar: { correct: 0, total: 0 },
+          };
+        }
+
+        let weakestTopic = null;
+        let lowestScore = 100;
+
+        topics.forEach((topic) => {
+          const data = userData.verbalSubTopicPerformance[topic];
+
+          // ✅ Extra safety: ensure topic exists
+          if (!data) {
+            userData.verbalSubTopicPerformance[topic] = {
+              correct: 0,
+              total: 0,
+            };
+            return; // Skip this iteration
+          }
+
+          if (data.total > 0) {
+            const percentage = Math.round((data.correct / data.total) * 100);
+
+            // Update display
+            const perfElem = document.getElementById(`${topic}Perf`);
+            const barElem = document.getElementById(`${topic}Bar`);
+            const textElem = document.getElementById(`${topic}Text`);
+
+            if (perfElem) perfElem.textContent = percentage + "%";
+            if (barElem) barElem.style.width = percentage + "%";
+
+            const status =
+              percentage >= 80
+                ? "✅ Strong"
+                : percentage >= 60
+                  ? "⚠️ Improving"
+                  : "❌ Needs Work";
+
+            if (textElem) {
+              textElem.textContent = `${data.correct}/${data.total} correct - ${status}`;
+            }
+
+            // Track weakest
+            if (percentage < lowestScore) {
+              lowestScore = percentage;
+              weakestTopic = topic;
+            }
+          }
+        });
+
+        // Show recommendation
+        const recTextElem = document.getElementById("verbalRecText");
+        if (!recTextElem) return;
+
+        if (weakestTopic && lowestScore < 70) {
+          const topicNames = {
+            analogies: "Word Analogies",
+            vocabulary: "Vocabulary",
+            comprehension: "Reading Comprehension",
+            grammar: "Grammar",
+          };
+
+          recTextElem.innerHTML = `
+            Focus on <strong>${topicNames[weakestTopic]}</strong> (${lowestScore}%). 
+            Review the tutorial section and practice 20+ questions in this area.
+        `;
+        } else if (lowestScore >= 70) {
+          recTextElem.textContent =
+            "🎉 Great work! All verbal sub-topics are strong. Keep practicing to maintain proficiency.";
+        }
+      }
+      function confirmResetProgress() {
+        // Show a confirmation modal before deleting
+        const modalContent = document.getElementById("modalContent");
+        modalContent.innerHTML = `
+    <div style="text-align: center; padding: 20px;">
+      <div style="font-size: 4rem; margin-bottom: 20px;">⚠️</div>
+      <h2 style="color: var(--danger); margin-bottom: 15px;">Reset All Progress?</h2>
+      <p style="color: var(--text-dark); margin-bottom: 10px; font-size: 1.1rem;">
+        This will permanently delete:
+      </p>
+      <ul style="text-align: left; display: inline-block; margin: 15px 0; line-height: 2;">
+        <li>📊 All practice scores and statistics</li>
+        <li>🎮 All game high scores</li>
+        <li>🔥 Your study streak</li>
+        <li>📈 Performance history</li>
+        <li>⚙️ All preferences</li>
+      </ul>
+      <p style="color: var(--danger); font-weight: 700; margin: 20px 0;">
+        This action CANNOT be undone!
+      </p>
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
+        <button class="btn btn-danger" onclick="executeResetProgress()" style="padding: 14px 35px; font-size: 1.1rem;">
+          Yes, Reset Everything
+        </button>
+        <button class="btn btn-secondary" onclick="closeModal()" style="padding: 14px 35px; font-size: 1.1rem;">
+          Cancel
+        </button>
+      </div>
+    </div>
+  `;
+        document.getElementById("modal").classList.add("active");
+      }
+
+      function executeResetProgress() {
+        // Clear localStorage
+        localStorage.removeItem("afpExamData");
+
+        // Reset userData to defaults
+        userData = {
+          totalQuestions: 0,
+          correctAnswers: 0,
+          afpsatScores: [],
+          neuroPsychScores: [],
+          mockExams: [],
+          studyStreak: 0,
+          lastStudyDate: null,
+          weakAreas: {},
+          strongAreas: {},
+          verbalSubTopicPerformance: {
+            analogies: { correct: 0, total: 0 },
+            vocabulary: { correct: 0, total: 0 },
+            comprehension: { correct: 0, total: 0 },
+            grammar: { correct: 0, total: 0 },
+          },
+          questionsAnsweredOnTime: 0,
+          questionsTotalTimed: 0,
+          sectionPerformance: {
+            abstract: [],
+            verbal: [],
+            numerical: [],
+            neuroPsych: [],
+          },
+          preferences: {
+            strictExamMode: false,
+            lastUpdated: null,
+          },
+          gamesProgress: {
+            patternSpeed: { highScore: 0, attempts: 0, lastPlayed: null },
+            mathBlitz: { highScore: 0, attempts: 0, lastPlayed: null },
+            memoryMatch: {
+              highScore: 0,
+              bestTime: 999999,
+              attempts: 0,
+              lastPlayed: null,
+            },
+          },
+        };
+
+        closeModal();
+        updateDashboard();
+        updateStats();
+        initializeStrictMode();
+        showNotification("✅ All progress has been reset successfully!");
+      }
     </script>
   </body>
 </html>
