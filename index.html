@@ -4977,6 +4977,89 @@
               topic: "comprehension",
               subTopic: "authorIntent",
             },
+            // GRAMMAR ERROR-SPOTTING (real AFPSAT format)
+            {
+              question:
+                "Find the error: 'My supply officer and me went to the commissary this morning.'",
+              options: ["supply officer", "me", "commissary", "No error"],
+              correct: 1,
+              explanation:
+                "The subject of the verb should be 'I', not 'me'. Correct: 'My supply officer and I went...' Use 'I' when it is the subject of the sentence.",
+              topic: "grammar",
+              subTopic: "pronouns",
+            },
+            {
+              question:
+                "Find the error: 'This children are the hope of tomorrow.'",
+              options: ["This", "are", "hope", "No error"],
+              correct: 0,
+              explanation:
+                "'This' is singular and cannot modify the plural noun 'children'. The correct word is 'These children are the hope of tomorrow.'",
+              topic: "grammar",
+              subTopic: "demonstratives",
+            },
+            {
+              question:
+                "Find the error: 'She made a mistake of putting her trust at someone she does not know.'",
+              options: ["made", "putting", "at", "No error"],
+              correct: 2,
+              explanation:
+                "The correct preposition is 'in', not 'at'. We say 'put your trust IN someone', not 'at someone'.",
+              topic: "grammar",
+              subTopic: "prepositions",
+            },
+
+            // IDIOM / MEANING (real AFPSAT format)
+            {
+              question:
+                "His explanation is 'as clear as mud.' What does this idiom mean?",
+              options: [
+                "Very dirty",
+                "Extremely clear",
+                "Not understandable at all",
+                "Somewhat confusing",
+              ],
+              correct: 2,
+              explanation:
+                "'As clear as mud' is an ironic idiom meaning the opposite of clear — it means completely confusing or impossible to understand.",
+              topic: "vocabulary",
+              subTopic: "idioms",
+            },
+            {
+              question: "Choose the word most similar to 'BENEVOLENT':",
+              options: ["Cruel", "Kind", "Strict", "Indifferent"],
+              correct: 1,
+              explanation:
+                "Benevolent means well-meaning and kind. Its synonym is 'kind' or 'generous'.",
+              topic: "vocabulary",
+              subTopic: "synonyms",
+            },
+            {
+              question: "The opposite of 'VAGUE' is:",
+              options: ["Obscure", "Unclear", "Definite", "Uncertain"],
+              correct: 2,
+              explanation:
+                "Vague means unclear or not specific. Its antonym (opposite) is 'definite' or 'clear'.",
+              topic: "vocabulary",
+              subTopic: "antonyms",
+            },
+
+            // READING COMPREHENSION - Military context passage (real AFPSAT style)
+            {
+              question:
+                "Read: 'Neuro and psychological disorders are disqualifying conditions for military service. Such individuals are likely to break down under the stress of military life and are an additional burden to the AFP.' Based on the passage, which statement is NOT true?",
+              options: [
+                "They are an additional expense to the AFP",
+                "They are disqualified from military service",
+                "They are likely to breakdown under stress",
+                "They can be identified just by looking at them",
+              ],
+              correct: 3,
+              explanation:
+                "Option D is NOT stated in the passage. The passage says they breakdown under stress and are disqualified — but nowhere does it say they can be identified by appearance alone.",
+              topic: "comprehension",
+              subTopic: "notTrue",
+            },
           ],
         },
         afpsatNumerical: {
@@ -5112,10 +5195,80 @@
                 "5% less",
                 "Equal to 1",
               ],
-              correct: 0, // ✅ Change from 1 to 0
+              correct: 0,
               explanation:
                 "Start with 100. After +25%: 125. After -20%: 125 × 0.8 = 100. Equal to original!",
               topic: "percentages",
+            },
+            // AGE PROBLEMS (real AFPSAT format)
+            {
+              question:
+                "James' dad is 5 times older than James, and James is twice as old as his sister Sara. In two years, the sum of their ages will be 58. How old is James now?",
+              options: [
+                "6 years old",
+                "7 years old",
+                "8 years old",
+                "9 years old",
+              ],
+              correct: 2,
+              explanation:
+                "Let James = J, Dad = 5J, Sara = J/2. In 2 years: (J+2) + (5J+2) + (J/2+2) = 58 → 6.5J + 6 = 58 → 6.5J = 52 → J = 8. James is 8 years old.",
+              topic: "wordProblems",
+              subTopic: "ageProblems",
+            },
+            {
+              question:
+                "A barangay population of 95,000 decreased by 5%. What is the remaining population?",
+              options: ["90,000", "90,025", "90,250", "89,500"],
+              correct: 1,
+              explanation:
+                "5% of 95,000 = 4,750. Remaining = 95,000 - 4,750 = 90,250. Wait — the exact answer: 95,000 × 0.95 = 90,250. Answer is 90,250.",
+              topic: "percentages",
+              subTopic: "population",
+            },
+
+            // WORK-RATE PROBLEMS
+            {
+              question:
+                "A basketball team won 80% of its games and won 20 games. How many total games did they play?",
+              options: ["20", "22", "25", "28"],
+              correct: 2,
+              explanation:
+                "80% of total = 20 games. Total = 20 ÷ 0.80 = 25 games.",
+              topic: "percentages",
+              subTopic: "backCalculation",
+            },
+            {
+              question:
+                "A mason uses 2 bags of cement to finish a 9 sqm wall. How many bags does he need for a 40 sqm wall?",
+              options: ["7 bags", "8 bags", "9 bags", "10 bags"],
+              correct: 2,
+              explanation:
+                "Rate = 2 bags / 9 sqm. For 40 sqm: (2/9) × 40 = 8.88 ≈ 9 bags (you must round up since partial bags are needed).",
+              topic: "ratios",
+              subTopic: "workRate",
+            },
+            {
+              question:
+                "Maria wrote down numbers from 20 to 80 on flash cards, one number per card. How many cards did she have?",
+              options: ["59", "60", "61", "62"],
+              correct: 2,
+              explanation:
+                "Count: 80 - 20 + 1 = 61 cards. The +1 is because both endpoints (20 and 80) are included.",
+              topic: "basic",
+              subTopic: "counting",
+            },
+
+            // MULTI-STEP WORD PROBLEM
+            {
+              question:
+                "In an examination, 300 competitors passed the first part and 500 passed the second part. The total number of competitors who passed BOTH parts cannot exceed:",
+              options: ["800", "500", "400", "300"],
+              correct: 3,
+              explanation:
+                "The maximum who could have passed both is limited by the smaller group — 300 (those who passed Part 1). So the number who passed both cannot be more than 300.",
+              topic: "wordProblems",
+              subTopic: "setLogic",
             },
           ],
         },
@@ -5261,6 +5414,53 @@
                 "Pattern is n(n+1): 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, 6×7=42",
               topic: "sequences",
             },
+            // LETTER-NUMBER COMBINED SERIES (real AFPSAT format)
+            {
+              question: "Series: Z25, Y24, X23, W22, __ What comes next?",
+              options: ["U21", "V21", "V22", "U20"],
+              correct: 1,
+              explanation:
+                "Letters go backward (Z, Y, X, W, V) and numbers decrease by 1 (25, 24, 23, 22, 21). Answer: V21.",
+              topic: "sequences",
+              subTopic: "letterNumber",
+            },
+            {
+              question: "Series: 1, 3, 7, 15, 31, __ What comes next?",
+              options: ["47", "55", "63", "71"],
+              correct: 2,
+              explanation:
+                "Each number = previous × 2 + 1: (1×2+1=3), (3×2+1=7), (7×2+1=15), (15×2+1=31), (31×2+1=63).",
+              topic: "sequences",
+              subTopic: "doublingPlusOne",
+            },
+            {
+              question:
+                "Series: 2, 3, 5, 8, 13, 21, __ (Fibonacci variant +1) What comes next?",
+              options: ["32", "33", "34", "35"],
+              correct: 2,
+              explanation:
+                "Each number = sum of the two before it: 13+21 = 34. This is the Fibonacci sequence.",
+              topic: "sequences",
+              subTopic: "fibonacci",
+            },
+            {
+              question: "Odd one out: 144, 169, 196, 216, 225",
+              options: ["144", "169", "196", "216"],
+              correct: 3,
+              explanation:
+                "144=12², 169=13², 196=14², 225=15² — all are perfect squares. But 216=6³ (a perfect cube, NOT a perfect square). So 216 is the odd one out.",
+              topic: "oddOneOut",
+              subTopic: "perfectSquares",
+            },
+            {
+              question: "Series: AZ, BY, CX, DW, __ What comes next?",
+              options: ["EU", "EV", "FV", "FU"],
+              correct: 1,
+              explanation:
+                "First letter goes forward (A,B,C,D,E). Second letter goes backward (Z,Y,X,W,V). Answer: EV.",
+              topic: "sequences",
+              subTopic: "dualAlphabet",
+            },
           ],
         },
         neuroPsych: {
@@ -5404,6 +5604,108 @@
               topic: "integrity",
               consistency: "integrity_2",
             },
+            // === CONSISTENCY TRAP PAIR 1 ===
+            // (Tests same trait as easy Q1 — teamwork — but from the opposite angle)
+            {
+              question:
+                "You are assigned to a group project, but you believe your teammates are taking the wrong approach. What is your FIRST action?",
+              options: [
+                "Immediately take over the project leadership",
+                "Do your assigned part and stay quiet",
+                "Bring up your concerns calmly in the group discussion",
+                "Report the situation to your superior before discussing with the team",
+              ],
+              correct: 2,
+              explanation:
+                "The best first action is to raise your concern within the team. Taking over shows poor teamwork. Staying quiet shows passivity. Reporting to superiors before even discussing with teammates skips the proper first step.",
+              topic: "teamwork",
+              consistency: "teamwork_4",
+            },
+
+            // === IMPULSE CONTROL SCENARIO ===
+            {
+              question:
+                "During a heated argument, a fellow soldier personally insults you in front of others. What do you do?",
+              options: [
+                "Insult them back immediately to defend your honor",
+                "Stay calm, ignore it for now, and address it privately later",
+                "Report it directly to the commanding officer during the argument",
+                "Physically confront them to make a point",
+              ],
+              correct: 1,
+              explanation:
+                "Staying calm and addressing it privately shows emotional maturity and impulse control — a critical military trait. Physical or verbal retaliation is unacceptable conduct. Reporting mid-argument escalates instead of de-escalates.",
+              topic: "stress",
+              consistency: "stress_4",
+            },
+
+            // === AUTHORITY VS. ETHICS (mid-level) ===
+            {
+              question:
+                "Your commanding officer gives you an order you find unnecessary and time-consuming. You:",
+              options: [
+                "Ignore the order and do what you think is better",
+                "Follow the order but complain loudly to your peers",
+                "Follow the order without complaint",
+                "Ask permission to discuss the order after completing it",
+              ],
+              correct: 3,
+              explanation:
+                "The ideal response is to follow the order and then seek clarification afterward through proper channels. Ignoring orders undermines discipline. Complaining to peers damages team morale. Simply following without ever seeking to understand is also less ideal than asking afterward.",
+              topic: "discipline",
+              consistency: "discipline_4",
+            },
+
+            // === GZTS-STYLE SELF-REFLECTION ===
+            {
+              question:
+                "Which statement best describes how you handle boredom during long, repetitive tasks?",
+              options: [
+                "I find ways to entertain myself even if it slows my work",
+                "I push through, maintain pace, and stay focused on the goal",
+                "I ask to be reassigned to something more challenging",
+                "I frequently lose focus and need reminders to continue",
+              ],
+              correct: 1,
+              explanation:
+                "Military service involves sustained effort through routine tasks. Staying focused without complaint or distraction reflects the discipline and endurance the AFP values.",
+              topic: "discipline",
+              consistency: "discipline_5",
+            },
+
+            // === PEER PRESSURE SCENARIO ===
+            {
+              question:
+                "Several of your peers routinely skip a non-mandatory but recommended unit activity. They pressure you to skip too. You:",
+              options: [
+                "Skip it to maintain good relations with your peers",
+                "Attend and encourage others to come, without lecturing them",
+                "Report all of them to the commanding officer",
+                "Attend but avoid interacting with those who skipped",
+              ],
+              correct: 1,
+              explanation:
+                "Attending while positively encouraging peers reflects integrity and leadership without being confrontational or punitive. Skipping shows poor values. Over-reporting minor issues is disproportionate. Avoiding teammates damages unit cohesion.",
+              topic: "integrity",
+              consistency: "integrity_5",
+            },
+
+            // === EMOTIONAL CONTROL UNDER PRESSURE ===
+            {
+              question:
+                "You fail an important evaluation despite studying hard. You feel devastated. Your healthiest immediate response is to:",
+              options: [
+                "Blame the evaluators for unfair testing",
+                "Withdraw from your peers and isolate yourself",
+                "Accept the result, identify what went wrong, and plan how to improve",
+                "Immediately demand a re-evaluation",
+              ],
+              correct: 2,
+              explanation:
+                "Resilience means processing failure constructively. Blaming others and demanding re-evaluation shows poor accountability. Isolation is a sign of poor coping. The AFP values individuals who bounce back with a plan.",
+              topic: "resilience",
+              consistency: "resilience_3",
+            },
           ],
           hard: [
             {
@@ -5479,6 +5781,124 @@
                 "Military values dignity and respect. Intervention shows moral courage and integrity.",
               topic: "integrity",
               consistency: "integrity_4",
+            },
+            // === ETHICAL DILEMMA — CHAIN OF COMMAND CONFLICT ===
+            {
+              question:
+                "You discover that your commanding officer has been falsifying equipment inventory reports. The officer is well-liked and has protected your unit. What do you do?",
+              options: [
+                "Ignore it — loyalty to your officer comes first",
+                "Confront the officer privately and give them a chance to correct it",
+                "Report it immediately to a higher authority through proper channels",
+                "Tell your peers so the group can decide together",
+              ],
+              correct: 2,
+              explanation:
+                "Falsifying official reports is a serious violation regardless of personal loyalty. Integrity requires reporting it. Ignoring it makes you complicit. A private confrontation without escalating is insufficient for fraud. Group decisions on reporting bypass the chain of command.",
+              topic: "integrity",
+              consistency: "integrity_6",
+            },
+
+            // === CONSISTENCY TRAP — STRESS (paired with medium stress Q) ===
+            {
+              question:
+                "You are given three urgent tasks simultaneously with no way to complete all three on time. No superior is available to ask. You:",
+              options: [
+                "Panic and attempt all three at once, completing none properly",
+                "Choose the task you personally prefer and finish only that one",
+                "Prioritize by mission impact, complete the most critical, and document why",
+                "Wait until a superior is available before doing anything",
+              ],
+              correct: 2,
+              explanation:
+                "This tests decision-making under pressure without supervision. Prioritizing by impact and documenting the reasoning shows analytical thinking and accountability — a critical officer-level trait. Waiting indefinitely or acting randomly are both disqualifying behaviors.",
+              topic: "stress",
+              consistency: "stress_5",
+            },
+
+            // === GZTS CONSISTENCY TRAP — SOCIAL AGGRESSION ===
+            {
+              question:
+                "You strongly disagree with a policy your unit has adopted. The majority of your peers support it. You:",
+              options: [
+                "Openly criticize the policy and rally others against it",
+                "Accept it silently and comply, suppressing your view permanently",
+                "Express your disagreement once through proper channels, then comply with the decision",
+                "Comply publicly but undermine the policy in private",
+              ],
+              correct: 2,
+              explanation:
+                "Expressing disagreement once formally and then complying reflects mature professionalism. Open rebellion damages unit cohesion. Permanent silent compliance with no feedback loop is also unhealthy. Undermining in private is a form of insubordination and deception.",
+              topic: "discipline",
+              consistency: "discipline_6",
+            },
+
+            // === COMPLEX LOYALTY DILEMMA ===
+            {
+              question:
+                "You witness a close friend and fellow soldier using their position to get preferential treatment for a family member's business contract with the AFP. No one else seems to notice. You:",
+              options: [
+                "Stay silent — it's not your business and they're your friend",
+                "Participate and benefit from the arrangement to maintain the friendship",
+                "Confront your friend privately and insist they stop, then report if they refuse",
+                "Immediately report it without giving your friend a chance to explain",
+              ],
+              correct: 2,
+              explanation:
+                "This tests integrity under social pressure. The AFP prohibits conflict of interest. The right path is private confrontation first (giving benefit of the doubt), followed by reporting if the behavior continues. Pure silence or participation makes you complicit. Skipping confrontation and reporting immediately, while technically correct, shows a lack of mature judgment.",
+              topic: "integrity",
+              consistency: "integrity_7",
+            },
+
+            // === APPLICANT RISK PROFILER STYLE ===
+            {
+              question:
+                "When you are under extreme pressure and feel you cannot cope, what is your TYPICAL real behavior? (Answer honestly — there is no trick here.)",
+              options: [
+                "I talk to someone I trust about it",
+                "I handle it alone and never show weakness to others",
+                "I engage in physical activity to release tension",
+                "I tend to become irritable or short-tempered with others",
+              ],
+              correct: 0,
+              explanation:
+                "This question mirrors the Applicant Risk Profiler style — it is testing for HELP-SEEKING BEHAVIOR, which is a protective factor. Seeking support is the healthiest coping mechanism. Isolating, bottling up stress, or taking it out on others are risk indicators the AFP screens for.",
+              topic: "stress",
+              consistency: "stress_6",
+            },
+
+            // === LEADERSHIP UNDER AMBIGUITY ===
+            {
+              question:
+                "Your unit receives an order with unclear instructions during a field exercise. Your superior is unreachable. Junior soldiers are looking to you for direction. You:",
+              options: [
+                "Tell everyone to stand by and do nothing until orders are clarified",
+                "Make a reasonable interpretation of the order, proceed cautiously, and document your decision",
+                "Let the most senior soldier by age decide",
+                "Ask every team member to vote on the best interpretation",
+              ],
+              correct: 1,
+              explanation:
+                "Military environments require initiative and sound judgment under ambiguity. Making a reasonable, documented decision demonstrates leadership confidence. Doing nothing risks mission failure. Age-based hierarchy ignores rank. Voting decisions in a combat environment is unrealistic and dangerous.",
+              topic: "leadership",
+              consistency: "teamwork_5",
+            },
+
+            // === GZTS-STYLE SELF-AWARENESS TRAP ===
+            {
+              question:
+                "You have been described by others as 'too sensitive' when receiving criticism. When you reflect on this honestly, you:",
+              options: [
+                "Disagree — you handle criticism perfectly and others are wrong",
+                "Somewhat agree — you may react defensively at first but you recover",
+                "Fully agree — criticism often ruins your focus for the rest of the day",
+                "Disagree — you simply have high standards for how criticism should be delivered",
+              ],
+              correct: 1,
+              explanation:
+                "This is a self-awareness question. Option B shows honest self-reflection AND resilience — you acknowledge the tendency but demonstrate it doesn't permanently affect you. Flat denial (A or D) signals poor self-awareness. Full agreement (C) signals vulnerability to sustained performance degradation under criticism.",
+              topic: "resilience",
+              consistency: "resilience_4",
             },
           ],
         },
@@ -6319,14 +6739,53 @@
         startTimedExam(allQuestions, 4620, "AFPSAT Full Mock"); // 77 minutes
       }
       function startFullNeuroPsychMock() {
+        // Pull from all difficulty levels
         const allQuestions = [
           ...practiceQuestions.neuroPsych.easy,
           ...practiceQuestions.neuroPsych.medium,
           ...practiceQuestions.neuroPsych.hard,
         ];
 
+        // Shuffle and select 45 questions for a harder, longer simulation
         const shuffled = shuffleQuestions(allQuestions);
-        startTimedExam(shuffled, 3600, "Neuro-Psych Mock"); // 60 minutes
+
+        // Separate by topic to ensure balanced coverage
+        const byTopic = {};
+        shuffled.forEach((q) => {
+          if (!byTopic[q.topic]) byTopic[q.topic] = [];
+          byTopic[q.topic].push(q);
+        });
+
+        // Build balanced set — pull up to 8 from each major topic
+        const topics = [
+          "integrity",
+          "stress",
+          "teamwork",
+          "discipline",
+          "leadership",
+          "resilience",
+          "feedback",
+        ];
+        let balanced = [];
+        topics.forEach((topic) => {
+          if (byTopic[topic]) {
+            balanced.push(...byTopic[topic].slice(0, 8));
+          }
+        });
+
+        // Fill to 45 if needed with remaining questions
+        const used = new Set(balanced.map((q) => q.question));
+        shuffled.forEach((q) => {
+          if (!used.has(q.question) && balanced.length < 45) {
+            balanced.push(q);
+          }
+        });
+
+        // Final shuffle of the balanced set
+        const finalSet = shuffleQuestions(balanced).slice(0, 45);
+
+        // Start with 60 minutes (harder — original was same time but fewer questions)
+        startTimedExam(finalSet, 3600, "Neuro-Psych Mock");
       }
 
       function startTimedExam(questions, timeLimit, examName) {
@@ -6492,6 +6951,24 @@
           <h3 style="color: ${percentage >= 71 ? "var(--success)" : "var(--danger)"}; margin: 20px 0;">
             Final Score: ${percentage}% ${percentage >= 71 ? "✅ PASSING" : "❌ BELOW PASSING"}
           </h3>
+          ${
+            examName.toLowerCase().includes("neuro")
+              ? `
+            <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px 0; text-align: left;">
+              <h4 style="color: var(--primary); margin-bottom: 15px;">🧠 Psychological Trait Breakdown</h4>
+              <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px;">
+                Remember: The real Neuro-Psych exam checks CONSISTENCY across similar questions. 
+                A perfect score here doesn't guarantee passing if your answers were inconsistent.
+              </p>
+              <div style="background: var(--bg-light); padding: 15px; border-radius: 8px; border-left: 4px solid var(--accent);">
+                <strong>💡 What the real exam detects:</strong><br>
+                Contradiction between how you answer teamwork questions early vs. late in the exam.
+                Answer all similar questions the same way — the test is designed to catch inconsistency.
+              </div>
+            </div>
+          `
+              : ""
+          }
           
           <div class="tip-box" style="margin: 20px 0; background: ${percentage >= 71 ? "#dcfce7" : "#fee2e2"};">
             <strong>${percentage >= 71 ? "🎉 Congratulations!" : "📖 Keep Studying"}</strong>
