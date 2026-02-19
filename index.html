@@ -2126,6 +2126,376 @@
           align-self: flex-end;
         }
       }
+
+      /* =============================================
+   FLASHCARD DRILL - MODERN DESIGN
+   ============================================= */
+
+      #flashcards {
+        padding: 30px;
+      }
+
+      /* Section Header */
+      .fc-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 10px;
+      }
+
+      .fc-header h2 {
+        color: var(--primary);
+        margin: 0;
+        font-size: 1.8rem;
+      }
+
+      .fc-subtitle {
+        color: var(--text-light);
+        margin-bottom: 28px;
+        font-size: 0.98rem;
+      }
+
+      /* Progress Area */
+      .fc-progress-wrapper {
+        background: white;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 22px;
+        border: 1px solid var(--border);
+        box-shadow: 0 2px 8px var(--shadow-soft);
+      }
+
+      .fc-progress-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .fc-progress-label {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.95rem;
+      }
+
+      .fc-progress-count {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: white;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+
+      .fc-progress-bar-track {
+        background: var(--bg-light);
+        border-radius: 10px;
+        height: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      .fc-progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--secondary),
+          var(--secondary-light)
+        );
+        border-radius: 10px;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .fc-progress-bar-fill::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        animation: shimmer 2s infinite;
+      }
+
+      /* Card Counter Badge */
+      .fc-counter {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+
+      .fc-counter-badge {
+        display: inline-block;
+        background: var(--bg-light);
+        border: 1px solid var(--border);
+        color: var(--text-light);
+        padding: 5px 18px;
+        border-radius: 20px;
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+
+      /* ---- 3D FLIP CARD ---- */
+      .fc-card-wrapper {
+        perspective: 1200px;
+        width: 100%;
+        max-width: 680px;
+        margin: 0 auto 28px auto;
+        cursor: pointer;
+      }
+
+      .fc-card-inner {
+        position: relative;
+        width: 100%;
+        min-height: 240px;
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 20px;
+      }
+
+      .fc-card-wrapper:hover .fc-card-inner:not(.is-flipped) {
+        transform: translateY(-6px) rotateX(2deg);
+        filter: drop-shadow(0 16px 32px rgba(26, 77, 46, 0.22));
+      }
+
+      .fc-card-inner.is-flipped {
+        transform: rotateY(180deg);
+      }
+
+      .fc-card-wrapper:hover .fc-card-inner.is-flipped {
+        transform: rotateY(180deg) translateY(-6px);
+        filter: drop-shadow(0 16px 32px rgba(74, 124, 89, 0.22));
+      }
+
+      /* Front and Back share the same base */
+      .fc-card-front,
+      .fc-card-back {
+        position: absolute;
+        width: 100%;
+        min-height: 240px;
+        border-radius: 20px;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 40px;
+        box-shadow: 0 8px 28px rgba(26, 77, 46, 0.18);
+        text-align: center;
+      }
+
+      /* Front face — word side */
+      .fc-card-front {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-light) 100%
+        );
+        color: white;
+      }
+
+      /* Back face — meaning side */
+      .fc-card-back {
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--secondary-light) 100%
+        );
+        color: white;
+        transform: rotateY(180deg);
+      }
+
+      .fc-side-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        opacity: 0.7;
+        margin-bottom: 14px;
+      }
+
+      .fc-word-text {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin: 0 0 12px 0;
+        line-height: 1.2;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+
+      .fc-meaning-text {
+        font-size: 1.08rem;
+        line-height: 1.75;
+        opacity: 0.97;
+        max-width: 500px;
+      }
+
+      .fc-flip-hint {
+        font-size: 0.78rem;
+        opacity: 0.55;
+        margin-top: 18px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* Controls */
+      .fc-controls {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+
+      .fc-btn {
+        padding: 11px 24px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 0.92rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+      }
+
+      .fc-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 18px rgba(0, 0, 0, 0.15);
+      }
+
+      .fc-btn:active {
+        transform: translateY(-1px);
+      }
+
+      .fc-btn-prev,
+      .fc-btn-next {
+        background: white;
+        color: var(--primary);
+        border: 2px solid var(--border);
+      }
+
+      .fc-btn-prev:hover,
+      .fc-btn-next:hover {
+        background: var(--bg-light);
+        border-color: var(--primary);
+      }
+
+      .fc-btn-flip {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: white;
+      }
+
+      .fc-btn-shuffle {
+        background: linear-gradient(
+          135deg,
+          var(--secondary),
+          var(--secondary-light)
+        );
+        color: white;
+      }
+
+      .fc-btn-reset {
+        background: linear-gradient(135deg, var(--danger), #9a0e1a);
+        color: white;
+      }
+
+      /* Tip box inside flashcards */
+      .fc-tip {
+        background: linear-gradient(135deg, var(--bg-light), var(--bg-cream));
+        border-left: 4px solid var(--primary);
+        border-radius: 10px;
+        padding: 16px 20px;
+        font-size: 0.93rem;
+        color: var(--text-dark);
+        max-width: 680px;
+        margin: 0 auto;
+        line-height: 1.65;
+      }
+
+      /* Responsive - Tablet */
+      @media (max-width: 768px) {
+        .fc-card-front,
+        .fc-card-back {
+          padding: 40px 28px;
+          min-height: 210px;
+        }
+
+        .fc-word-text {
+          font-size: 1.8rem;
+        }
+
+        .fc-meaning-text {
+          font-size: 1rem;
+        }
+
+        .fc-btn {
+          padding: 10px 18px;
+          font-size: 0.88rem;
+        }
+      }
+
+      /* Responsive - Mobile */
+      @media (max-width: 480px) {
+        #flashcards {
+          padding: 15px;
+        }
+
+        .fc-header h2 {
+          font-size: 1.3rem;
+        }
+
+        .fc-card-front,
+        .fc-card-back {
+          padding: 35px 20px;
+          min-height: 200px;
+        }
+
+        .fc-word-text {
+          font-size: 1.5rem;
+        }
+
+        .fc-meaning-text {
+          font-size: 0.95rem;
+        }
+
+        .fc-controls {
+          gap: 8px;
+        }
+
+        .fc-btn {
+          padding: 10px 14px;
+          font-size: 0.85rem;
+          border-radius: 40px;
+        }
+
+        .fc-card-wrapper {
+          margin-bottom: 20px;
+        }
+      }
+
       /* Footer Styles */
       .footer {
         background: linear-gradient(
@@ -2256,6 +2626,9 @@
         </button>
         <button class="nav-tab" onclick="showSection('resources', event)">
           📚 Resources
+        </button>
+        <button class="nav-tab" onclick="showSection('flashcards', event)">
+          🃏 Flashcards
         </button>
       </div>
 
@@ -2808,8 +3181,7 @@
           crucial. Get 7-8 hours of sleep the night before.
         </div>
         <h3 style="color: var(--secondary); margin: 40px 0 15px">
-          📖 AFPSAT Verbal Ability - Pro Strategies (Based on Cathy Castillo
-          Vlog Tips)
+          📖 AFPSAT Verbal Ability - Pro Strategies
         </h3>
 
         <div
@@ -2819,9 +3191,9 @@
             border-left-color: var(--primary);
           "
         >
-          <strong>🎯 Cathy Castillo's Golden Rule:</strong> "For Verbal, SPEED +
-          ACCURACY = Success. You have 27.7 seconds per question - practice
-          until it becomes automatic!"
+          <strong>🎯 Golden Rule:</strong> "For Verbal, SPEED + ACCURACY =
+          Success. You have 27.7 seconds per question — practice until it
+          becomes automatic!"
         </div>
 
         <div class="tip-box">
@@ -2866,7 +3238,7 @@
               synonyms and 1-2 antonyms
             </li>
             <li>
-              <strong>Cathy's tip:</strong> "If you don't know a word, use
+              <strong>💡 Pro Tip:</strong> "If you don't know a word, use
               process of elimination. Wrong answers are usually too extreme or
               unrelated."
             </li>
@@ -2919,8 +3291,8 @@
               Trust your ear for obvious errors
             </li>
             <li>
-              <strong>Cathy's trick:</strong> "Cover the answer choices first,
-              try to spot the error yourself, THEN look at options"
+              <strong>💡 Pro Tip:</strong> "Cover the answer choices first, try
+              to spot the error yourself, THEN look at options"
             </li>
           </ul>
         </div>
@@ -2945,8 +3317,8 @@
               questions
             </li>
             <li>
-              <strong>Cathy's advice:</strong> "Easy questions are worth the
-              same points as hard ones - grab the easy points first!"
+              <strong>💡 Pro Tip:</strong> "Easy questions are worth the same
+              points as hard ones - grab the easy points first!"
             </li>
           </ul>
         </div>
@@ -2969,8 +3341,8 @@
             </li>
             <li>Never leave blanks - always guess if time is running out</li>
             <li>
-              <strong>Cathy's secret:</strong> "For comprehension, if 2 answers
-              seem correct, pick the MORE SPECIFIC one"
+              <strong>💡 Pro Tip:</strong> "For comprehension, if 2 answers seem
+              correct, pick the MORE SPECIFIC one"
             </li>
           </ul>
         </div>
@@ -3193,6 +3565,89 @@
           🌐 General AFPSAT Resources
         </h3>
         <div class="card-grid" id="generalResources"></div>
+      </div>
+
+      <!-- Flashcard Section -->
+      <div id="flashcards" class="content-section">
+        <!-- Header -->
+        <div class="fc-header">
+          <span style="font-size: 2.2rem">🃏</span>
+          <h2>Vocabulary Flashcard Drill</h2>
+        </div>
+        <p class="fc-subtitle">
+          Review key military and exam vocabulary. Click a card to reveal its
+          meaning.
+        </p>
+
+        <!-- Progress -->
+        <div class="fc-progress-wrapper">
+          <div class="fc-progress-top">
+            <span class="fc-progress-label">📊 Cards Reviewed</span>
+            <span id="fcProgressText" class="fc-progress-count"
+              >0 of 0 reviewed</span
+            >
+          </div>
+          <div class="fc-progress-bar-track">
+            <div
+              id="fcProgressBar"
+              class="fc-progress-bar-fill"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Card Counter -->
+        <div class="fc-counter">
+          <span class="fc-counter-badge">
+            Card <span id="fcCurrentIndex">1</span> of
+            <span id="fcTotalCards">0</span>
+          </span>
+        </div>
+
+        <!-- 3D Flip Card -->
+        <div class="fc-card-wrapper" onclick="flipCard()">
+          <div class="fc-card-inner" id="fcCardInner">
+            <!-- Front: Word -->
+            <div class="fc-card-front">
+              <div class="fc-side-label">✦ Word ✦</div>
+              <h2 class="fc-word-text" id="fcWord">Loading...</h2>
+              <div class="fc-flip-hint">👆 Click to reveal meaning</div>
+            </div>
+
+            <!-- Back: Meaning -->
+            <div class="fc-card-back">
+              <div class="fc-side-label">✦ Meaning ✦</div>
+              <p class="fc-meaning-text" id="fcMeaning"></p>
+              <div class="fc-flip-hint">👆 Click to flip back</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="fc-controls">
+          <button class="fc-btn fc-btn-prev" onclick="fcPrevious()">
+            ← Prev
+          </button>
+          <button class="fc-btn fc-btn-flip" onclick="flipCard()">
+            🔄 Flip
+          </button>
+          <button class="fc-btn fc-btn-next" onclick="fcNext()">Next →</button>
+          <button class="fc-btn fc-btn-shuffle" onclick="fcShuffle()">
+            🔀 Shuffle
+          </button>
+          <button class="fc-btn fc-btn-reset" onclick="fcReset()">
+            ↺ Reset
+          </button>
+        </div>
+
+        <!-- Tip -->
+        <div class="fc-tip">
+          <strong>💡 How to use:</strong> Click the card or press
+          <strong>Flip</strong> to see the meaning. Use
+          <strong>Next / Previous</strong> to navigate cards.
+          <strong>Shuffle</strong> randomizes the order. Your progress resets
+          when you press <strong>Reset</strong>.
+        </div>
       </div>
     </div>
 
@@ -5062,7 +5517,9 @@
         if (sectionId === "resources") {
           renderResources();
         }
-
+        if (sectionId === "flashcards") {
+          fcRenderCard();
+        }
         // Update game scores if games section
         if (sectionId === "games") {
           updateGameScores();
@@ -7039,7 +7496,183 @@
       }
 
       setInterval(checkDailyReminder, 60000); // Check every minute
+      // =============================================
+      // FLASHCARD VOCABULARY DRILL
+      // =============================================
 
+      const flashcardData = [
+        {
+          word: "Resilient",
+          meaning:
+            "Able to recover quickly from difficulties; tough and adaptable under pressure.",
+        },
+        {
+          word: "Allegiance",
+          meaning:
+            "Loyal commitment to a person, group, or cause (e.g., allegiance to the flag).",
+        },
+        {
+          word: "Hierarchy",
+          meaning:
+            "A system where members are ranked one above another by authority or status.",
+        },
+        {
+          word: "Protocol",
+          meaning:
+            "The official rules and procedures for formal or military situations.",
+        },
+        {
+          word: "Reconnaissance",
+          meaning:
+            "A military survey of an area to gather information about the enemy.",
+        },
+        {
+          word: "Fortify",
+          meaning:
+            "To strengthen a place against attack; to make more resistant or secure.",
+        },
+        {
+          word: "Deploy",
+          meaning:
+            "To move troops or equipment into a position ready for action.",
+        },
+        {
+          word: "Integrity",
+          meaning:
+            "The quality of being honest and having strong moral principles.",
+        },
+        {
+          word: "Discipline",
+          meaning:
+            "Training that enforces rules and order; controlled behavior and habits.",
+        },
+        {
+          word: "Mobilize",
+          meaning:
+            "To organize and prepare troops or resources for active service.",
+        },
+        {
+          word: "Surveillance",
+          meaning:
+            "Close observation, especially of a suspected area or person.",
+        },
+        {
+          word: "Tactics",
+          meaning:
+            "Specific actions or plans used to achieve a short-term goal in battle.",
+        },
+        {
+          word: "Strategy",
+          meaning:
+            "A long-term plan designed to achieve a major goal or objective.",
+        },
+        {
+          word: "Morale",
+          meaning:
+            "The confidence, enthusiasm, and discipline of a person or group at a given time.",
+        },
+        {
+          word: "Valor",
+          meaning: "Great courage in the face of danger, especially in battle.",
+        },
+        {
+          word: "Insubordination",
+          meaning:
+            "Defiance or refusal to obey orders from a superior officer.",
+        },
+        {
+          word: "Commendation",
+          meaning:
+            "Formal praise or an award given for outstanding performance or bravery.",
+        },
+        {
+          word: "Covert",
+          meaning:
+            "Not openly acknowledged or displayed; secret or hidden (e.g., covert operation).",
+        },
+        {
+          word: "Jurisdiction",
+          meaning:
+            "The official power to make legal decisions; the territory it applies to.",
+        },
+        {
+          word: "Perseverance",
+          meaning:
+            "Continued effort and determination despite difficulty or delay.",
+        },
+      ];
+
+      let fcDeck = [...flashcardData];
+      let fcIndex = 0;
+      let fcFlipped = false;
+      let fcReviewed = new Set();
+
+      function fcRenderCard() {
+        const card = fcDeck[fcIndex];
+        const cardInner = document.getElementById("fcCardInner");
+
+        // Reset flip state
+        fcFlipped = false;
+        cardInner.classList.remove("is-flipped");
+
+        // Update content
+        document.getElementById("fcWord").textContent = card.word;
+        document.getElementById("fcMeaning").textContent = card.meaning;
+        document.getElementById("fcCurrentIndex").textContent = fcIndex + 1;
+        document.getElementById("fcTotalCards").textContent = fcDeck.length;
+
+        fcUpdateProgress();
+      }
+
+      function flipCard() {
+        const cardInner = document.getElementById("fcCardInner");
+
+        fcFlipped = !fcFlipped;
+
+        if (fcFlipped) {
+          cardInner.classList.add("is-flipped");
+          fcReviewed.add(fcIndex);
+          fcUpdateProgress();
+        } else {
+          cardInner.classList.remove("is-flipped");
+        }
+      }
+
+      function fcNext() {
+        fcIndex = (fcIndex + 1) % fcDeck.length;
+        fcRenderCard();
+      }
+
+      function fcPrevious() {
+        fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length;
+        fcRenderCard();
+      }
+
+      function fcShuffle() {
+        fcDeck = shuffleArray([...flashcardData]);
+        fcIndex = 0;
+        fcReviewed.clear();
+        fcRenderCard();
+        showNotification("🔀 Cards shuffled!");
+      }
+
+      function fcReset() {
+        fcDeck = [...flashcardData];
+        fcIndex = 0;
+        fcReviewed.clear();
+        fcRenderCard();
+        showNotification("↺ Flashcards reset!");
+      }
+
+      function fcUpdateProgress() {
+        const total = fcDeck.length;
+        const reviewed = fcReviewed.size;
+        const percent = Math.round((reviewed / total) * 100);
+
+        document.getElementById("fcProgressBar").style.width = percent + "%";
+        document.getElementById("fcProgressText").textContent =
+          reviewed + " of " + total + " reviewed (" + percent + "%)";
+      }
       // Update Verbal Analysis Dashboard
       function updateVerbalAnalysis() {
         // ✅ ADD: Reset all display elements first before recalculating
