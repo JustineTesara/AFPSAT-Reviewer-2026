@@ -2495,7 +2495,68 @@
           margin-bottom: 20px;
         }
       }
+      /* =============================================
+   COLOR VISION TEST
+   ============================================= */
+      .cvt-plate {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        border: 2px solid var(--border);
+        text-align: center;
+        box-shadow: 0 4px 12px var(--shadow-soft);
+        transition: all 0.3s ease;
+      }
 
+      .cvt-plate:hover {
+        border-color: var(--primary);
+        box-shadow: 0 6px 18px rgba(26, 77, 46, 0.15);
+      }
+
+      .cvt-canvas {
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto 15px auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .cvt-input {
+        width: 80px;
+        padding: 10px;
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-align: center;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        color: var(--primary);
+        transition: border-color 0.3s;
+      }
+
+      .cvt-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.15);
+      }
+
+      .cvt-plate-label {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-bottom: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      @media (max-width: 480px) {
+        #cvtPlates {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 15px !important;
+        }
+        .cvt-img {
+          width: 120px !important;
+          height: 120px !important;
+        }
+      }
       /* Footer Styles */
       .footer {
         background: linear-gradient(
@@ -2629,6 +2690,15 @@
         </button>
         <button class="nav-tab" onclick="showSection('flashcards', event)">
           🃏 Flashcards
+        </button>
+        <button class="nav-tab" onclick="showSection('medicalTest', event)">
+          👁️ Medical Test
+        </button>
+        <button class="nav-tab" onclick="showSection('checklist', event)">
+          ✅ AFP Checklist
+        </button>
+        <button class="nav-tab" onclick="showSection('studyPlan', event)">
+          📅 Study Plan
         </button>
       </div>
 
@@ -3648,6 +3718,205 @@
           <strong>Shuffle</strong> randomizes the order. Your progress resets
           when you press <strong>Reset</strong>.
         </div>
+      </div>
+
+      <!-- Medical Test Section -->
+      <div id="medicalTest" class="content-section">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+          "
+        >
+          <span style="font-size: 2.2rem">👁️</span>
+          <h2 style="color: var(--primary); margin: 0">
+            Color Vision Test (Ishihara-Style)
+          </h2>
+        </div>
+        <p style="color: var(--text-light); margin-bottom: 28px">
+          This is a basic screening test to check for red-green color vision
+          deficiency. It does not replace an official medical examination.
+        </p>
+
+        <!-- Instructions -->
+        <div class="tip-box" style="margin-bottom: 25px">
+          <strong>📋 Instructions:</strong> Look at each circle below and type
+          the number you see inside it. If you cannot see a number, type
+          <strong>0</strong>. Take the test in good lighting.
+        </div>
+
+        <!-- Test Plates -->
+        <div
+          id="cvtPlates"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+          "
+        ></div>
+
+        <!-- Submit Button -->
+        <div style="text-align: center; margin: 20px 0">
+          <button
+            class="btn btn-primary"
+            onclick="submitColorTest()"
+            style="padding: 15px 50px; font-size: 1.1rem"
+          >
+            Submit Answers
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="resetColorTest()"
+            style="padding: 15px 30px; font-size: 1.1rem; margin-left: 10px"
+          >
+            Reset
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="cvtResults" style="display: none"></div>
+
+        <!-- Disclaimer -->
+        <div
+          class="tip-box"
+          style="
+            margin-top: 30px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left-color: var(--accent);
+          "
+        >
+          <strong>⚠️ Disclaimer:</strong> This is a simplified digital screening
+          only. The AFP requires an official Ishihara test administered by a
+          licensed medical officer. Digital screens may affect color accuracy.
+          Consult a doctor for official results.
+        </div>
+      </div>
+
+      <!-- AFP Application Checklist Section -->
+      <div id="checklist" class="content-section">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+          "
+        >
+          <span style="font-size: 2.2rem">✅</span>
+          <h2 style="color: var(--primary); margin: 0">
+            AFP Application Checklist
+          </h2>
+        </div>
+        <p style="color: var(--text-light); margin-bottom: 28px">
+          Check off each requirement as you prepare. Progress is saved
+          automatically.
+        </p>
+
+        <div
+          style="
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 22px;
+            border: 1px solid var(--border);
+          "
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 8px;
+            "
+          >
+            <strong style="color: var(--primary)">Overall Readiness</strong>
+            <span
+              id="checklistPercent"
+              style="
+                background: var(--primary);
+                color: white;
+                padding: 3px 12px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+              "
+              >0%</span
+            >
+          </div>
+          <div class="progress-bar" style="height: 12px">
+            <div
+              id="checklistBar"
+              class="progress-fill"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <div id="checklistItems"></div>
+
+        <button
+          class="btn btn-danger"
+          onclick="resetChecklist()"
+          style="margin-top: 20px"
+        >
+          🔄 Reset Checklist
+        </button>
+
+        <div
+          class="tip-box"
+          style="
+            margin-top: 20px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left-color: var(--accent);
+          "
+        >
+          <strong>⚠️ Note:</strong> This is for guidance only. Always verify
+          current requirements with the AFP Recruiting Unit in your area.
+        </div>
+      </div>
+
+      <!-- 30-Day Study Plan Section -->
+      <div id="studyPlan" class="content-section">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+          "
+        >
+          <span style="font-size: 2.2rem">📅</span>
+          <h2 style="color: var(--primary); margin: 0">
+            30-Day AFPSAT Study Plan
+          </h2>
+        </div>
+        <p style="color: var(--text-light); margin-bottom: 28px">
+          A structured daily plan to prepare effectively for your AFPSAT exam.
+        </p>
+
+        <div
+          class="tip-box"
+          style="
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left-color: var(--primary);
+            margin-bottom: 25px;
+          "
+        >
+          <strong>💡 How to use:</strong> Spend 30–60 minutes per day. Check off
+          each day as you complete it. If you miss a day, just continue — don't
+          restart from zero.
+        </div>
+
+        <div id="studyPlanDays"></div>
+
+        <button
+          class="btn btn-danger"
+          onclick="resetStudyPlan()"
+          style="margin-top: 20px"
+        >
+          🔄 Reset Study Plan
+        </button>
       </div>
     </div>
 
@@ -5154,9 +5423,9 @@
               question:
                 "In a battalion, the ratio of officers to enlisted is 1:9. If 15% of officers and 8% of enlisted are female, and there are 45 female soldiers total, how many soldiers are in the battalion?",
               options: ["400", "450", "500", "550"],
-              correct: 1,
+              correct: 2,
               explanation:
-                "Let officers = x, enlisted = 9x. Total = 10x. Females: 0.15x + 0.08(9x) = 0.15x + 0.72x = 0.87x = 45. So x = 51.7 ≈ 52. Total ≈ 520, closest to 500. Actually: 0.87x = 45, x = 51.72, total = 517 ≈ 450-500 range. Answer is 450.",
+                "Let officers = x, enlisted = 9x. Total = 10x. Female officers = 0.15x. Female enlisted = 0.08 × 9x = 0.72x. Total females = 0.87x = 45. So x = 45 ÷ 0.87 = 51.7 ≈ 52 officers. Total soldiers = 10x = 517 ≈ 500 (closest answer). Correct answer: 500.",
               topic: "ratios",
             },
             {
@@ -5220,9 +5489,9 @@
               question:
                 "A barangay population of 95,000 decreased by 5%. What is the remaining population?",
               options: ["90,000", "90,025", "90,250", "89,500"],
-              correct: 1,
+              correct: 2,
               explanation:
-                "5% of 95,000 = 4,750. Remaining = 95,000 - 4,750 = 90,250. Wait — the exact answer: 95,000 × 0.95 = 90,250. Answer is 90,250.",
+                "5% of 95,000 = 4,750. Remaining = 95,000 − 4,750 = 90,250. Or: 95,000 × 0.95 = 90,250.",
               topic: "percentages",
               subTopic: "population",
             },
@@ -5940,6 +6209,17 @@
         if (sectionId === "flashcards") {
           fcRenderCard();
         }
+        if (sectionId === "medicalTest") {
+          if (!document.querySelector("#cvtPlates .cvt-plate")) {
+            renderColorTestPlates();
+          }
+        }
+        if (sectionId === "checklist") {
+          renderChecklist();
+        }
+        if (sectionId === "studyPlan") {
+          renderStudyPlan();
+        }
         // Update game scores if games section
         if (sectionId === "games") {
           updateGameScores();
@@ -5990,20 +6270,6 @@
         document.getElementById("practiceModalContent").innerHTML = html;
         document.getElementById("practiceModal").classList.add("active");
         document.body.style.overflow = "hidden"; // Prevent background scroll
-      }
-      // Close practice modal
-      function closePracticeModal() {
-        const modal = document.getElementById("practiceModal");
-        modal.style.animation = "fadeOut 0.3s ease";
-
-        setTimeout(() => {
-          modal.classList.remove("active");
-          modal.style.animation = "";
-          document.body.style.overflow = ""; // Restore scroll
-
-          // Stop any active timers
-          stopTimer();
-        }, 300);
       }
       // ===== UNIVERSAL MODAL SYSTEM =====
 
@@ -6092,6 +6358,41 @@
 
       // ESC key to close modals
       document.addEventListener("keydown", function (event) {
+        const practiceModal = document.getElementById("practiceModal");
+
+        // Keyboard shortcuts (only when practice modal is open)
+        if (practiceModal && practiceModal.classList.contains("active")) {
+          if (
+            event.target.tagName !== "INPUT" &&
+            event.target.tagName !== "TEXTAREA"
+          ) {
+            if (["1", "2", "3", "4"].includes(event.key)) {
+              const optionIndex = parseInt(event.key) - 1;
+              const options = document.querySelectorAll(".option");
+              if (options[optionIndex]) {
+                options.forEach((opt) => opt.classList.remove("selected"));
+                options[optionIndex].classList.add("selected");
+                window.selectedAnswer = optionIndex;
+                showNotification(`Option ${event.key} selected`);
+              }
+            }
+            if (event.key === "Enter") {
+              const submitBtn = document.querySelector(
+                'button[onclick="submitAnswer()"]',
+              );
+              const nextBtn = document.querySelector(
+                'button[onclick="nextQuestion()"]',
+              );
+              if (nextBtn && !nextBtn.disabled) {
+                nextBtn.click();
+              } else if (submitBtn && !submitBtn.disabled) {
+                submitBtn.click();
+              }
+            }
+          }
+        }
+
+        // ESC key to close modals
         if (event.key === "Escape") {
           if (
             document
@@ -6143,6 +6444,7 @@
         let score = 0;
         let timeStarted;
         let answeredOnTime = 0;
+        let reviewLog = []; // ← ADD THIS LINE
 
         // Determine time limit per question based on type
         const timeLimits = {
@@ -6363,6 +6665,15 @@
               .insertAdjacentHTML("beforeend", explanation);
           }
 
+          // Save to review log for post-session review
+          reviewLog.push({
+            question: q.question,
+            options: q.options,
+            correct: q.correct,
+            userAnswer: window.selectedAnswer,
+            explanation: q.explanation || "No explanation available.",
+          });
+
           saveUserData();
           window.selectedAnswer = undefined;
         };
@@ -6380,6 +6691,130 @@
 
         showQuestion();
       };
+
+      function showAnswerReview() {
+        let html = `
+          <div style="padding: 10px;">
+            <h2 style="color: var(--primary); margin-bottom: 5px;">📋 Answer Review</h2>
+            <p style="color: var(--text-light); margin-bottom: 20px; font-size: 0.95rem;">
+              Review every question from this session. Learn from your mistakes!
+            </p>
+        `;
+
+        reviewLog.forEach((entry, index) => {
+          const isCorrect = entry.userAnswer === entry.correct;
+          const userDidNotAnswer = entry.userAnswer === undefined;
+
+          html += `
+            <div style="
+              background: ${isCorrect ? "#f0fdf4" : "#fff1f2"};
+              border: 2px solid ${isCorrect ? "#86efac" : "#fca5a5"};
+              border-radius: 12px;
+              padding: 18px;
+              margin-bottom: 16px;
+            ">
+              <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
+                <span style="
+                  font-size: 1.3rem;
+                  flex-shrink: 0;
+                  margin-top: 2px;
+                ">${isCorrect ? "✅" : "❌"}</span>
+                <p style="font-weight: 600; font-size: 1rem; line-height: 1.5; color: var(--text-dark);">
+                  Q${index + 1}. ${entry.question}
+                </p>
+              </div>
+
+              <div style="margin-left: 32px;">
+                ${entry.options
+                  .map((opt, i) => {
+                    let bg = "var(--bg-light)";
+                    let border = "1px solid var(--border)";
+                    let label = "";
+
+                    if (i === entry.correct) {
+                      bg = "#dcfce7";
+                      border = "2px solid #16a34a";
+                      label =
+                        '<span style="color:#16a34a; font-weight:700; margin-left:8px;">✓ Correct</span>';
+                    }
+                    if (i === entry.userAnswer && !isCorrect) {
+                      bg = "#fee2e2";
+                      border = "2px solid #dc2626";
+                      label =
+                        '<span style="color:#dc2626; font-weight:700; margin-left:8px;">✗ Your answer</span>';
+                    }
+                    if (i === entry.userAnswer && isCorrect) {
+                      label =
+                        '<span style="color:#16a34a; font-weight:700; margin-left:8px;">✓ Your answer</span>';
+                    }
+
+                    return `
+                    <div style="
+                      background: ${bg};
+                      border: ${border};
+                      border-radius: 8px;
+                      padding: 10px 14px;
+                      margin-bottom: 8px;
+                      font-size: 0.93rem;
+                      display: flex;
+                      align-items: center;
+                    ">
+                      <span style="font-weight: 600; margin-right: 8px; color: var(--primary);">
+                        ${String.fromCharCode(65 + i)}.
+                      </span>
+                      ${opt}${label}
+                    </div>
+                  `;
+                  })
+                  .join("")}
+
+                ${
+                  userDidNotAnswer
+                    ? `
+                  <p style="color: var(--accent); font-size: 0.9rem; margin: 6px 0;">
+                    ⚠️ You did not answer this question.
+                  </p>
+                `
+                    : ""
+                }
+
+                <div style="
+                  background: white;
+                  border-left: 4px solid var(--primary);
+                  border-radius: 6px;
+                  padding: 12px 14px;
+                  margin-top: 10px;
+                  font-size: 0.92rem;
+                  color: var(--text-dark);
+                  line-height: 1.6;
+                ">
+                  <strong style="color: var(--primary);">💡 Explanation:</strong><br/>
+                  ${entry.explanation}
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+            <div style="text-align: center; margin-top: 20px; padding-bottom: 10px;">
+              <button class="btn btn-primary" onclick="closePracticeModal(); showSection('practice')">
+                ✅ Done — Practice Again
+              </button>
+            </div>
+          </div>
+        `;
+
+        document.getElementById("practiceModalContent").innerHTML = html;
+
+        // Scroll to top of modal
+        const modal = document.getElementById("practiceModal");
+        if (modal) modal.scrollTop = 0;
+        const modalContent = document.querySelector(
+          "#practiceModal .modal-content",
+        );
+        if (modalContent) modalContent.scrollTop = 0;
+      }
 
       function showPracticeResults(
         score,
@@ -6502,11 +6937,7 @@
                         `
                             : ""
                         }
-                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
-                          <button class="btn btn-primary" onclick="closePracticeModal(); showSection('practice')">Practice Again</button>
-                          <button class="btn btn-success" onclick="closePracticeModal(); showSection('stats')">View Full Stats</button>
-                          <button class="btn" style="background: var(--accent); color: white;" onclick="closePracticeModal(); showSection('dashboard')">Dashboard</button>
-                        </div>
+                        
                     </div>
                     
                     <div class="tip-box" style="margin: 20px 0;">
@@ -6547,6 +6978,7 @@
                     }
                     
                     <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="showAnswerReview()">📋 Review Answers</button>
                         <button class="btn btn-primary" onclick="showSection('practice')">Practice Again</button>
                         <button class="btn btn-success" onclick="showSection('stats')">View Full Stats</button>
                         <button class="btn" style="background: var(--accent); color: white;" onclick="showSection('dashboard')">Dashboard</button>
@@ -7486,10 +7918,6 @@
 
       // Update stats
       function updateStats() {
-        // Update mock exams count
-        document.getElementById("mocksTaken").textContent =
-          userData.mockExams.length;
-
         // ✅ CALCULATE AVERAGES FIRST
         const afpsatAvg =
           userData.afpsatScores.length > 0
@@ -7973,6 +8401,225 @@
       }
 
       setInterval(checkDailyReminder, 60000); // Check every minute
+
+      // =============================================
+      // COLOR VISION TEST (Ishihara-Style)
+      // =============================================
+
+      const cvtPlates = [
+        {
+          number: 1,
+          normalSee: 12,
+          cvdSee: 12,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate1.gif",
+          label: "Plate 1 (Demo — everyone sees 12)",
+        },
+        {
+          number: 2,
+          normalSee: 8,
+          cvdSee: 3,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate2.gif",
+          label: "Plate 2",
+        },
+        {
+          number: 3,
+          normalSee: 29,
+          cvdSee: 70,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate3.gif",
+          label: "Plate 3",
+        },
+        {
+          number: 4,
+          normalSee: 5,
+          cvdSee: 2,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate4.gif",
+          label: "Plate 4",
+        },
+        {
+          number: 5,
+          normalSee: 3,
+          cvdSee: 5,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate5.gif",
+          label: "Plate 5",
+        },
+        {
+          number: 6,
+          normalSee: 15,
+          cvdSee: 17,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate6.gif",
+          label: "Plate 6",
+        },
+        {
+          number: 7,
+          normalSee: 74,
+          cvdSee: 21,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate7.gif",
+          label: "Plate 7",
+        },
+        {
+          number: 8,
+          normalSee: 6,
+          cvdSee: null,
+          img: "https://www.colour-blindness.com/CBTests/ishihara/Plate8.gif",
+          label: "Plate 8",
+        },
+      ];
+
+      function renderColorTestPlates() {
+        const container = document.getElementById("cvtPlates");
+        if (!container) return;
+        container.innerHTML = "";
+
+        cvtPlates.forEach((plate, idx) => {
+          const div = document.createElement("div");
+          div.className = "cvt-plate";
+          div.innerHTML = `
+      <div class="cvt-plate-label">${plate.label || "Plate " + (idx + 1)}</div>
+
+      <img
+        src="${plate.img}"
+        alt="Ishihara Plate ${idx + 1}"
+        class="cvt-img"
+        style="
+          width: 160px;
+          height: 160px;
+          border-radius: 50%;
+          display: block;
+          margin: 0 auto 15px auto;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+          object-fit: cover;
+        "
+        onerror="this.style.background='#fee2e2'; this.alt='Image failed to load — check connection';"
+      />
+
+      <div style="margin-top: 12px;">
+        <label style="font-size: 0.9rem; color: var(--text-light); display: block; margin-bottom: 6px;">
+          What number do you see?
+        </label>
+        <input
+          type="number"
+          class="cvt-input"
+          id="cvtAnswer${idx}"
+          placeholder="?"
+          min="0"
+          max="99"
+        />
+      </div>
+    `;
+          container.appendChild(div);
+        });
+      }
+
+      function submitColorTest() {
+        let correct = 0;
+        let missed = 0;
+        let details = [];
+
+        cvtPlates.forEach((plate, idx) => {
+          const input = document.getElementById(`cvtAnswer${idx}`);
+          const userAnswer = parseInt(input?.value || "0") || 0;
+          const isCorrect = userAnswer === plate.normalSee;
+
+          if (isCorrect) {
+            correct++;
+          } else {
+            missed++;
+          }
+
+          details.push({
+            plate: idx + 1,
+            correct: plate.normalSee,
+            user: userAnswer,
+            pass: isCorrect,
+          });
+
+          // Color-code the input
+          if (input) {
+            input.style.background = isCorrect ? "#dcfce7" : "#fee2e2";
+            input.style.borderColor = isCorrect
+              ? "var(--success)"
+              : "var(--danger)";
+          }
+        });
+
+        const total = cvtPlates.length;
+        const passRate = Math.round((correct / total) * 100);
+
+        let resultLevel, resultColor, resultMessage, resultAdvice;
+
+        if (correct >= total - 1) {
+          resultLevel = "✅ Normal Color Vision";
+          resultColor = "var(--success)";
+          resultMessage = `You correctly identified ${correct} out of ${total} plates.`;
+          resultAdvice =
+            "Your color vision appears normal based on this screening. You are unlikely to have color vision deficiency.";
+        } else if (correct >= Math.floor(total * 0.6)) {
+          resultLevel = "⚠️ Possible Mild Deficiency";
+          resultColor = "var(--accent)";
+          resultMessage = `You correctly identified ${correct} out of ${total} plates.`;
+          resultAdvice =
+            "You may have a mild color vision deficiency. We strongly recommend an official Ishihara test with a licensed physician before your AFP medical exam.";
+        } else {
+          resultLevel = "❌ Possible Color Vision Deficiency";
+          resultColor = "var(--danger)";
+          resultMessage = `You correctly identified ${correct} out of ${total} plates.`;
+          resultAdvice =
+            "This screening suggests a possible significant color vision deficiency. Please see an ophthalmologist or licensed physician for an official diagnosis before your AFP medical examination.";
+        }
+
+        const resultsDiv = document.getElementById("cvtResults");
+        resultsDiv.style.display = "block";
+        resultsDiv.innerHTML = `
+    <div style="background: white; border-radius: 16px; padding: 30px; border: 2px solid var(--border); margin-top: 20px;">
+      <h3 style="color: ${resultColor}; margin-bottom: 15px; font-size: 1.5rem;">${resultLevel}</h3>
+      <p style="font-size: 1.1rem; margin-bottom: 10px;">${resultMessage}</p>
+      
+      <div class="progress-bar" style="margin: 20px 0;">
+        <div class="progress-fill" style="width: ${passRate}%;">${passRate}%</div>
+      </div>
+      
+      <div class="tip-box" style="margin: 20px 0; border-left-color: ${resultColor};">
+        <strong>Assessment:</strong> ${resultAdvice}
+      </div>
+      
+      <h4 style="color: var(--primary); margin: 20px 0 12px;">Plate-by-Plate Breakdown:</h4>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px;">
+        ${details
+          .map(
+            (d) => `
+          <div style="padding: 12px; background: ${d.pass ? "#dcfce7" : "#fee2e2"}; 
+                      border-radius: 8px; text-align: center; font-size: 0.9rem;">
+            <div style="font-weight: 700; color: ${d.pass ? "var(--success)" : "var(--danger)"};">
+              Plate ${d.plate}: ${d.pass ? "✅" : "❌"}
+            </div>
+            <div>Your answer: <strong>${d.user || "—"}</strong></div>
+            <div style="color: var(--text-light);">Correct: ${d.correct}</div>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+
+        // Scroll to results
+        resultsDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function resetColorTest() {
+        cvtPlates.forEach((_, idx) => {
+          const input = document.getElementById(`cvtAnswer${idx}`);
+          if (input) {
+            input.value = "";
+            input.style.background = "";
+            input.style.borderColor = "";
+          }
+        });
+        document
+          .getElementById("medicalTest")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
       // =============================================
       // FLASHCARD VOCABULARY DRILL
       // =============================================
@@ -8080,9 +8727,11 @@
       ];
 
       let fcDeck = [...flashcardData];
-      let fcIndex = 0;
+      let fcIndex = parseInt(localStorage.getItem("fcIndex") || "0");
       let fcFlipped = false;
-      let fcReviewed = new Set();
+      let fcReviewed = new Set(
+        JSON.parse(localStorage.getItem("fcReviewed") || "[]"),
+      );
 
       function fcRenderCard() {
         const card = fcDeck[fcIndex];
@@ -8103,12 +8752,11 @@
 
       function flipCard() {
         const cardInner = document.getElementById("fcCardInner");
-
         fcFlipped = !fcFlipped;
-
         if (fcFlipped) {
           cardInner.classList.add("is-flipped");
           fcReviewed.add(fcIndex);
+          localStorage.setItem("fcReviewed", JSON.stringify([...fcReviewed]));
           fcUpdateProgress();
         } else {
           cardInner.classList.remove("is-flipped");
@@ -8117,11 +8765,13 @@
 
       function fcNext() {
         fcIndex = (fcIndex + 1) % fcDeck.length;
+        localStorage.setItem("fcIndex", fcIndex);
         fcRenderCard();
       }
 
       function fcPrevious() {
         fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length;
+        localStorage.setItem("fcIndex", fcIndex);
         fcRenderCard();
       }
 
@@ -8137,6 +8787,8 @@
         fcDeck = [...flashcardData];
         fcIndex = 0;
         fcReviewed.clear();
+        localStorage.removeItem("fcIndex");
+        localStorage.removeItem("fcReviewed");
         fcRenderCard();
         showNotification("↺ Flashcards reset!");
       }
@@ -8325,6 +8977,401 @@
         updateStats();
         initializeStrictMode();
         showNotification("✅ All progress has been reset successfully!");
+      }
+      // =============================================
+      // AFP APPLICATION CHECKLIST
+      // =============================================
+      const checklistCategories = [
+        {
+          category: "📄 Required Documents",
+          items: [
+            "Birth Certificate (PSA authenticated)",
+            "Transcript of Records / Diploma",
+            "NBI Clearance (recent, within 6 months)",
+            "Police Clearance (recent)",
+            "Barangay Certificate of Good Moral Character",
+            "2×2 and 1×1 ID photos (white background)",
+            "Medical Certificate from government hospital",
+            "AFPSAT Examination Permit",
+          ],
+        },
+        {
+          category: "📏 Physical Requirements",
+          items: [
+            "Age requirement met (check branch-specific age limit)",
+            "Height: Males 5'2\" minimum / Females 5'0\" minimum (most branches)",
+            "Weight proportional to height (within AFP BMI range)",
+            "No visible tattoos on face, neck, or hands",
+            "No disqualifying physical deformities",
+          ],
+        },
+        {
+          category: "🏃 Physical Fitness Test (PFT)",
+          items: [
+            "Push-ups: Males 30+ reps / Females 15+ reps",
+            "Sit-ups: Males 35+ reps / Females 25+ reps",
+            "2.4km run: Males under 13min / Females under 16min",
+            "Swimming test preparation (if required by branch)",
+          ],
+        },
+        {
+          category: "🧠 Exam Preparation",
+          items: [
+            "AFPSAT review completed (Verbal, Numerical, Abstract)",
+            "Neuro-Psych simulation completed at least twice",
+            "Mock exam score of 71+ achieved",
+            "Hard difficulty practice at 75%+ accuracy",
+            "Flashcard vocabulary drilled (all cards reviewed)",
+          ],
+        },
+        {
+          category: "🏥 Medical Requirements",
+          items: [
+            "Vision: 20/20 correctable (color vision test passed)",
+            "No disqualifying heart conditions",
+            "No chronic illness or ongoing medication dependency",
+            "No history of disqualifying psychiatric conditions",
+            "Dental: No major untreated dental problems",
+            "Hearing: Normal in both ears",
+          ],
+        },
+        {
+          category: "📝 Application Steps",
+          items: [
+            "Downloaded and completely filled AFP application form",
+            "Chose branch of service (Army, Navy, Air Force, Marines, Coast Guard)",
+            "Registered for AFPSAT examination date",
+            "Arranged transportation to examination venue",
+            "Prepared exam day kit: HB pencil, eraser, valid ID, permit",
+          ],
+        },
+      ];
+
+      function renderChecklist() {
+        const saved = JSON.parse(localStorage.getItem("afpChecklist") || "{}");
+        const container = document.getElementById("checklistItems");
+        if (!container) return;
+
+        let totalItems = 0;
+        let checkedItems = 0;
+        let html = "";
+
+        checklistCategories.forEach((cat, catIdx) => {
+          html += `
+      <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); box-shadow: 0 2px 8px var(--shadow-soft);">
+        <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 1.05rem;">${cat.category}</h3>
+    `;
+          cat.items.forEach((item, itemIdx) => {
+            const key = `${catIdx}_${itemIdx}`;
+            const isChecked = saved[key] || false;
+            totalItems++;
+            if (isChecked) checkedItems++;
+            html += `
+        <label style="display: flex; align-items: flex-start; gap: 12px; padding: 10px; margin: 5px 0; background: ${isChecked ? "#f0fdf4" : "var(--bg-light)"}; border-radius: 8px; cursor: pointer; border: 1px solid ${isChecked ? "#86efac" : "var(--border)"}; transition: all 0.2s;">
+          <input type="checkbox" ${isChecked ? "checked" : ""}
+                 onchange="toggleChecklistItem('${key}', this.checked)"
+                 style="width: 18px; height: 18px; margin-top: 2px; cursor: pointer; flex-shrink: 0;">
+          <span style="color: ${isChecked ? "#15803d" : "var(--text-dark)"}; ${isChecked ? "text-decoration: line-through; opacity: 0.7;" : ""} font-size: 0.95rem; line-height: 1.5;">
+            ${item}
+          </span>
+        </label>
+      `;
+          });
+          html += `</div>`;
+        });
+
+        container.innerHTML = html;
+
+        const percent =
+          totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
+        const bar = document.getElementById("checklistBar");
+        const pct = document.getElementById("checklistPercent");
+        if (bar) bar.style.width = percent + "%";
+        if (pct)
+          pct.textContent = `${checkedItems}/${totalItems} (${percent}%)`;
+      }
+
+      function toggleChecklistItem(key, checked) {
+        const saved = JSON.parse(localStorage.getItem("afpChecklist") || "{}");
+        saved[key] = checked;
+        localStorage.setItem("afpChecklist", JSON.stringify(saved));
+        renderChecklist();
+      }
+
+      function resetChecklist() {
+        localStorage.removeItem("afpChecklist");
+        renderChecklist();
+        showNotification("✅ Checklist reset!");
+      }
+      // =============================================
+      // 30-DAY STUDY PLAN
+      // =============================================
+      const studyPlanData = [
+        {
+          day: 1,
+          week: "Week 1: Know Your Level",
+          icon: "🎯",
+          section: "Mock Exam",
+          task: "Take the AFPSAT Full Mock Exam cold — no studying first. This is your baseline score.",
+        },
+        {
+          day: 2,
+          week: "Week 1: Know Your Level",
+          icon: "📊",
+          section: "Performance",
+          task: "Review your results. Identify your weakest section (Verbal, Numerical, or Abstract).",
+        },
+        {
+          day: 3,
+          week: "Week 1: Know Your Level",
+          icon: "📖",
+          section: "Tutorials",
+          task: "Read the Verbal Ability Tutorial. Take notes on analogy types and vocabulary tips.",
+        },
+        {
+          day: 4,
+          week: "Week 1: Know Your Level",
+          icon: "✍️",
+          section: "Practice",
+          task: "Practice Verbal — Easy difficulty. Target 80%+ accuracy before moving up.",
+        },
+        {
+          day: 5,
+          week: "Week 1: Know Your Level",
+          icon: "📖",
+          section: "Tutorials",
+          task: "Read the Numerical Ability Tutorial. Review percentages, ratios, and word problems.",
+        },
+        {
+          day: 6,
+          week: "Week 1: Know Your Level",
+          icon: "✍️",
+          section: "Practice",
+          task: "Practice Numerical — Easy difficulty. Max 60 seconds per question.",
+        },
+        {
+          day: 7,
+          week: "Week 1: Know Your Level",
+          icon: "🎮",
+          section: "Games / Flashcards",
+          task: "REST DAY — Play Math Blitz for light practice. Review 10 flashcard words.",
+        },
+
+        {
+          day: 8,
+          week: "Week 2: Build Core Skills",
+          icon: "📖",
+          section: "Tutorials",
+          task: "Read the Abstract Reasoning Tutorial. Study rotation, progression, and sequence patterns.",
+        },
+        {
+          day: 9,
+          week: "Week 2: Build Core Skills",
+          icon: "✍️",
+          section: "Practice",
+          task: "Practice Abstract — Easy difficulty. Remember: only 14.4 seconds per question in the real exam!",
+        },
+        {
+          day: 10,
+          week: "Week 2: Build Core Skills",
+          icon: "✍️",
+          section: "Practice",
+          task: "Practice Verbal — Medium difficulty. Focus on reading comprehension and grammar.",
+        },
+        {
+          day: 11,
+          week: "Week 2: Build Core Skills",
+          icon: "✍️",
+          section: "Practice",
+          task: "Practice Numerical — Medium difficulty. Work on ratios and multi-step word problems.",
+        },
+        {
+          day: 12,
+          week: "Week 2: Build Core Skills",
+          icon: "📖",
+          section: "Tutorials",
+          task: "Read all 3 Neuro-Psych Tutorials. Understand what traits the exam evaluates.",
+        },
+        {
+          day: 13,
+          week: "Week 2: Build Core Skills",
+          icon: "✍️",
+          section: "Practice",
+          task: "Practice Neuro-Psych. Answer honestly and check your consistency on similar questions.",
+        },
+        {
+          day: 14,
+          week: "Week 2: Build Core Skills",
+          icon: "🃏",
+          section: "Flashcards",
+          task: "REST DAY — Drill all flashcards. Play Pattern Speed Challenge game.",
+        },
+
+        {
+          day: 15,
+          week: "Week 3: Drill Hard Difficulty",
+          icon: "🔴",
+          section: "Practice",
+          task: "Practice Verbal — Hard difficulty. Focus extra time on grammar and idiom questions.",
+        },
+        {
+          day: 16,
+          week: "Week 3: Drill Hard Difficulty",
+          icon: "🔴",
+          section: "Practice",
+          task: "Practice Numerical — Hard. Age problems, compound interest, work-rate problems.",
+        },
+        {
+          day: 17,
+          week: "Week 3: Drill Hard Difficulty",
+          icon: "🔴",
+          section: "Practice",
+          task: "Practice Abstract — Hard. Focus on Fibonacci, dual alphabet, and combined patterns.",
+        },
+        {
+          day: 18,
+          week: "Week 3: Drill Hard Difficulty",
+          icon: "🧠",
+          section: "Mock Exam",
+          task: "Take the full Neuro-Psych Mock Exam. Read each scenario slowly before answering.",
+        },
+        {
+          day: 19,
+          week: "Week 3: Drill Hard Difficulty",
+          icon: "📊",
+          section: "Performance",
+          task: "Review your Performance Stats. Which section is still weakest? Drill it today.",
+        },
+        {
+          day: 20,
+          week: "Week 3: Drill Hard Difficulty",
+          icon: "✍️",
+          section: "Practice",
+          task: "Practice your weakest section at Hard difficulty. Target 70%+ accuracy.",
+        },
+        {
+          day: 21,
+          week: "Week 3: Drill Hard Difficulty",
+          icon: "✅",
+          section: "AFP Checklist",
+          task: "REST DAY — Review your AFP Application Checklist. What documents are still missing?",
+        },
+
+        {
+          day: 22,
+          week: "Week 4: Exam Simulation",
+          icon: "⏱️",
+          section: "Mock Exam",
+          task: "Take AFPSAT Full Mock Exam (2nd attempt). Did your score improve from Day 1?",
+        },
+        {
+          day: 23,
+          week: "Week 4: Exam Simulation",
+          icon: "📋",
+          section: "Review",
+          task: "Review your mock answers. Write down every question type you got wrong.",
+        },
+        {
+          day: 24,
+          week: "Week 4: Exam Simulation",
+          icon: "⚡",
+          section: "Practice",
+          task: "Speed drill: 15 Abstract questions in under 3 minutes. Train your pattern eyes.",
+        },
+        {
+          day: 25,
+          week: "Week 4: Exam Simulation",
+          icon: "⚡",
+          section: "Practice",
+          task: "Speed drill: 20 Verbal questions in under 9 minutes. Build automatic recognition.",
+        },
+        {
+          day: 26,
+          week: "Week 4: Exam Simulation",
+          icon: "⚡",
+          section: "Practice",
+          task: "Speed drill: 10 Numerical questions in under 10 minutes — mental math only, no scratch paper!",
+        },
+        {
+          day: 27,
+          week: "Week 4: Exam Simulation",
+          icon: "⏱️",
+          section: "Mock Exam",
+          task: "Take AFPSAT Full Mock Exam (3rd attempt, Strict Mode ON). Aim for 75%+.",
+        },
+        {
+          day: 28,
+          week: "Week 4: Exam Simulation",
+          icon: "💡",
+          section: "Flashcards / Tips",
+          task: "Review all flashcard words. Study the Tips & Strategies section carefully.",
+        },
+
+        {
+          day: 29,
+          week: "Final Preparation",
+          icon: "📄",
+          section: "Review + Checklist",
+          task: "Light review only. Go over notes on weak areas. Confirm all documents are ready.",
+        },
+        {
+          day: 30,
+          week: "Final Preparation",
+          icon: "💤",
+          section: "Rest",
+          task: "REST. Sleep 8 hours. Eat well. Prepare your exam kit. You are ready. Good luck! 🇵🇭",
+        },
+      ];
+
+      function renderStudyPlan() {
+        const container = document.getElementById("studyPlanDays");
+        if (!container) return;
+        const saved = JSON.parse(localStorage.getItem("afpStudyPlan") || "{}");
+
+        const weeks = {};
+        studyPlanData.forEach((day) => {
+          if (!weeks[day.week]) weeks[day.week] = [];
+          weeks[day.week].push(day);
+        });
+
+        let html = "";
+        Object.entries(weeks).forEach(([weekName, days]) => {
+          html += `<div style="margin-bottom: 25px;">
+      <h3 style="color: var(--primary); margin-bottom: 12px; padding: 10px 15px; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--primary);">${weekName}</h3>`;
+          days.forEach((day) => {
+            const isDone = saved[`day_${day.day}`] || false;
+            html += `
+        <label style="display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; margin: 8px 0; background: ${isDone ? "#f0fdf4" : "white"}; border-radius: 10px; cursor: pointer; border: 1px solid ${isDone ? "#86efac" : "var(--border)"}; transition: all 0.2s; box-shadow: 0 1px 4px var(--shadow-soft);">
+          <input type="checkbox" ${isDone ? "checked" : ""}
+                 onchange="toggleStudyDay(${day.day}, this.checked)"
+                 style="width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; cursor: pointer;">
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px; flex-wrap: wrap;">
+              <span style="font-size: 1.3rem;">${day.icon}</span>
+              <strong style="color: ${isDone ? "var(--success)" : "var(--primary)"};">Day ${day.day}</strong>
+              <span style="background: var(--accent); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 600;">${day.section}</span>
+            </div>
+            <p style="color: ${isDone ? "#15803d" : "var(--text-dark)"}; font-size: 0.94rem; line-height: 1.6; ${isDone ? "opacity:0.7;" : ""}">${day.task}</p>
+          </div>
+        </label>`;
+          });
+          html += `</div>`;
+        });
+
+        container.innerHTML = html;
+      }
+
+      function toggleStudyDay(dayNumber, checked) {
+        const saved = JSON.parse(localStorage.getItem("afpStudyPlan") || "{}");
+        saved[`day_${dayNumber}`] = checked;
+        localStorage.setItem("afpStudyPlan", JSON.stringify(saved));
+        renderStudyPlan();
+      }
+
+      function resetStudyPlan() {
+        localStorage.removeItem("afpStudyPlan");
+        renderStudyPlan();
+        showNotification("📅 Study plan reset!");
       }
     </script>
   </body>
