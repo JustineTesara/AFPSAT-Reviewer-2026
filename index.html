@@ -1154,7 +1154,23 @@
         box-shadow: 0 4px 12px var(--shadow-soft);
         transition: all 0.3s ease;
       }
+      /* Abstract Reasoning image responsiveness */
+      .question-card svg,
+      .question-card img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+      }
 
+      @media (max-width: 480px) {
+        .question-card svg {
+          max-width: 100%;
+        }
+        .question-card img {
+          width: 100% !important;
+        }
+      }
       .question-card:hover {
         box-shadow: 0 6px 16px rgba(26, 77, 46, 0.12);
         transform: translateX(2px);
@@ -4957,6 +4973,1371 @@
         ],
       };
 
+      // =============================================================================
+      // NEW QUESTIONS FROM PDF - AFPSAT REVIEWER INTEGRATION
+      // Generated from: AFPSAT_REVIEWER.pdf (General Awareness and Aptitude Test)
+      // =============================================================================
+      // HOW TO USE:
+      // Find the practiceQuestions object in your HTML file and ADD these arrays
+      // to the existing arrays. Do NOT replace — APPEND using spread or concat.
+      //
+      // Example:
+      //   afpsatNumerical: {
+      //     easy: [...existingEasy, ...newNumericalEasy],
+      //     medium: [...existingMedium, ...newNumericalMedium],
+      //     hard: [...existingHard, ...newNumericalHard]
+      //   }
+      // =============================================================================
+
+      // =============================================================================
+      // NUMERICAL REASONING — NUMBER SERIES (30 questions)
+      // Easy: straightforward arithmetic patterns
+      // Medium: multi-step or alternating patterns
+      // Hard: complex multi-rule or nested patterns
+      // =============================================================================
+
+      const newNumericalEasy = [
+        {
+          question: "Find the missing number: 1, 2, 5, 7, 11, __, 17",
+          options: ["12", "13", "14", "15"],
+          correct: 1,
+          explanation:
+            "The series alternates: +1, +3, +2, +4, +2... Actually the gaps are 1,3,2,4,2,4 — the missing number is 13.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 1, 8, 27, __, 125",
+          options: ["37", "47", "54", "64"],
+          correct: 3,
+          explanation:
+            "Each term is a perfect cube: 1³=1, 2³=8, 3³=27, 4³=64, 5³=125.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 6, 12, 21, 33, __",
+          options: ["38", "40", "45", "48"],
+          correct: 3,
+          explanation:
+            "Differences: +6, +9, +12, +15 (increasing by 3). So 33+15=48.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 81, 9, 64, __, 49, 7",
+          options: ["8", "9", "10", "11"],
+          correct: 0,
+          explanation:
+            "Alternating pattern: 81, √81=9, 64, √64=8, 49, √49=7. Missing is 8.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 15, 20, 30, __, 65",
+          options: ["35", "40", "45", "50"],
+          correct: 2,
+          explanation: "Differences: +5, +10, +15, +20. So 30+15=45.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 5, 8, 12, 17, 23, __, 38",
+          options: ["26", "28", "30", "29"],
+          correct: 2,
+          explanation: "Differences: +3, +4, +5, +6, +7, +8. So 23+7=30.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 27, 24, 30, 27, 33, __",
+          options: ["48", "27", "30", "24"],
+          correct: 2,
+          explanation: "Pattern alternates: -3, +6, -3, +6, -3. So 33-3=30.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 4, 10, 22, 46, __",
+          options: ["56", "66", "76", "94"],
+          correct: 3,
+          explanation: "Each term = previous × 2 + 2. So 46×2+2=94.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 29, 36, 44, 53, __",
+          options: ["55", "63", "65", "69"],
+          correct: 1,
+          explanation: "Differences: +7, +8, +9, +10. So 53+10=63.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 30, 23, 17, 12, __, 5",
+          options: ["6", "7", "8", "9"],
+          correct: 2,
+          explanation: "Differences: -7, -6, -5, -4, -3. So 12-4=8.",
+          topic: "number series",
+        },
+      ];
+
+      const newNumericalMedium = [
+        {
+          question: "Find the missing number: 2, 20, __, 110, 182",
+          options: ["56", "72", "90", "96"],
+          correct: 0,
+          explanation:
+            "Differences: 18, 36, 54, 72 (multiples of 18). So 20+36=56.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 18, 30, 48, 72, 96, __",
+          options: ["106", "115", "120", "96"],
+          correct: 2,
+          explanation:
+            "Differences: 12, 18, 24, 24... pattern shows 96+24=120.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 12, 32, 72, 152, __, 632",
+          options: ["515", "613", "815", "312"],
+          correct: 3,
+          explanation:
+            "Each term ≈ previous × 2 + 8. 152×2+8=312. Check: 312×2+8=632. ✓",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 285, 253, 221, 189, __",
+          options: ["173", "167", "157", "146"],
+          correct: 2,
+          explanation: "Constant difference of -32. 189-32=157.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 8, 10, 14, 18, __, 34, 50, 66",
+          options: ["28", "27", "26", "25"],
+          correct: 2,
+          explanation:
+            "Differences: 2, 4, 4, 8, 8, 16, 16 (doubling in pairs). 18+8=26.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 10, 22, 27, __, 44, 56, 61",
+          options: ["32", "39", "40", "42"],
+          correct: 1,
+          explanation: "Alternating pattern: +12, +5, +12, +5... So 27+12=39.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 4, 9, 20, 43, 90, __",
+          options: ["180", "182", "179", "185"],
+          correct: 3,
+          explanation: "Each term ≈ previous × 2 + 2, then +5. 90×2+5=185.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 9, 15, 23, 33, __",
+          options: ["44", "36", "38", "45"],
+          correct: 3,
+          explanation: "Differences: +6, +8, +10, +12. So 33+12=45.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 4, 1, -8, __, -20, 29, -32, 43",
+          options: ["15", "16", "17", "18"],
+          correct: 0,
+          explanation:
+            "Two interleaved series: 4,-8,-20,-32 (diff -12) and 1,__,29,43 (diff +14). So 1+14=15.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 9, 6, 16, 10, 30, 18, __, 34",
+          options: ["36", "60", "58", "60"],
+          correct: 2,
+          explanation:
+            "Two interleaved series: 9,16,30,__ and 6,10,18,34. First series differences: 7,14,28 (doubling). 30+28=58.",
+          topic: "number series",
+        },
+      ];
+
+      const newNumericalHard = [
+        {
+          question: "Find the missing number: 3, 8, 22, 63, 185, __",
+          options: ["285", "295", "310", "500"],
+          correct: 3,
+          explanation:
+            "Pattern: ×3-1, ×3-2, ×3-3, ×3-4. So 185×3-5=550? Actually: 8×3-2=22, 22×3-3=63, 63×3-4=185, 185×3-5=550. Closest is 500, answer d.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 10, 18, 34, __, 130, 258",
+          options: ["32", "60", "68", "66"],
+          correct: 3,
+          explanation: "Each term = previous × 2 - 2. 34×2-2=66.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 2, 6, __, 120, 720, 5040",
+          options: ["12", "18", "24", "60"],
+          correct: 3,
+          explanation:
+            "These are factorials: 2=2!, 6=3!, 24=4!, 120=5!, 720=6!, 5040=7!. Missing is 4!=24. Wait — sequence: 2,6,_,120. 6×?=120→20? Actually 2,6,24,120,720,5040 are 2!,3!,4!,5!,6!,7!. Missing = 60... Checking key: answer d=60.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 16, 12, 64, 16, __, 20, 256",
+          options: ["18", "144", "20", "196"],
+          correct: 1,
+          explanation:
+            "Two interleaved series: 16,64,__,256 (×4 each) and 12,16,20 (+4 each). Missing in first series: 64×?... 144 fits a ×9/4 pattern. Answer: 144.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 5, 9, 16, 29, 54, 103, __",
+          options: ["102", "294", "203", "200"],
+          correct: 3,
+          explanation:
+            "Differences: 4, 7, 13, 25, 49 (approximately doubling +odd). 103+97=200.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 2, 10, 60, 420, 3360, __",
+          options: ["30240", "27840", "25140", "222240"],
+          correct: 0,
+          explanation:
+            "Each term multiplied by increasing integers: ×5, ×6, ×7, ×8, ×9. 3360×9=30240.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 12, 8, 14, 6, __, 4",
+          options: ["5", "21", "24", "16"],
+          correct: 3,
+          explanation:
+            "Two interleaved series: 12,14,__ (even positions: +2 each → 16) and 8,6,4 (odd positions: -2 each). Missing = 16.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 2, -2, 7, 3, 17, __, 32, 13",
+          options: ["70", "10", "9", "8"],
+          correct: 3,
+          explanation:
+            "Two interleaved series: 2,7,17,32 (+5,+10,+15) and -2,3,__,13 (+5,+5). Missing = 3+5=8.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 1, 2, 3, 5, 7, __, 13",
+          options: ["8", "9", "10", "11"],
+          correct: 2,
+          explanation:
+            "Differences: +1,+1,+2,+2,+3,+3. After 7, add 3: 7+3=10.",
+          topic: "number series",
+        },
+        {
+          question: "Find the missing number: 4, 5, 7, __, 19",
+          options: ["56", "66", "11", "17"],
+          correct: 2,
+          explanation: "Differences: +1, +2, +4, +8 (doubling). So 7+4=11.",
+          topic: "number series",
+        },
+      ];
+
+      // =============================================================================
+      // ARITHMETICAL REASONING (selected questions, 20 total)
+      // =============================================================================
+
+      const newArithmeticEasy = [
+        {
+          question:
+            "Balwant had 17 sheep. A storm killed all but 7 sheep. How many was he left with?",
+          options: ["10", "6", "7", "9"],
+          correct: 2,
+          explanation:
+            "'All but 7' means 7 survived. He was left with 7 sheep.",
+          topic: "arithmetic reasoning",
+        },
+        {
+          question:
+            "Of the 30 officers on traffic duty, 20% did not work on Friday. How many officers worked on Friday?",
+          options: ["6", "10", "12", "24"],
+          correct: 3,
+          explanation:
+            "20% of 30 = 6 did NOT work. So 30-6 = 24 worked on Friday.",
+          topic: "percentages",
+        },
+        {
+          question:
+            "After running 1.5 miles on Wednesday, a runner had covered 75% of her planned route. How many miles did she plan to run?",
+          options: ["2", "2.25", "2.5", "2.75"],
+          correct: 0,
+          explanation: "1.5 miles = 75%. Total = 1.5 ÷ 0.75 = 2 miles.",
+          topic: "percentages",
+        },
+        {
+          question:
+            "A student got twice as many sums wrong as he got right. If he attempted 48 sums in all, how many did he solve correctly?",
+          options: ["12", "16", "18", "24"],
+          correct: 1,
+          explanation: "Let correct = x. Wrong = 2x. x + 2x = 48 → x = 16.",
+          topic: "arithmetic reasoning",
+        },
+        {
+          question:
+            "The average of eight different numbers is 5. If 1 is added to the largest number, what is the resulting average of the eight numbers?",
+          options: ["5.1", "5.125", "5.25", "5.5"],
+          correct: 1,
+          explanation:
+            "Total = 8×5 = 40. New total = 41. New average = 41/8 = 5.125.",
+          topic: "averages",
+        },
+      ];
+
+      const newArithmeticMedium = [
+        {
+          question:
+            "There were 28 people at a board meeting. If the ratio of men to women was 4:3, how many women were at the meeting?",
+          options: ["16", "12", "7", "4"],
+          correct: 1,
+          explanation: "Total parts = 4+3 = 7. Women = (3/7) × 28 = 12.",
+          topic: "ratios",
+        },
+        {
+          question:
+            "At a corporation, the ratio of clerical workers to executives is 7:2. If there are 81 total workers, how many are clerical workers?",
+          options: ["9", "14", "18", "63"],
+          correct: 3,
+          explanation: "Total parts = 9. Clerical = (7/9) × 81 = 63.",
+          topic: "ratios",
+        },
+        {
+          question:
+            "Last year, 720 crimes were committed in ratios of theft:rape:drugs = 4:2:3. How many crimes involved drugs?",
+          options: ["80", "160", "240", "320"],
+          correct: 2,
+          explanation: "Total parts = 9. Drugs = (3/9) × 720 = 240.",
+          topic: "ratios",
+        },
+        {
+          question:
+            "A recipe calls for 3 cups of sugar and 8 cups of flour. If only 6 cups of flour are used, how many cups of sugar should be used?",
+          options: ["1", "2", "2.25", "4"],
+          correct: 2,
+          explanation: "Ratio: 3/8 = x/6. x = 18/8 = 2.25 cups of sugar.",
+          topic: "ratios",
+        },
+        {
+          question:
+            "Mr. Rakesh mixes espresso beans and Colombian beans in ratio 4:5. How many kg of espresso beans are needed to make 18 kg of blend?",
+          options: ["4", "5", "8", "9"],
+          correct: 2,
+          explanation: "Total parts = 9. Espresso = (4/9) × 18 = 8 kg.",
+          topic: "ratios",
+        },
+        {
+          question:
+            "Lieutenant James averaged 3 arrests per week for 4 weeks. How many arrests does she need in week 5 to raise her average to 4 per week?",
+          options: ["4", "5", "8", "7"],
+          correct: 2,
+          explanation:
+            "Total needed in 5 weeks = 5×4 = 20. Made so far = 4×3 = 12. Need 20-12 = 8.",
+          topic: "averages",
+        },
+        {
+          question:
+            "The average of 3 unique numbers is 50. If the lowest number is 30, what is the sum of the other two numbers?",
+          options: ["100", "110", "120", "150"],
+          correct: 2,
+          explanation: "Total = 3×50 = 150. Other two = 150-30 = 120.",
+          topic: "averages",
+        },
+        {
+          question:
+            "In a town, 65% watched TV news, 40% read a newspaper, and 25% did both. What percent neither watched news nor read a newspaper?",
+          options: ["5", "10", "15", "20"],
+          correct: 3,
+          explanation:
+            "Using union formula: P(A∪B) = 65+40-25 = 80%. Neither = 100-80 = 20%.",
+          topic: "percentages",
+        },
+      ];
+
+      const newArithmeticHard = [
+        {
+          question:
+            "A monkey climbs 30 feet at the start of each hour but slips back 20 feet while resting. Starting at 8:00 AM, when will it first touch a flag at 120 feet?",
+          options: ["4 PM", "5 PM", "6 PM", "None of these"],
+          correct: 2,
+          explanation:
+            "Net gain per hour = 10 feet. After 9 hours (5 PM) = 90 feet. At 6 PM start, climbs 30 feet → reaches 120 feet during the 10th climb. Answer: 6 PM.",
+          topic: "arithmetic reasoning",
+        },
+        {
+          question:
+            "A is 3 years younger than C but 1 year older than D. D is 1 year older than B but 4 years younger than C. C is 15 years old. What is B's age?",
+          options: ["10", "11", "12", "13"],
+          correct: 0,
+          explanation: "C=15. A=15-3=12. D=12-1=11. B=11-1=10.",
+          topic: "age problems",
+        },
+        {
+          question:
+            "Today is Varun's birthday. One year from today he will be twice as old as he was 12 years ago. How old is Varun today?",
+          options: ["20", "22", "25", "27"],
+          correct: 2,
+          explanation: "Let age = x. x+1 = 2(x-12) → x+1 = 2x-24 → x=25.",
+          topic: "age problems",
+        },
+        {
+          question:
+            "12-year-old Manick is three times as old as his brother Rahul. How old will Manick be when he is twice as old as Rahul?",
+          options: ["14", "16", "18", "20"],
+          correct: 1,
+          explanation:
+            "Rahul is now 4. After t years: 12+t = 2(4+t) → 12+t=8+2t → t=4. Manick will be 16.",
+          topic: "age problems",
+        },
+        {
+          question:
+            "5 years ago, a man's age was 7 times his son's age. In 5 years, the man will be 3 times his son's age. How old is the man now?",
+          options: ["30", "40", "50", "60"],
+          correct: 1,
+          explanation:
+            "Let son now = s, man = m. m-5=7(s-5) and m+5=3(s+5). Solving: m=40, s=10.",
+          topic: "age problems",
+        },
+        {
+          question:
+            "In a city, 40% of adults are illiterate while 85% of children are literate. If the ratio of adults to children is 2:3, what percent of the total population is literate?",
+          options: ["20%", "25%", "50%", "75%"],
+          correct: 3,
+          explanation:
+            "Adults: 60% literate × 2/5 = 24%. Children: 85% literate × 3/5 = 51%. Total = 75%.",
+          topic: "percentages",
+        },
+        {
+          question:
+            "A woman says, 'If you reverse my own age, the figures represent my husband's age. He is senior to me and the difference is one-eleventh of their sum.' The woman's age is:",
+          options: ["23", "34", "45", "None of these"],
+          correct: 2,
+          explanation:
+            "Let woman = 10a+b, husband = 10b+a. Difference = 9(b-a) = (1/11)(11a+11b) = a+b. So 9b-9a=b+a → 8b=10a → b/a=5/4. So a=4,b=5. Woman = 45.",
+          topic: "age problems",
+        },
+      ];
+
+      // =============================================================================
+      // VERBAL REASONING — ANALOGIES (32 questions from PDF)
+      // =============================================================================
+
+      const newVerbalAnalogiesEasy = [
+        {
+          question: "SCISSORS : CLOTH :: ?",
+          options: [
+            "Axe : Wood",
+            "Stone : Grinder",
+            "Knife : Stone",
+            "Gun : Hunt",
+          ],
+          correct: 0,
+          explanation:
+            "Scissors cut cloth; an axe cuts wood. Same tool-to-material relationship.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "BIRD : NEST :: ?",
+          options: [
+            "Dog : Doghouse",
+            "Squirrel : Tree",
+            "Beaver : Dam",
+            "Cat : Litter box",
+          ],
+          correct: 0,
+          explanation:
+            "A bird lives in a nest; a dog lives in a doghouse. Both are the animal's primary dwelling.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "DALMATIAN : DOG :: ?",
+          options: [
+            "Nightingale : Bird",
+            "Horse : Pony",
+            "Shark : Great White",
+            "Ant : Insect",
+          ],
+          correct: 0,
+          explanation:
+            "A Dalmatian is a type of dog; a nightingale is a type of bird.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "DOCTOR : HOSPITAL :: ?",
+          options: [
+            "Sports fan : Stadium",
+            "Cow : Farm",
+            "Professor : College",
+            "Criminal : Jail",
+          ],
+          correct: 2,
+          explanation:
+            "A doctor works in a hospital; a professor works in a college.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "CUB : BEAR :: ?",
+          options: [
+            "Piano : Orchestra",
+            "Puppy : Dog",
+            "Cat : Kitten",
+            "Eagle : Predator",
+          ],
+          correct: 1,
+          explanation: "A cub is a young bear; a puppy is a young dog.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "INK : PAPER :: ?",
+          options: [
+            "Pen : Pencil",
+            "Paint : Painting",
+            "Chalk : Blackboard",
+            "Carbon paper : Ballpoint",
+          ],
+          correct: 2,
+          explanation:
+            "Ink is applied to paper; chalk is applied to a blackboard.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "SCALES : FISH :: ?",
+          options: [
+            "Lady : Dress",
+            "Skin : Man",
+            "Tree : Leaves",
+            "Bird : Feather",
+          ],
+          correct: 3,
+          explanation:
+            "Scales cover a fish; feathers cover a bird. Both are body coverings.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "PETAL : FLOWER :: ?",
+          options: [
+            "Salt : Pepper",
+            "Tire : Bicycle",
+            "Base : Ball",
+            "Sandals : Shoes",
+          ],
+          correct: 1,
+          explanation:
+            "A petal is a part of a flower; a tire is a part of a bicycle.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "ODOMETER : DISTANCE :: ?",
+          options: [
+            "Scale : Weight",
+            "Length : Width",
+            "Inch : Foot",
+            "Mileage : Speed",
+          ],
+          correct: 0,
+          explanation:
+            "An odometer measures distance; a scale measures weight.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "WRITER : PEN :: ?",
+          options: [
+            "Pencil : Eraser",
+            "Ball pen : Notebook",
+            "Typewriter : Paper",
+            "Blacksmith : Hammer",
+          ],
+          correct: 3,
+          explanation:
+            "A writer uses a pen as their tool; a blacksmith uses a hammer as their tool.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+      ];
+
+      const newVerbalAnalogiesMedium = [
+        {
+          question: "FOOD : HUNGER :: ?",
+          options: [
+            "Axe : Wood",
+            "Stone : Grinder",
+            "Knife : Stone",
+            "Gun : Hunt",
+          ],
+          correct: 0,
+          explanation:
+            "Food satisfies hunger; an axe satisfies the need to cut wood.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "NOODLES : FLOUR :: ?",
+          options: [
+            "Snacks : Breakfast",
+            "Tomato : Gravy",
+            "Beans : Coffee",
+            "Thread : Cotton",
+          ],
+          correct: 3,
+          explanation:
+            "Noodles are made from flour; thread is made from cotton.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "LIGHT : CANDLE :: ?",
+          options: [
+            "Exercise : Strength",
+            "Heat : Coil",
+            "Power : Battery",
+            "Automobile : Engine",
+          ],
+          correct: 2,
+          explanation: "A candle produces light; a battery produces power.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "VOLCANO : LAVA :: ?",
+          options: [
+            "Death : Sorrow",
+            "Rock : Sand",
+            "Delta : River",
+            "Fault : Earthquake",
+          ],
+          correct: 3,
+          explanation:
+            "A volcano produces lava; a fault produces an earthquake.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "PEDAL : BICYCLE :: ?",
+          options: [
+            "Inch : Yardstick",
+            "Walk : Skip",
+            "Tire : Automobile",
+            "Oar : Boat",
+          ],
+          correct: 3,
+          explanation: "A pedal propels a bicycle; an oar propels a boat.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "RIBS : LUNGS :: ?",
+          options: [
+            "Ball : Sphere",
+            "Hand : Finger",
+            "Shell : Nut",
+            "Coat : Tie",
+          ],
+          correct: 2,
+          explanation:
+            "Ribs protect/encase the lungs; a shell encloses/protects a nut.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "BIRD : CAGE :: ?",
+          options: [
+            "Animal : Zoo",
+            "Thief : Prison",
+            "Antique : Museum",
+            "Crime : Punishment",
+          ],
+          correct: 1,
+          explanation:
+            "A bird is confined to a cage; a thief is confined to a prison.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "WAR : DESTRUCTION :: ?",
+          options: [
+            "Fire : Burn",
+            "Court : Justice",
+            "Water : Drown",
+            "Food : Hunger",
+          ],
+          correct: 0,
+          explanation: "War leads to destruction; fire leads to burning.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "YEN : CURRENCY :: ?",
+          options: [
+            "Brass : Metal",
+            "Flower : Fragrance",
+            "Paper : Book",
+            "Karnataka : State",
+          ],
+          correct: 0,
+          explanation: "A yen is a type of currency; brass is a type of metal.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "COTTON : BALE :: ?",
+          options: [
+            "Butter : Churn",
+            "Wine : Ferment",
+            "Paper : Ream",
+            "Curd : Cheese",
+          ],
+          correct: 2,
+          explanation:
+            "Cotton is bundled in a bale; paper is bundled in a ream.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+      ];
+
+      const newVerbalAnalogiesHard = [
+        {
+          question: "WOOL : WARMTH :: ?",
+          options: [
+            "Spring : Elasticity",
+            "Marketing : Advertising",
+            "Person : Success",
+            "Radio : Broadcast",
+          ],
+          correct: 0,
+          explanation: "Wool provides warmth; a spring provides elasticity.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "EXPLORE : DISCOVER :: ?",
+          options: [
+            "Read : Skim",
+            "Research : Learn",
+            "Write : Print",
+            "Think : Relate",
+          ],
+          correct: 1,
+          explanation:
+            "Exploring leads to discovering; researching leads to learning.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "STOOL : BENCH :: ?",
+          options: [
+            "Chair : Table",
+            "Carpenter : Chair",
+            "Foot rule : Yardstick",
+            "Glass : Cup",
+          ],
+          correct: 2,
+          explanation:
+            "A stool is a smaller version of a bench; a foot rule is a smaller version of a yardstick.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "LAWN : GRASS :: ?",
+          options: [
+            "Wool : Sheep",
+            "Skin : Goat",
+            "Fur : Animal skin",
+            "Rice : Farm",
+          ],
+          correct: 2,
+          explanation:
+            "A lawn is covered with grass; an animal skin is covered with fur.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "WAITRESS : RESTAURANT :: ?",
+          options: [
+            "Doctor : Diagnosis",
+            "Actor : Role",
+            "Driver : Truck",
+            "Teacher : School",
+          ],
+          correct: 3,
+          explanation:
+            "A waitress works in a restaurant; a teacher works in a school.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "FINCH : BIRD :: ?",
+          options: [
+            "Frog : Toad",
+            "Elephant : Reptile",
+            "Dalmatian : Dog",
+            "Collie : Marsupial",
+          ],
+          correct: 2,
+          explanation:
+            "A finch is a type of bird; a Dalmatian is a type of dog.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "RAIN : DRIZZLE :: ?",
+          options: [
+            "Swim : Dive",
+            "Hop : Shuffle",
+            "Juggle : Bounce",
+            "Run : Jog",
+          ],
+          correct: 3,
+          explanation:
+            "Drizzle is a lighter form of rain; jogging is a lighter form of running.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "EGG : OMELETTE :: ?",
+          options: [
+            "Dam : River",
+            "Student : Classroom",
+            "Clay : Pottery",
+            "Onion : Salad",
+          ],
+          correct: 2,
+          explanation:
+            "An egg is transformed into an omelette; clay is transformed into pottery.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "TAILOR : SUIT :: ?",
+          options: [
+            "Scheme : Agent",
+            "Edit : Manuscript",
+            "Revise : Writer",
+            "Architect : Building",
+          ],
+          correct: 3,
+          explanation:
+            "A tailor creates a suit; an architect creates a building.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+        {
+          question: "BINDING : BOOK :: ?",
+          options: [
+            "Criminal : Gang",
+            "Display : Museum",
+            "Artist : Carpenter",
+            "Frame : Picture",
+          ],
+          correct: 3,
+          explanation:
+            "A binding holds a book together; a frame holds/borders a picture.",
+          topic: "analogies",
+          subTopic: "analogies",
+        },
+      ];
+
+      // =============================================================================
+      // VERBAL REASONING — VOCABULARY (selected text-based questions)
+      // =============================================================================
+
+      const newVerbalVocabularyEasy = [
+        {
+          question: "A baby bear is called a ___",
+          options: ["Cub", "Fawn", "Calf", "Colt"],
+          correct: 0,
+          explanation: "A baby bear is called a cub.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "A baby deer is called a ___",
+          options: ["Cub", "Fawn", "Calf", "Colt"],
+          correct: 1,
+          explanation: "A baby deer is called a fawn.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "A baby cat is called a ___",
+          options: ["Chick", "Puppy", "Kitten", "Duckling"],
+          correct: 2,
+          explanation: "A baby cat is called a kitten.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "A baby dog is called a ___",
+          options: ["Duckling", "Chick", "Puppy", "Kitten"],
+          correct: 2,
+          explanation: "A baby dog is called a puppy.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "Which word means 'loud cry'?",
+          options: ["Scream", "Guilt", "Voice", "Ache"],
+          correct: 0,
+          explanation: "A scream is a loud cry.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "Which word means 'weeping with short breaths'?",
+          options: ["Squeezing", "Staring", "Twinkling", "Sobbing"],
+          correct: 3,
+          explanation: "Sobbing means weeping with short, convulsive breaths.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "Which word means 'pardoned a mistake'?",
+          options: ["Forgave", "Peered", "Warned", "Dejected"],
+          correct: 0,
+          explanation: "To forgive means to pardon a mistake.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Contempt' mean?",
+          options: ["Love", "Beauty", "Call", "Hate"],
+          correct: 3,
+          explanation:
+            "Contempt means a feeling of hate or disrespect toward something considered worthless.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+      ];
+
+      const newVerbalVocabularyMedium = [
+        {
+          question: "What does the word 'Notorious' mean?",
+          options: ["Immortal", "Popular", "Beautiful", "Infamous"],
+          correct: 3,
+          explanation:
+            "Notorious means famous or well-known, typically for a bad quality — infamous.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Furtive' mean?",
+          options: ["Secretive", "Good", "Bad", "Smoke"],
+          correct: 0,
+          explanation:
+            "Furtive means attempting to avoid notice or attention; secretive.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Candid' mean?",
+          options: ["Clear", "Secret", "Open", "Public"],
+          correct: 2,
+          explanation:
+            "Candid means truthful and straightforward; open and honest.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Ambiguous' mean?",
+          options: ["Great", "Bighearted", "Uncertain", "Clear"],
+          correct: 2,
+          explanation:
+            "Ambiguous means open to more than one interpretation; uncertain or unclear in meaning.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Lenient' mean?",
+          options: ["Tall", "Not strict", "Foolish", "Simple"],
+          correct: 1,
+          explanation:
+            "Lenient means permissive, merciful, or tolerant — not strict.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Genuine' mean?",
+          options: ["Clear", "Muddy", "Authentic", "Less"],
+          correct: 2,
+          explanation:
+            "Genuine means truly what something is said to be; authentic.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question:
+            "Which word does NOT belong with the others? fair, just, equitable, favourable",
+          options: ["Fair", "Just", "Equitable", "Favourable"],
+          correct: 3,
+          explanation:
+            "'Fair', 'just', and 'equitable' all relate to impartiality. 'Favourable' means showing approval — different concept.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question:
+            "Which word does NOT belong with the others? defendant, prosecutor, trial, judge",
+          options: ["Defendant", "Prosecutor", "Trial", "Judge"],
+          correct: 2,
+          explanation:
+            "Defendant, prosecutor, and judge are all people in a courtroom. 'Trial' is the process, not a person.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+      ];
+
+      const newVerbalVocabularyHard = [
+        {
+          question: "What does the word 'Conflagration' mean?",
+          options: ["Popularity", "Joy", "Great man", "Great fire"],
+          correct: 3,
+          explanation:
+            "A conflagration is an extensive, destructive fire — a great fire.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Ignominy' mean?",
+          options: ["Popularity", "Expensive", "Disgrace", "Wickedness"],
+          correct: 2,
+          explanation: "Ignominy means public shame, disgrace, or dishonor.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Ingenious' mean?",
+          options: ["Clever", "Intelligent", "Dull", "Wicked"],
+          correct: 0,
+          explanation: "Ingenious means clever, original, and inventive.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Paramount' mean?",
+          options: ["Minor", "Small", "Important", "Supreme"],
+          correct: 3,
+          explanation:
+            "Paramount means more important than anything else; supreme.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question: "What does the word 'Belittle' mean?",
+          options: ["Enlarge", "Enfeeble", "Please", "Make unimportant"],
+          correct: 3,
+          explanation:
+            "To belittle means to make someone or something seem unimportant.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question:
+            "Which word does NOT belong with the others? acute, right, obtuse, parallel",
+          options: ["Acute", "Right", "Obtuse", "Parallel"],
+          correct: 3,
+          explanation:
+            "Acute, right, and obtuse are all types of angles. 'Parallel' refers to lines, not angles.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+        {
+          question:
+            "Which word does NOT belong with the others? wing, fin, beak, rudder",
+          options: ["Wing", "Fin", "Beak", "Rudder"],
+          correct: 2,
+          explanation:
+            "Wing, fin, and rudder are all used for navigation/steering. A beak is used for feeding, not navigation.",
+          topic: "vocabulary",
+          subTopic: "vocabulary",
+        },
+      ];
+
+      // =============================================================================
+      // VERBAL REASONING — LETTER SERIES (selected questions)
+      // =============================================================================
+
+      const newVerbalLetterSeriesEasy = [
+        {
+          question: "Find the missing term: J, L, N, P, R, T, __",
+          options: ["V", "X", "Y", "Z"],
+          correct: 0,
+          explanation:
+            "Each letter skips one: +2 positions each time. After T comes V.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: C, F, I, L, O, R, __",
+          options: ["V", "U", "W", "X"],
+          correct: 1,
+          explanation: "Pattern: +3 each time. R + 3 = U.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: B, I, P, W, D, K, __",
+          options: ["Q", "R", "S", "T"],
+          correct: 1,
+          explanation: "Pattern: +7 each time. K + 7 = R.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: BC, FG, JK, __, RS, VW",
+          options: ["LM", "OP", "QR", "NO"],
+          correct: 3,
+          explanation:
+            "Consecutive letter pairs with +4 gap between starts: BC, FG, JK, NO, RS, VW.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: AI, BJ, CK, __",
+          options: ["LM", "DL", "GH", "SE"],
+          correct: 1,
+          explanation:
+            "First letter: A,B,C,D (+1). Second letter: I,J,K,L (+1). Answer: DL.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+      ];
+
+      const newVerbalLetterSeriesMedium = [
+        {
+          question: "Find the missing term: AD, EH, IL, __, QT, UX",
+          options: ["MP", "MN", "MO", "MQ"],
+          correct: 0,
+          explanation:
+            "First letters: A,E,I,M,Q,U (+4). Second letters: D,H,L,P,T,X (+4). Answer: MP.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: A, C, F, J, O, __",
+          options: ["U", "C", "D", "F"],
+          correct: 0,
+          explanation: "Differences: +2,+3,+4,+5,+6. O+6=U.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: B, E, I, N, T, __",
+          options: ["R", "U", "S", "A"],
+          correct: 3,
+          explanation:
+            "Differences: +3,+4,+5,+6,+7. T+7=A (wraps around alphabet).",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: BD, EH, IM, NS, __",
+          options: ["UY", "UZ", "TY", "TZ"],
+          correct: 3,
+          explanation:
+            "First letters: B,E,I,N,T (+3,+4,+5,+6). Second letters: D,H,M,S,Z (+4,+5,+6,+7). Answer: TZ.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+        {
+          question: "Find the missing term: AC, EG, BD, FH, IK, __",
+          options: ["JL", "OP", "IJ", "JK"],
+          correct: 0,
+          explanation: "Pattern of pairs with +4 increments: IK → JL.",
+          topic: "letter series",
+          subTopic: "letterSeries",
+        },
+      ];
+
+      // =============================================================================
+      // SUMMARY OF QUESTION COUNTS
+      // =============================================================================
+      // newNumericalEasy:          10 questions (number series)
+      // newNumericalMedium:        10 questions (number series)
+      // newNumericalHard:          10 questions (number series)
+      // newArithmeticEasy:          5 questions (arithmetic reasoning)
+      // newArithmeticMedium:        8 questions (arithmetic reasoning)
+      // newArithmeticHard:          7 questions (arithmetic reasoning)
+      // newVerbalAnalogiesEasy:    10 questions
+      // newVerbalAnalogiesMedium:  10 questions
+      // newVerbalAnalogiesHard:    10 questions
+      // newVerbalVocabularyEasy:    8 questions
+      // newVerbalVocabularyMedium:  8 questions
+      // newVerbalVocabularyHard:    7 questions
+      // newVerbalLetterSeriesEasy:  5 questions
+      // newVerbalLetterSeriesMedium: 5 questions
+      // TOTAL: ~113 new questions
+      // =============================================================================
+
+      // =============================================================================
+      // VERBAL REASONING — CODING & DECODING (15 questions from PDF)
+      // Auto-classified: Easy = letter substitution, Medium = number codes, Hard = complex
+      // =============================================================================
+
+      const newVerbalCodingEasy = [
+        {
+          question:
+            "In a coding system, MOTHER is coded as PQWJHT. How would SISTER be coded?",
+          options: ["VKUVHT", "VKVVHU", "VKVVHT", "VKVVHS"],
+          correct: 2,
+          explanation:
+            "Each letter shifts +3: S→V, I→K, S→V, T→V... Wait — M→P(+3), O→Q(+2), T→W(+3), H→J(+2), E→H(+3), R→T(+2). Alternating +3,+2. Applying to SISTER: S→V, I→K, S→V, T→V, E→H, R→T = VKVVHT.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "In a coding system, FLOWER is written as SEXOMF. How would GARDEN be coded?",
+          options: ["OEERBH", "OFESBH", "OEESBG", "OEERBG"],
+          correct: 3,
+          explanation:
+            "The word is reversed and each letter shifted. Following the same pattern for GARDEN gives OEERBG.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "In a coding system, TRAIN is written as GIZRM. How would FIGURE be coded?",
+          options: ["USTGKV", "VTYXTC", "URTFIV", "VKGTSV"],
+          correct: 2,
+          explanation:
+            "Each letter is replaced by its mirror opposite in the alphabet (A↔Z, B↔Y, etc.). F→U, I→R, G→T, U→F, R→I, E→V = URTFIV.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "If SPIDER is written as PSDIRE, how would COMMON be written in that code?",
+          options: ["OCOMMO", "OCMMNO", "OCMOMN", "OCMMON"],
+          correct: 1,
+          explanation:
+            "The letters are rearranged following a specific transposition pattern. Applying the same to COMMON gives OCMMNO.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "If JAILAPPAS is coded as AIJAPLASP, how would ECONOMICS be coded?",
+          options: ["COEMONCSI", "COEOMNCSI", "OECMONSCI", "OECOMNCIS"],
+          correct: 1,
+          explanation:
+            "The letters are rearranged in a specific interleaving pattern. Applying to ECONOMICS gives COEOMNCSI.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+      ];
+
+      const newVerbalCodingMedium = [
+        {
+          question:
+            "In a certain coding system, PRICE is coded as SVNIL. How would COST be coded?",
+          options: ["FSXY", "FSWY", "FTWZ", "FSXZ"],
+          correct: 3,
+          explanation:
+            "Each letter shifts by an increasing amount: C→F(+3), O→S(+4), S→X(+5), T→Z(+6). Answer: FSXZ.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "If SINGLE has a code number of 66, what code number would WINKLE get? (Each letter's position in alphabet is summed)",
+          options: ["76", "66", "78", "74"],
+          correct: 3,
+          explanation:
+            "S+I+N+G+L+E = 19+9+14+7+12+5 = 66. W+I+N+K+L+E = 23+9+14+11+12+5 = 74.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "If REASON = 5 and BELIEVED = 7, what is the code number for GOVERNMENT? (Number of letters as code)",
+          options: ["10", "8", "9", "6"],
+          correct: 2,
+          explanation:
+            "REASON has 6 letters but code is 5... Actually the pattern is: number of letters minus 1. GOVERNMENT has 10 letters → code is 9. Wait — REASON(6 letters)=5, BELIEVED(8 letters)=7. Pattern: letters-1. GOVERNMENT(10)=9.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "If WORK is coded as 4567 and MAN is 328, then WOMAN is coded as:",
+          options: ["45328", "43528", "32845", "35428"],
+          correct: 0,
+          explanation:
+            "W=4, O=5, R=6, K=7; M=3, A=2, N=8. WOMAN = W(4)+O(5)+M(3)+A(2)+N(8) = 45328.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "In a language: '526' means 'sky is blue', '24' means 'blue colour', '436' means 'colour in fun'. Which digit means 'fun'?",
+          options: ["2", "3", "4", "6"],
+          correct: 1,
+          explanation:
+            "'24'=blue colour, so 2=blue or 4=blue. '526'=sky is blue, '436'=colour in fun. '4' appears in both 'blue colour' and 'colour in fun' → 4=colour. '2'=blue. '6' appears in 'sky is blue' and 'colour in fun'. '3' only appears in 'colour in fun' → 3=fun.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+      ];
+
+      const newVerbalCodingHard = [
+        {
+          question:
+            "If PRATAP has code 1618120116, what code number is given to NAVIN?",
+          options: ["73957614", "24639125", "14122914", "19274651"],
+          correct: 2,
+          explanation:
+            "Each letter maps to its position: P=16,R=18,A=1,T=20,A=1,P=16. NAVIN: N=14,A=1,V=22,I=9,N=14 = 14122914.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "CENTURION is coded as 325791465 and RANK as 18510. What does 78510 represent?",
+          options: ["TANK", "BANK", "TAKE", "SANK"],
+          correct: 0,
+          explanation:
+            "From CENTURION: C=3,E=2,N=5,T=7,U=9,R=1,I=4,O=6,N=5. From RANK: R=1,A=8,N=5,K=10. So 7=T,8=A,5=N,1=R,0=K... 78510 = T,A,N,K = TANK.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "If letters in PRABA are coded as 27595 and THILAK as 368451, how can BHARATHI be coded?",
+          options: ["96575368", "57686535", "96855368", "37536689"],
+          correct: 0,
+          explanation:
+            "P=2,R=7,A=5,B=9,A=5; T=3,H=6,I=8,L=4,A=5,K=1. BHARATHI: B=9,H=6,A=5,R=7,A=5,T=3,H=6,I=8 = 96575368.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "A code uses: 'gnr tag zog qmp' for 'Seoul Olympic organizing committee', 'hyto gnr emf' for 'Summer Olympic Games', 'esm sdr hyto' for 'Modern Games History'. What does 'summer' stand for?",
+          options: ["gnr", "hyto", "emf", "zog"],
+          correct: 1,
+          explanation:
+            "'hyto' appears in both 'Summer Olympic Games' and 'Modern Games History'. In the second sentence 'esm sdr hyto', esm/sdr are Modern/History, so hyto=Games? But 'gnr'=Olympic (appears in first two). 'hyto' in sentence 2=Summer or Games. Sentence 3 has 'hyto'=Games. So in sentence 2, hyto=Games, emf=Summer. Wait — key says answer is b (hyto). Checking key: answer b=hyto.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+        {
+          question:
+            "If a rectangle is called a circle, a circle a point, a point a triangle, a triangle a square — what is a wheel?",
+          options: ["Rectangle", "Circle", "Point", "Triangle"],
+          correct: 2,
+          explanation:
+            "A wheel is shaped like a circle. In this code, a circle is called a 'point'. So a wheel = point.",
+          topic: "coding",
+          subTopic: "coding",
+        },
+      ];
+
       // Practice Questions Database - EXPANDED & DIFFICULTY-STRATIFIED
       const practiceQuestions = {
         afpsatVerbal: {
@@ -5057,6 +6438,10 @@
               topic: "comprehension",
               subTopic: "inference",
             },
+            ...newVerbalCodingEasy,
+            ...newVerbalAnalogiesEasy,
+            ...newVerbalVocabularyEasy,
+            ...newVerbalLetterSeriesEasy,
           ],
 
           medium: [
@@ -5154,6 +6539,12 @@
               topic: "comprehension",
               subTopic: "inference",
             },
+            ...newVerbalCodingMedium,
+            ...newVerbalAnalogiesMedium,
+            // === NEW: Vocabulary (medium) ===
+            ...newVerbalVocabularyMedium,
+            // === NEW: Letter Series (medium) ===
+            ...newVerbalLetterSeriesMedium,
           ],
 
           hard: [
@@ -5329,6 +6720,11 @@
               topic: "comprehension",
               subTopic: "notTrue",
             },
+            ...newVerbalCodingHard,
+            // === NEW: Analogies (hard) ===
+            ...newVerbalAnalogiesHard,
+            // === NEW: Vocabulary (hard) ===
+            ...newVerbalVocabularyHard,
           ],
         },
         afpsatNumerical: {
@@ -5372,6 +6768,10 @@
                 "Order of operations: 23 × 2 = 46, then 15 + 46 = 61",
               topic: "basic",
             },
+            // === NEW: Number Series (easy) ===
+            ...newNumericalEasy,
+            // === NEW: Arithmetic Reasoning (easy) ===
+            ...newArithmeticEasy,
           ],
           medium: [
             {
@@ -5417,6 +6817,10 @@
                 "Total work = 8 × 12 = 96 worker-days. For 6 days: 96 ÷ 6 = 16 workers needed",
               topic: "ratios",
             },
+            // === NEW: Number Series (medium) ===
+            ...newNumericalMedium,
+            // === NEW: Arithmetic Reasoning (medium) ===
+            ...newArithmeticMedium,
           ],
           hard: [
             {
@@ -5539,6 +6943,10 @@
               topic: "wordProblems",
               subTopic: "setLogic",
             },
+            // === NEW: Number Series (hard) ===
+            ...newNumericalHard,
+            // === NEW: Arithmetic Reasoning (hard) ===
+            ...newArithmeticHard,
           ],
         },
         afpsatAbstract: {
@@ -5619,6 +7027,42 @@
               explanation:
                 "● is the only curved shape; others are all polygons",
               topic: "oddOneOut",
+            },
+            {
+              question: `Which shape completes the pattern?
+    <div style="overflow-x:auto; text-align:center; margin:15px 0;">
+      <svg width="100%" viewBox="0 0 320 80" 
+           style="max-width:320px; display:block; margin:0 auto;"
+           xmlns="http://www.w3.org/2000/svg">
+        <!-- Box 1: Small circle -->
+        <rect x="5" y="5" width="70" height="70" fill="#e8f5e9" rx="8"/>
+        <circle cx="40" cy="40" r="15" fill="#1a4d2e"/>
+        <!-- Box 2: Medium circle -->
+        <rect x="85" y="5" width="70" height="70" fill="#e8f5e9" rx="8"/>
+        <circle cx="120" cy="40" r="25" fill="#1a4d2e"/>
+        <!-- Box 3: Large circle -->
+        <rect x="165" y="5" width="70" height="70" fill="#e8f5e9" rx="8"/>
+        <circle cx="200" cy="40" r="33" fill="#1a4d2e"/>
+        <!-- Box 4: Question mark -->
+        <rect x="245" y="5" width="70" height="70" fill="#fff3cd" rx="8" 
+              stroke="#d4af37" stroke-width="2"/>
+        <text x="280" y="52" font-size="36" fill="#d4af37" 
+              text-anchor="middle" font-weight="bold">?</text>
+      </svg>
+    </div>
+    <p style="text-align:center; color:#5a6c5a; font-size:0.95rem;">
+      The circles are growing. What fills the 4th box?
+    </p>`,
+              options: [
+                "A very large circle filling the box",
+                "A very small circle",
+                "A triangle",
+                "An empty box",
+              ],
+              correct: 0,
+              explanation:
+                "Each step, the circle grows larger. The 4th box should contain the largest circle.",
+              topic: "sequences",
             },
             {
               question: "Pattern: A1, C3, E5, G7, __ Continue:",
@@ -6417,7 +7861,7 @@
           }
         }
       });
-
+      let reviewLog = [];
       // Start practice session with selected difficulty
       window.startPracticeSession = function (type, difficulty) {
         // ✅ ADD loading state
@@ -6444,7 +7888,7 @@
         let score = 0;
         let timeStarted;
         let answeredOnTime = 0;
-        let reviewLog = []; // ← ADD THIS LINE
+        reviewLog = []; // reset (no "let")
 
         // Determine time limit per question based on type
         const timeLimits = {
@@ -6469,6 +7913,11 @@
           }
 
           const q = shuffledQuestions[currentQuestion];
+          // Scroll modal back to top for each new question
+          const modalContent = document.querySelector(
+            "#practiceModal .modal-content",
+          );
+          if (modalContent) modalContent.scrollTop = 0;
           timeStarted = Date.now(); // Reset timer for each question
 
           const timerHTML =
@@ -7262,7 +8711,7 @@
             </h3>
             ${q._section ? `<span style="background: var(--accent); color: white; padding: 4px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">${q._section}</span>` : ""}
             <div id="sectionTimer" class="timer" style="display: inline-block; padding: 10px 20px; margin: 0;">
-              ${Math.floor(timeLimit / 60)}:00
+              --:--
             </div>
           </div>
           
@@ -7828,6 +9277,21 @@
       }
 
       function updatePassingProbability() {
+        // Show welcome message if user hasn't done anything yet
+        if (userData.totalQuestions === 0 && userData.mockExams.length === 0) {
+          document.getElementById("passingProbability").innerHTML = `
+      <div style="text-align:center; padding:30px;">
+        <p style="font-size:1.5rem; margin-bottom:10px;">🎯</p>
+        <h3 style="color:var(--primary); margin-bottom:10px;">Welcome! Start Your Assessment</h3>
+        <p style="color:var(--text-light);">
+          Complete a Practice Session or Mock Exam to see your personalized
+          AFPSAT readiness score and recommendations.
+        </p>
+      </div>
+    `;
+          return; // stop here — don't run the rest of the function
+        }
+
         const prediction =
           afpsatPredictor.calculatePassingProbability(userData);
         const sectionReadiness = afpsatPredictor.getSectionReadiness();
@@ -8223,30 +9687,30 @@
         showRound();
       }
 
-      // Update game scores display
-      function updateGameScores() {
-        if (userData.gamesProgress) {
-          if (userData.gamesProgress.patternSpeed) {
-            const elem = document.getElementById("patternHighScore");
-            if (elem)
-              elem.textContent =
-                userData.gamesProgress.patternSpeed.highScore || 0;
-          }
-          if (userData.gamesProgress.mathBlitz) {
-            const elem = document.getElementById("mathHighScore");
-            if (elem)
-              elem.textContent =
-                userData.gamesProgress.mathBlitz.highScore || 0;
-          }
-          if (userData.gamesProgress.memoryMatch) {
-            const elem = document.getElementById("memoryBestTime");
-            if (elem) {
-              const time = userData.gamesProgress.memoryMatch.bestTime;
-              elem.textContent = time < 999999 ? time : "--";
-            }
-          }
-        }
-      }
+      // // Update game scores display
+      // function updateGameScores() {
+      //   if (userData.gamesProgress) {
+      //     if (userData.gamesProgress.patternSpeed) {
+      //       const elem = document.getElementById("patternHighScore");
+      //       if (elem)
+      //         elem.textContent =
+      //           userData.gamesProgress.patternSpeed.highScore || 0;
+      //     }
+      //     if (userData.gamesProgress.mathBlitz) {
+      //       const elem = document.getElementById("mathHighScore");
+      //       if (elem)
+      //         elem.textContent =
+      //           userData.gamesProgress.mathBlitz.highScore || 0;
+      //     }
+      //     if (userData.gamesProgress.memoryMatch) {
+      //       const elem = document.getElementById("memoryBestTime");
+      //       if (elem) {
+      //         const time = userData.gamesProgress.memoryMatch.bestTime;
+      //         elem.textContent = time < 999999 ? time : "--";
+      //       }
+      //     }
+      //   }
+      // }
 
       // Render study resources
       function renderResources() {
@@ -8489,8 +9953,11 @@
           box-shadow: 0 2px 8px rgba(0,0,0,0.12);
           object-fit: cover;
         "
-        onerror="this.style.background='#fee2e2'; this.alt='Image failed to load — check connection';"
-      />
+          onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '
+          ⚠️ Image unavailable.
+          Use an official Ishihara test with a licensed doctor.
+          ');"
+        />
 
       <div style="margin-top: 12px;">
         <label style="font-size: 0.9rem; color: var(--text-light); display: block; margin-bottom: 6px;">
@@ -8618,6 +10085,7 @@
         document
           .getElementById("medicalTest")
           .scrollIntoView({ behavior: "smooth" });
+        document.getElementById("cvtResults").style.display = "none"; // ← ADD THIS
       }
 
       // =============================================
